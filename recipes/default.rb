@@ -18,11 +18,22 @@
 # limitations under the License.
 #
 
-package "squid"
+package "squid" do
+  package_name "squid"
+  action :install
+end
+
+
 
 service "squid" do
-  supports :restart => true, :status => true, :reload => true
-  provider Chef::Provider::Service::Upstart
+  case node[:platform]
+  when "redhat","centos","scientific","fedora","suse"
+    supports :restart => true, :status => true, :reload => true
+    provider Chef::Provider::Service::Redhat
+  when "debian","ubuntu"
+    supports :restart => true, :status => true, :reload => true
+    provider Chef::Provider::Service::Upstart
+  end
   action [ :enable, :start ]
 end
 
