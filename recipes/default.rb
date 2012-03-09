@@ -23,8 +23,6 @@ package "squid" do
   action :install
 end
 
-
-
 service "squid" do
   case node[:platform]
   when "redhat","centos","scientific","fedora","suse"
@@ -44,9 +42,17 @@ else
 end
 Chef::Log.info "Squid network #{network}"
 
+if node['squid']['version']
+  version = node['squid']['version']
+else
+  version = ""
+end
+Chef::Log.info "Squid version number (unknown if blank): #{version}"
+
 template "/etc/squid/squid.conf" do
-  source "squid.conf.erb"
+  source "squid#{version}.conf.erb"
   notifies :reload, "service[squid]"
+  mode 644
 end
 
 template "/etc/squid/chef.acl.config" do
