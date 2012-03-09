@@ -23,6 +23,15 @@ package "squid" do
   action :install
 end
 
+case node[:platform]
+  when "redhat","centos","scientific","fedora","suse"
+  template "/etc/sysconfig/squid" do
+    source "redhat/sysconfig/squid.erb"
+    notifies :restart, "service[squid]", :delayed
+    mode 644
+  end
+end
+
 service "squid" do
   case node[:platform]
   when "redhat","centos","scientific","fedora","suse"
