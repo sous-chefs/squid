@@ -64,10 +64,38 @@ template "/etc/squid/squid.conf" do
   mode 644
 end
 
+url_acl = []
+data_bag("squid_urls").each do |bag|
+  group = data_bag_item("squid_urls",bag)
+  group['urls'].each do |url|
+  	url_acl.push [group['id'],url]
+  end
+end
+
+host_acl = []
+data_bag("squid_hosts").each do |bag|
+  group = data_bag_item("squid_hosts",bag)
+  group['net'].each do |host|
+        host_acl.push [group['id'],group['type'],host]
+  end
+end
+
+acls = []
+data_bag("squid_acls").each do |bag|
+  group = data_bag_item("squid_acls",bag)
+  group['acl'].each do |acl|
+    acls.push [acl[1],group['id'],acl[0]]
+  end
+end
+
 template "/etc/squid/chef.acl.config" do
   source "chef.acl.config.erb"
   variables(
-    :network => network
+    :acls => acls,
+    :host_acl => host_acl,
+    :url_acl => url_acl
+    
     )
   notifies :reload, "service[squid]"
 end
+
