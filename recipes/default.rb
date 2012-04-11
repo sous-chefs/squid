@@ -19,26 +19,24 @@
 #
 
 package "squid" do
-  package_name "squid"
   action :install
 end
 
-case node[:platform]
-  when "redhat","centos","scientific","fedora","suse"
+case node['platform']
+when "redhat","centos","scientific","fedora","suse"
   template "/etc/sysconfig/squid" do
     source "redhat/sysconfig/squid.erb"
     notifies :restart, "service[squid]", :delayed
-    mode 644
+    mode "644"
   end
 end
 
 service "squid" do
-  case node[:platform]
+  supports :restart => true, :status => true, :reload => true
+  case node['platform']
   when "redhat","centos","scientific","fedora","suse"
-    supports :restart => true, :status => true, :reload => true
     provider Chef::Provider::Service::Redhat
   when "debian","ubuntu"
-    supports :restart => true, :status => true, :reload => true
     provider Chef::Provider::Service::Upstart
   end
   action [ :enable, :start ]
@@ -51,41 +49,49 @@ else
 end
 Chef::Log.info "Squid network #{network}"
 
-if node['squid']['version']
-  version = node['squid']['version']
-else
-  version = ""
-end
+version = node['squid']['version']
 Chef::Log.info "Squid version number (unknown if blank): #{version}"
 
 template "/etc/squid/squid.conf" do
   source "squid#{version}.conf.erb"
   notifies :reload, "service[squid]"
-  mode 644
+  mode "644"
 end
 
 url_acl = []
-data_bag("squid_urls").each do |bag|
-  group = data_bag_item("squid_urls",bag)
-  group['urls'].each do |url|
-  	url_acl.push [group['id'],url]
+begin
+  data_bag("squid_urls").each do |bag|
+    group = data_bag_item("squid_urls",bag)
+    group['urls'].each do |url|
+      url_acl.push [group['id'],url]
+    end
   end
+rescue
+  Chef::Log.info "no 'squid_urls' data bag"
 end
 
 host_acl = []
-data_bag("squid_hosts").each do |bag|
-  group = data_bag_item("squid_hosts",bag)
-  group['net'].each do |host|
-        host_acl.push [group['id'],group['type'],host]
+begin
+  data_bag("squid_hosts").each do |bag|
+    group = data_bag_item("squid_hosts",bag)
+    group['net'].each do |host|
+      host_acl.push [group['id'],group['type'],host]
+    end
   end
+rescue
+  Chef::Log.info "no 'squid_hosts' data bag"
 end
 
 acls = []
-data_bag("squid_acls").each do |bag|
-  group = data_bag_item("squid_acls",bag)
-  group['acl'].each do |acl|
-    acls.push [acl[1],group['id'],acl[0]]
+begin
+  data_bag("squid_acls").each do |bag|
+    group = data_bag_item("squid_acls",bag)
+    group['acl'].each do |acl|
+      acls.push [acl[1],group['id'],acl[0]]
+    end
   end
+rescue
+  Chef::Log.info "no 'squid_acls' data bag"
 end
 
 template "/etc/squid/chef.acl.config" do
@@ -94,7 +100,6 @@ template "/etc/squid/chef.acl.config" do
     :acls => acls,
     :host_acl => host_acl,
     :url_acl => url_acl
-    
     )
   notifies :reload, "service[squid]"
 end
