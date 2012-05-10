@@ -18,5 +18,9 @@
 # limitations under the License.
 #
 
-default[:squid][:port] = 3128
-default[:squid][:network] = nil
+default['squid']['port'] = 3128
+default['squid']['network'] = nil
+default['squid']['config_file'] = "/etc/squid/squid.conf"
+default['squid']['timeout'] = "10"
+default['squid']['opts'] = ""
+default['squid']['version'] = ""
