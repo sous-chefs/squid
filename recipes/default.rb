@@ -23,18 +23,18 @@ package "squid" do
 end
 
 case node['platform']
-when "redhat","centos","scientific","fedora","suse"
+when "redhat","centos","scientific","fedora","suse","amazon"
   template "/etc/sysconfig/squid" do
     source "redhat/sysconfig/squid.erb"
     notifies :restart, "service[squid]", :delayed
-    mode "644"
+    mode 00644
   end
 end
 
 service "squid" do
   supports :restart => true, :status => true, :reload => true
   case node['platform']
-  when "redhat","centos","scientific","fedora","suse"
+  when "redhat","centos","scientific","fedora","suse","amazon"
     provider Chef::Provider::Service::Redhat
   when "debian","ubuntu"
     provider Chef::Provider::Service::Upstart
@@ -55,7 +55,7 @@ Chef::Log.info "Squid version number (unknown if blank): #{version}"
 template "/etc/squid/squid.conf" do
   source "squid#{version}.conf.erb"
   notifies :reload, "service[squid]"
-  mode "644"
+  mode 00644
 end
 
 url_acl = []
