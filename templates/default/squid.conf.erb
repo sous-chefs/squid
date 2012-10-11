@@ -1113,7 +1113,7 @@ icp_access deny all
 #	visible on the internal address.
 #
 # Squid normally listens to port 3128
-http_port <%= node[:squid][:port] %>
+http_port <%= node['squid']['port'] %>
 
 #  TAG: https_port
 # Note: This option is only available if Squid is rebuilt with the
