@@ -1,9 +1,10 @@
 #
-# Author:: Matt Ray <matt@opscode.com>
+# Author:: Matt Ray <someara@opscode.com>
+# Author:: Sean OMeara <someara@opscode.com>
 # Cookbook Name:: squid
 # Recipe:: default
 #
-# Copyright 2012, Opscode, Inc
+# Copyright 2013, Opscode, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,89 +19,80 @@
 # limitations under the License.
 #
 
-package "squid" do
-  action :install
-end
+# variables
+ipaddress = node['ipaddress']
+listen_interface = node['squid']['listen_interface']
+version = node['squid']['version']
+netmask = node['network']['interfaces']["#{listen_interface}"]['addresses']["#{ipaddress}"]['netmask']
 
-case node['platform']
-when "redhat","centos","scientific","fedora","suse","amazon"
+# squid/libraries/default.rb
+acls = squid_load_acls
+host_acl = squid_load_host_acl
+url_acl = squid_load_url_acl
+
+# Log variables to Chef::Log::debug()
+Chef::Log.debug("Squid listen_interface: #{listen_interface}")
+Chef::Log.debug("Squid ipaddress: #{ipaddress}")
+Chef::Log.debug("Squid netmask: #{netmask}")
+Chef::Log.debug("Squid version: #{version}")
+Chef::Log.debug("Squid host_acls: #{host_acl}")
+Chef::Log.debug("Squid url_acls: #{url_acl}")
+Chef::Log.debug("Squid acls: #{acls}")
+
+# packages
+package node['squid']['package']
+
+# rhel_family sysconfig
+if node['platform_family'] == "rhel" then
   template "/etc/sysconfig/squid" do
     source "redhat/sysconfig/squid.erb"
-    notifies :restart, "service[squid]", :delayed
+    notifies :restart, "service[#{node['squid']['service_name']}]", :delayed
     mode 00644
   end
 end
 
-service "squid" do
-  supports :restart => true, :status => true, :reload => true
-  case node['platform']
-  when "redhat","centos","scientific","fedora","suse","amazon"
-    provider Chef::Provider::Service::Redhat
-  when "debian","ubuntu"
-    provider Chef::Provider::Service::Upstart
-  end
-  action [ :enable, :start ]
+# squid config dir
+directory node['squid']['config_dir'] do
+  action :create
+  recursive true
+  owner "root"
+  mode 00755
 end
 
-if node['squid']['network']
-  network = node['squid']['network']
-else
-  network = node.ipaddress[0,node.ipaddress.rindex(".")]+".0/24"
-end
-Chef::Log.info "Squid network #{network}"
-
-version = node['squid']['version']
-Chef::Log.info "Squid version number (unknown if blank): #{version}"
-
-template "/etc/squid/squid.conf" do
-  source "squid#{version}.conf.erb"
-  notifies :reload, "service[squid]"
+# squid mime config
+cookbook_file "#{node['squid']['config_dir']}/mime.conf" do
+  source "mime.conf"
   mode 00644
 end
 
-url_acl = []
-begin
-  data_bag("squid_urls").each do |bag|
-    group = data_bag_item("squid_urls",bag)
-    group['urls'].each do |url|
-      url_acl.push [group['id'],url]
-    end
-  end
-rescue
-  Chef::Log.info "no 'squid_urls' data bag"
+# because reasons
+file "#{node['squid']['config_dir']}/msntauth.conf" do
+  action :delete
 end
 
-host_acl = []
-begin
-  data_bag("squid_hosts").each do |bag|
-    group = data_bag_item("squid_hosts",bag)
-    group['net'].each do |host|
-      host_acl.push [group['id'],group['type'],host]
-    end
-  end
-rescue
-  Chef::Log.info "no 'squid_hosts' data bag"
-end
-
-acls = []
-begin
-  data_bag("squid_acls").each do |bag|
-    group = data_bag_item("squid_acls",bag)
-    group['acl'].each do |acl|
-      acls.push [acl[1],group['id'],acl[0]]
-    end
-  end
-rescue
-  Chef::Log.info "no 'squid_acls' data bag"
-end
-
-template "/etc/squid/chef.acl.config" do
-  source "chef.acl.config.erb"
+# squid config
+template node['squid']['config_file'] do
+  source "squid.conf.erb"
+  notifies :reload, "service[#{node['squid']['service_name']}]"
+  mode 00644
   variables(
-    :acls => acls,
     :host_acl => host_acl,
-    :url_acl => url_acl
+    :url_acl => url_acl,
+    :acls => acls
     )
-  notifies :reload, "service[squid]"
 end
 
+# services
+service node['squid']['service_name'] do
+  supports :restart => true, :status => true, :reload => true
+  # FIXME - is this case statement necessary?
+  case node['platform_family']
+  when "rhel"
+    provider Chef::Provider::Service::Redhat
+  when "debian"
+    provider Chef::Provider::Service::Upstart    
+  when "smartos"
+    provider Chef::Provider::Service::Solaris
+  end
+  action [ :enable, :start ]
+end

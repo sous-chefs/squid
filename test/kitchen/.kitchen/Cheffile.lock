@@ -1,0 +1,35 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    apt (1.5.0)
+    build-essential (1.2.0)
+    chef_handler (1.0.8)
+    dmg (1.0.0)
+    git (2.0.0)
+      build-essential (>= 0.0.0)
+      dmg (>= 0.0.0)
+      runit (>= 0.0.0)
+      yum (>= 0.0.0)
+    minitest-handler (0.1.2)
+      chef_handler (>= 0.0.0)
+    runit (0.16.0)
+    yum (2.0.2)
+
+PATH
+  remote: /Users/someara/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/test-kitchen-0.7.0.beta.1/cookbooks/test-kitchen
+  specs:
+    test-kitchen (1.0.0)
+      apt (>= 0.0.0)
+      git (>= 0.0.0)
+      yum (>= 0.0.0)
+
+PATH
+  remote: /Users/someara/src/squid/test/kitchen/.kitchen/cookbook_under_test
+  specs:
+    squid (0.2.2)
+
+DEPENDENCIES
+  minitest-handler (>= 0)
+  squid (>= 0)
+  test-kitchen (>= 0)
+

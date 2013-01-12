@@ -57,6 +57,7 @@ License and Author
 ==================
 
 Author:: Matt Ray (<matt@opscode.com>)
+Author:: Sean OMeara (<someara@opscode.com>)
 
 Copyright 2012 Opscode, Inc.
 

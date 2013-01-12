@@ -1,0 +1,47 @@
+#
+# Author:: Seth Chisamore (<schisamo@opscode.com>)
+# Copyright:: Copyright (c) 2012 Opscode, Inc.
+# License:: Apache License, Version 2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+require 'test-kitchen'
+
+site 'http://community.opscode.com/api/v1'
+
+# base test-kitchen cookbooks
+cookbook 'test-kitchen',
+  :path => TestKitchen.source_root.join('cookbooks', 'test-kitchen').to_s
+
+env = TestKitchen::Environment.new
+env.load!
+
+# include cookbook being tested if this is a cookbook project
+if env.project.respond_to?(:cookbook_path)
+  cookbook env.project.name, :path => env.project.cookbook_path(env.root_path, env.tmp_path)
+end
+
+if env.project.run_list.include? 'recipe[minitest-handler]'
+  cookbook 'minitest-handler'
+end
+
+# include user-provided cookbooks
+if env.root_path.join('cookbooks').exist?
+  env.root_path.join('cookbooks').children.select(&:directory?).each do |c|
+    cookbook c.basename.to_s, :path => env.root_path.join('cookbooks', c.basename.to_s).to_s
+  end
+  if env.root_path.join('cookbooks', 'Cheffile').exist?
+    eval(File.read(env.root_path.join('cookbooks', 'Cheffile')))
+  end
+end

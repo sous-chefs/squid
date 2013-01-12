@@ -1,0 +1,30 @@
+{
+  "name": "minitest-handler",
+  "description": "Installs and configures minitest-chef-handler",
+  "long_description": "Cookbook: minitest-handler  \nAuthor: Bryan McLellan <btm@loftninjas.org>  \nAuthor: Bryan W. Berry <bryan.berry@gmail.com>  \nAuthor: David Petzel <davidpetzel@gmail.com>\nCopyright: 2012 Opscode, Inc.  \nLicense: Apache 2.0  \n\nDescription\n===========\n\n# <a name=\"title\"></a> minitest-handler [![Build Status](https://secure.travis-ci.org/btm/minitest-handler-cookbook.png?branch=master)](http://travis-ci.org/btm/minitest-handler-cookbook)\n\nThis cookbook utilizes the minitest-chef-handler project to facilitate cookbook testing.\n\nminitest-chef-handler project: https://github.com/calavera/minitest-chef-handler  \nstable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler  \nminitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook  \n\n*Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads \ntest files named \"recipe-name_test.rb\" rather than all test files in the path files/default/tests/minitest/*_test.rb\n\nIf you have any helper libraries, place them in files/default/tests/minitest/support/\n\nAttributes\n==========\n\n* node[:minitest][:path] - Location to store and find tests, defaults to `/var/chef/minitest`\n* node[:minitest][:tests] - Test files to run, defaults to `**/*_test.rb`\n\nUsage\n=====\n\n* The node run list should begin with 'recipe[minitest-handler]'\n* Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file with the name of 'your-recipe-name_test.rb' if you are testing the default recipe, the file should be named 'default_test.rb'\n\nMinitest: https://github.com/seattlerb/minitest\n\nExamples\n========\n\n### Traditional minitest\n\n    class TestApache2 < MiniTest::Chef::TestCase\n      def test_that_the_package_installed\n        case node[:platform]\n        when \"ubuntu\",\"debian\"\n          assert system('apt-cache policy apache2 | grep Installed | grep -v none')\n        end\n      end\n    \n      def test_that_the_service_is_running\n        assert system('/etc/init.d/apache2 status')\n      end\n    \n      def test_that_the_service_is_enabled\n        assert File.exists?(Dir.glob(\"/etc/rc5.d/S*apache2\").first)\n      end\n    end\n\n\n### Using minitest/spec\n\n    require 'minitest/spec'\n\n    describe_recipe 'ark::test' do\n\n      # It's often convenient to load these includes in a separate\n      # helper along with\n      # your own helper methods, but here we just include them directly:\n      include MiniTest::Chef::Assertions\n      include MiniTest::Chef::Context\n      include MiniTest::Chef::Resources\n\n      it \"installed the unzip package\" do\n        package(\"unzip\").must_be_installed\n      end\n\n      it \"dumps the correct files into place with correct owner and group\" do\n        file(\"/usr/local/foo_dump/foo1.txt\").must_have(:owner, \"foobarbaz\").and(:group, \"foobarbaz\")\n      end\n\n     end\n\nFor more detailed examples, see [here](https://github.com/calavera/minitest-chef-handler/blob/v0.4.0/examples/spec_examples/files/default/tests/minitest/example_test.rb)\n",
+  "maintainer": "Bryan Berry",
+  "maintainer_email": "bryan.berry@gmail.com",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+    "chef_handler": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.2"
+}
