@@ -53,7 +53,7 @@ icp_access deny all
 http_port 3128
 
 hierarchy_stoplist cgi-bin ?
-access_log /var/log/squid/access.log squid
+access_log <%= node['squid']['log_dir'] %>/access.log squid
 refresh_pattern	    ^ftp:			1440	20%	10080
 refresh_pattern     ^gopher:			1440	0%	1440
 refresh_pattern	    -i (/cgi-bin/|\?)		0	0%	0
@@ -64,8 +64,8 @@ refresh_pattern     (Release|Package(.gz)*)$	0	20%	2880
 # refresh_pattern	    \.$			1440    20%	10080
 # refresh_pattern	    .				0	20%	4320
 hosts_file /etc/hosts
-cache_dir ufs /var/spool/squid 100 16 256
-coredump_dir /var/spool/squid
+cache_dir ufs <%= node['squid']['cache_dir'] %> 100 16 256
+coredump_dir <%= node['squid']['coredump_dir'] %>
 refresh_pattern deb$ 1577846 100% 1577846
 maximum_object_size 1024 MB
-cache_mem 2048 MB
+cache_mem <%= node['squid']['cache_mem'] %> MB

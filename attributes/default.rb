@@ -28,9 +28,13 @@ default['squid']['package'] = "squid"
 default['squid']['version'] = "3.1"
 default['squid']['config_dir'] = "/etc/squid"
 default['squid']['config_file'] = "/etc/squid/squid.conf"
+default['squid']['log_dir'] = "/var/log/squid"
+default['squid']['cache_dir'] = "/var/spool/squid"
+default['squid']['coredump_dir'] = "/var/spool/squid"
 default['squid']['service_name'] = "squid"
 
 default['squid']['listen_interface'] = "eth0"
+default['squid']['cache_mem'] = "2048"
 
 case platform_family
   
@@ -58,6 +62,9 @@ when "debian"
       set['squid']['version'] = "3.1"
       set['squid']['config_dir'] = "/etc/squid3"
       set['squid']['config_file'] = "/etc/squid3/squid.conf"
+      set['squid']['log_dir'] = "/var/log/squid3"
+      set['squid']['cache_dir'] = "/var/spool/squid3"
+      set['squid']['coredump_dir'] = "/var/spool/squid3"
       set['squid']['service_name'] = "squid3"
     end
   end
