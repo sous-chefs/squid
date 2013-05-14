@@ -90,7 +90,7 @@ service node['squid']['service_name'] do
   when "rhel"
     provider Chef::Provider::Service::Redhat
   when "debian"
-    provider Chef::Provider::Service::Upstart    
+    provider Chef::Provider::Service::Upstart
   when "smartos"
     provider Chef::Provider::Service::Solaris
   end

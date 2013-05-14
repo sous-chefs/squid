@@ -1,3 +1,0 @@
-cookbook "squid" do
-  runtimes []
-end
