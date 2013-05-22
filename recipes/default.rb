@@ -23,7 +23,7 @@
 ipaddress = node['ipaddress']
 listen_interface = node['squid']['listen_interface']
 version = node['squid']['version']
-netmask = node['network']['interfaces']["#{listen_interface}"]['addresses']["#{ipaddress}"]['netmask']
+netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
 
 # squid/libraries/default.rb
 acls = squid_load_acls
