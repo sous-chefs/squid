@@ -43,7 +43,7 @@ Chef::Log.debug("Squid acls: #{acls}")
 package node['squid']['package']
 
 # rhel_family sysconfig
-if node['platform_family'] == "rhel" then
+if platform_family?("rhel")
   template "/etc/sysconfig/squid" do
     source "redhat/sysconfig/squid.erb"
     notifies :restart, "service[#{node['squid']['service_name']}]", :delayed
@@ -65,7 +65,7 @@ cookbook_file "#{node['squid']['config_dir']}/mime.conf" do
   mode 00644
 end
 
-# because reasons
+# TODO:  COOK-3041 (manage this file appropriately)
 file "#{node['squid']['config_dir']}/msntauth.conf" do
   action :delete
 end
@@ -85,14 +85,5 @@ end
 # services
 service node['squid']['service_name'] do
   supports :restart => true, :status => true, :reload => true
-  # FIXME - is this case statement necessary?
-  case node['platform_family']
-  when "rhel"
-    provider Chef::Provider::Service::Redhat
-  when "debian"
-    provider Chef::Provider::Service::Upstart
-  when "smartos"
-    provider Chef::Provider::Service::Solaris
-  end
   action [ :enable, :start ]
 end
