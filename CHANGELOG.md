@@ -1,3 +1,10 @@
+## v0.2.6:
+
+Cleanup in 5fc5df4 (v0.2.4) was a bit overzealous:
+
+Ubuntu needs upstart provider specified for the service or reload
+failures may occur.
+
 ## v0.2.4:
 
 ### Bug
