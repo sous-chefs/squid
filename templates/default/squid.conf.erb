@@ -1,7 +1,7 @@
 # This file generated from a Chef template.
 # squid/templates/default.squid.conf.erb
 
-<%= "acl src all" if node['squid']['version'].to_i <3 %>
+<%= "acl all src" if node['squid']['version'].to_i <3 %>
 acl manager proto cache_object
 acl localhost src 127.0.0.1/32
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32
