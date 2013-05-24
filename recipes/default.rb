@@ -85,5 +85,6 @@ end
 # services
 service node['squid']['service_name'] do
   supports :restart => true, :status => true, :reload => true
+  provider Chef::Provider::Service::Upstart if platform?('ubuntu')
   action [ :enable, :start ]
 end
