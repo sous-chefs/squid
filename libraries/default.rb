@@ -43,3 +43,18 @@ def squid_load_acls
   end
   acls   
 end
+
+def squid_load_auth_params
+  auth_params = []
+  begin
+    data_bag("squid_auth_params").each do |bag|
+      group = data_bag_item("squid_auth_params",bag)
+      group['auth_param'].each do |auth_param|
+        auth_params.push auth_param.dup.unshift(group['id'])
+      end
+    end
+  rescue
+    Chef::Log.info "no 'squid_auth_params' data bag"
+  end
+  auth_params   
+end
