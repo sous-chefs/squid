@@ -37,6 +37,10 @@ acl <%= url[0] %> url_regex <%= url[1] %>
 <% @acls.each do |acl| %>
 http_access <%= acl[0] %> <%= acl[1] %> <%= acl[2] %>
 <% end %>
+<% @auth_params.each do |auth_param| %>
+auth_param <%= auth_param.join(' ') %>
+<% end %>
+
 
 http_access allow manager localhost
 http_access deny manager
