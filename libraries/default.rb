@@ -41,5 +41,5 @@ def squid_load_acls
   rescue
     Chef::Log.info "no 'squid_acls' data bag"
   end
-  acls   
+  acls
 end

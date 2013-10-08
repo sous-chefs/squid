@@ -37,9 +37,9 @@ default['squid']['listen_interface'] = "eth0"
 default['squid']['cache_mem'] = "2048"
 
 case platform_family
-  
+
 when "debian"
-  case platform    
+  case platform
   when "debian"
     if node['platform_version'] == "6.0.3" then
       set['squid']['package'] = "squid3"
@@ -48,7 +48,7 @@ when "debian"
       set['squid']['config_file'] = "/etc/squid3/squid.conf"
       set['squid']['service_name'] = "squid3"
     end
-    
+
   when "ubuntu"
     if node['platform_version'] == "10.04" then
       set['squid']['package'] = "squid"
@@ -56,7 +56,7 @@ when "debian"
       set['squid']['config_dir'] = "/etc/squid"
       set['squid']['config_file'] = "/etc/squid/squid.conf"
       set['squid']['service_name'] = "squid"
-      
+
     elsif node['platform_version'] == "12.04" then
       set['squid']['package'] = "squid3"
       set['squid']['version'] = "3.1"
@@ -68,13 +68,13 @@ when "debian"
       set['squid']['service_name'] = "squid3"
     end
   end
-  
+
 when "rhel"
   set['squid']['package'] = "squid"
   rhel_version = node['platform_version'].to_f
   if rhel_version >= 6 && rhel_version < 7 then set['squid']['version'] = "3.1" end
   if rhel_version >= 5 && rhel_version < 6 then set['squid']['version'] = "2.6" end
-  
+
 when "smartos"
   set['squid']['package'] = "squid"
   set['squid']['version'] = "3.1"

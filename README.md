@@ -1,33 +1,35 @@
-Description
-===========
+squid Cookbook
+==============
 Configures squid as a caching proxy.
 
+
 Recipes
-=======
-default
 -------
+### default
 The default recipe installs squid and sets up simple proxy caching. As of now, the options you may change are the port (`node['squid']['port']`) and the network the caching proxy is available on the subnet from `node.ipaddress` (ie. "192.168.1.0/24") but may be overridden with `node['squid']['network']`. The size of objects allowed to be stored has been bumped up to allow for caching of installation files.
 
+
 Usage
-=====
+-----
 Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use the `node.ipaddress` and `node['squid']['port']` to point at it.
 
 Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
 
-Example Databags
-================
 
-squid_urls - yubikey item
--------------------------
+Example Databags
+----------------
+### squid_urls - yubikey item
+```javascript
 {
   "urls": [
     "^https://api.yubico.com/wsapi/2.0/verify"
   ],
   "id": "yubikey"
 }
+```
 
-squid_hosts - bastion item
---------------------------
+### squid_hosts - bastion item
+```javascript
 {
   "type": "src",
   "id": "bastion",
@@ -35,9 +37,10 @@ squid_hosts - bastion item
     "192.168.0.2/32"
   ]
 }
+```
 
-squid_acls - bastion item
--------------------------
+### squid_acls - bastion item
+```javascript
 {
   "id": "bastion",
   "acl": [
@@ -51,15 +54,16 @@ squid_acls - bastion item
     ]
   ]
 }
+```
 
 
-License and Author
-==================
+License & Authors
+-----------------
+- Author:: Matt Ray (<matt@opscode.com>)
+- Author:: Sean OMeara (<someara@opscode.com>)
 
-Author:: Matt Ray (<matt@opscode.com>)
-Author:: Sean OMeara (<someara@opscode.com>)
-
-Copyright 2012 Opscode, Inc.
+```text
+Copyright 2012-2013 Opscode, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -72,4 +76,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
+```
