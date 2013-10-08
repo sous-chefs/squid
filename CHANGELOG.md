@@ -3,6 +3,12 @@ squid Cookbook CHANGELOG
 This file is used to list changes made in each version of the squid cookbook.
 
 
+v0.2.8
+------
+### Bug
+- **[COOK-3590](https://tickets.opscode.com/browse/COOK-3590)** - Fix hard-coded daemon listen port
+
+
 v0.2.6
 ------
 Cleanup in 5fc5df4 (v0.2.4) was a bit overzealous:
