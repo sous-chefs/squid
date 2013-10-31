@@ -43,3 +43,18 @@ def squid_load_acls
   end
   acls
 end
+
+def squid_load_acl_actions
+  acls = []
+  begin
+    data_bag("squid_acl_actions").each do |bag|
+      group = data_bag_item("squid_acl_actions",bag)
+      group['acl'].each do |acl|
+        acls.push [acl[1],acl[0],group['action']]
+      end
+    end
+  rescue
+    Chef::Log.info "no 'squid_acls_actions' data bag"
+  end
+  acls
+end
