@@ -57,7 +57,7 @@ when "debian"
       set['squid']['config_file'] = "/etc/squid/squid.conf"
       set['squid']['service_name'] = "squid"
 
-    elsif node['platform_version'] == "12.04" then
+    elsif node['platform_version'] > "10.04" then
       set['squid']['package'] = "squid3"
       set['squid']['version'] = "3.1"
       set['squid']['config_dir'] = "/etc/squid3"

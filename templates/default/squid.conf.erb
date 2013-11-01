@@ -37,6 +37,9 @@ acl <%= url[0] %> url_regex <%= url[1] %>
 <% @acls.each do |acl| %>
 http_access <%= acl[0] %> <%= acl[1] %> <%= acl[2] %>
 <% end %>
+<% @acl_actions.each do |acl_action| %>
+<%= acl_action[2] %> <%= acl_action[0] %> <%= acl_action[1] %>
+<% end %>
 
 http_access allow manager localhost
 http_access deny manager

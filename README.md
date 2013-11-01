@@ -56,6 +56,24 @@ Example Databags
 }
 ```
 
+### squid_acl_action - bastion item
+```javascript
+{
+  "id": "bastion",
+  "action": "cache",
+  "acl": [
+    [
+      "yubikey",
+      "allow"
+    ],
+    [
+      "all",
+      "deny"
+    ]
+  ]
+}
+```
+
 
 License & Authors
 -----------------
