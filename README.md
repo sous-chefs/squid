@@ -6,15 +6,25 @@ Configures squid as a caching proxy.
 Recipes
 -------
 ### default
-The default recipe installs squid and sets up simple proxy caching. As of now, the options you may change are the port (`node['squid']['port']`) and the network the caching proxy is available on the subnet from `node.ipaddress` (ie. "192.168.1.0/24") but may be overridden with `node['squid']['network']`. The size of objects allowed to be stored has been bumped up to allow for caching of installation files.
+The default recipe installs squid and sets up simple proxy caching. To configure where the squid service listens for
+requests you have a few options. By default, this cookbook will configure squid to listen on all available interfaces
+on port 3128 (`node['squid']['port']`). To specify an interface to bind to, use the `node['squid']['listen_interface']`
+attribute. If this is defined, squid will only listen on port 3128 on the specified interface, whose IP address is
+discovered automatically. If you need a more custom setup, define `node['squid']['http_binds']` as a string or a list
+of binds, each of which can be either a port or ipaddress:port format.
+
+The size of objects allowed to be stored has been bumped up to allow for caching of installation files.
 
 
 Usage
 -----
-Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use the `node.ipaddress` and `node['squid']['port']` to point at it.
+Include the squid recipe on the server.
 
-Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
-
+Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url.
+By default, this cookbook looks for databags named `squid_urls`, `squid_hosts`, and `squid_acls` to configure allowed
+URLs and hosts, and ACLs respectively (as described below). You may wish to change the names of the databags in the
+event you wish to run multiple squids with different configs. To do this, set the attributes
+`node['squid']['urls_data_bag_name']`, `node['squid']['hosts_data_bag_name']`, and `node['squid']['acls_data_bag_name']`.
 
 Example Databags
 ----------------
