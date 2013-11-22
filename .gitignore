@@ -13,6 +13,7 @@ Gemfile.lock
 
 .bundle/
 .cache/
+.idea/
 .kitchen/
 .vagrant/
 .vagrant.d/

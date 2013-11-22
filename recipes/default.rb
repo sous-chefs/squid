@@ -20,20 +20,38 @@
 #
 
 # variables
-ipaddress = node['ipaddress']
+port = node['squid']['port']
 listen_interface = node['squid']['listen_interface']
+if node['squid']['http_binds'].nil?
+  http_binds = []
+else
+  http_binds = node['squid']['http_binds'].is_a?(Array) ? node['squid']['http_binds'].clone : [node['squid']['http_binds']]
+end
+ipaddress = nil
+
+# determine binds if needed
+if http_binds.empty?
+  if listen_interface.nil?
+    # listen on all interfaces
+    http_binds.push(port.to_s)
+  else
+    ipaddress = node['network']['interfaces'][listen_interface]['addresses'].select { |address, data| data['family'] == 'inet' }.keys[0]
+    http_binds.push(ipaddress + ':' + port.to_s)
+  end
+end
 version = node['squid']['version']
-netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
 
 # squid/libraries/default.rb
-acls = squid_load_acls
-host_acl = squid_load_host_acl
-url_acl = squid_load_url_acl
+acls = squid_load_acls node['squid']['acls_data_bag_name']
+host_acl = squid_load_host_acl node['squid']['hosts_data_bag_name']
+url_acl = squid_load_url_acl node['squid']['urls_data_bag_name']
 
 # Log variables to Chef::Log::debug()
-Chef::Log.debug("Squid listen_interface: #{listen_interface}")
-Chef::Log.debug("Squid ipaddress: #{ipaddress}")
-Chef::Log.debug("Squid netmask: #{netmask}")
+if not listen_interface.nil?
+  Chef::Log.debug("Squid listen_interface: #{listen_interface}")
+  Chef::Log.debug("Squid ipaddress: #{ipaddress}")
+end
+Chef::Log.debug("Squid http_port binds: " + http_binds.join(', '))
 Chef::Log.debug("Squid version: #{version}")
 Chef::Log.debug("Squid host_acls: #{host_acl}")
 Chef::Log.debug("Squid url_acls: #{url_acl}")
@@ -76,6 +94,7 @@ template node['squid']['config_file'] do
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode 00644
   variables(
+    :http_binds => http_binds,
     :host_acl => host_acl,
     :url_acl => url_acl,
     :acls => acls

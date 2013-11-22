@@ -19,11 +19,17 @@
 # limitations under the License.
 #
 
+default['squid']['http_binds'] = nil
 default['squid']['port'] = 3128
-default['squid']['network'] = nil
+default['squid']['listen_interface'] = nil
+default['squid']['hosts_data_bag_name'] = 'squid_hosts'
+default['squid']['urls_data_bag_name'] = 'squid_urls'
+default['squid']['acls_data_bag_name'] = 'squid_acls'
+default['squid']['cache_mem'] = "2048"
+
+
 default['squid']['timeout'] = "10"
 default['squid']['opts'] = ""
-
 default['squid']['package'] = "squid"
 default['squid']['version'] = "3.1"
 default['squid']['config_dir'] = "/etc/squid"
@@ -32,9 +38,6 @@ default['squid']['log_dir'] = "/var/log/squid"
 default['squid']['cache_dir'] = "/var/spool/squid"
 default['squid']['coredump_dir'] = "/var/spool/squid"
 default['squid']['service_name'] = "squid"
-
-default['squid']['listen_interface'] = "eth0"
-default['squid']['cache_mem'] = "2048"
 
 case platform_family
 
