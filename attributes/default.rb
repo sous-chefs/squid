@@ -42,44 +42,44 @@ when "debian"
   case platform
   when "debian"
     if node['platform_version'] == "6.0.3" then
-      set['squid']['package'] = "squid3"
-      set['squid']['version'] = "3.1"
-      set['squid']['config_dir'] = "/etc/squid3"
-      set['squid']['config_file'] = "/etc/squid3/squid.conf"
-      set['squid']['service_name'] = "squid3"
+      default['squid']['package'] = "squid3"
+      default['squid']['version'] = "3.1"
+      default['squid']['config_dir'] = "/etc/squid3"
+      default['squid']['config_file'] = "/etc/squid3/squid.conf"
+      default['squid']['service_name'] = "squid3"
     end
 
   when "ubuntu"
     if node['platform_version'] == "10.04" then
-      set['squid']['package'] = "squid"
-      set['squid']['version'] = "2.7"
-      set['squid']['config_dir'] = "/etc/squid"
-      set['squid']['config_file'] = "/etc/squid/squid.conf"
-      set['squid']['service_name'] = "squid"
+      default['squid']['package'] = "squid"
+      default['squid']['version'] = "2.7"
+      default['squid']['config_dir'] = "/etc/squid"
+      default['squid']['config_file'] = "/etc/squid/squid.conf"
+      default['squid']['service_name'] = "squid"
 
     elsif node['platform_version'] == "12.04" then
-      set['squid']['package'] = "squid3"
-      set['squid']['version'] = "3.1"
-      set['squid']['config_dir'] = "/etc/squid3"
-      set['squid']['config_file'] = "/etc/squid3/squid.conf"
-      set['squid']['log_dir'] = "/var/log/squid3"
-      set['squid']['cache_dir'] = "/var/spool/squid3"
-      set['squid']['coredump_dir'] = "/var/spool/squid3"
-      set['squid']['service_name'] = "squid3"
+      default['squid']['package'] = "squid3"
+      default['squid']['version'] = "3.1"
+      default['squid']['config_dir'] = "/etc/squid3"
+      default['squid']['config_file'] = "/etc/squid3/squid.conf"
+      default['squid']['log_dir'] = "/var/log/squid3"
+      default['squid']['cache_dir'] = "/var/spool/squid3"
+      default['squid']['coredump_dir'] = "/var/spool/squid3"
+      default['squid']['service_name'] = "squid3"
     end
   end
 
 when "rhel"
-  set['squid']['package'] = "squid"
+  default['squid']['package'] = "squid"
   rhel_version = node['platform_version'].to_f
-  if rhel_version >= 6 && rhel_version < 7 then set['squid']['version'] = "3.1" end
-  if rhel_version >= 5 && rhel_version < 6 then set['squid']['version'] = "2.6" end
+  if rhel_version >= 6 && rhel_version < 7 then default['squid']['version'] = "3.1" end
+  if rhel_version >= 5 && rhel_version < 6 then default['squid']['version'] = "2.6" end
 
 when "smartos"
-  set['squid']['package'] = "squid"
-  set['squid']['version'] = "3.1"
-  set['squid']['config_dir'] = "/etc/squid"
-  set['squid']['service_name'] = "squid"
-  set['squid']['listen_interface'] = "net0"
+  default['squid']['package'] = "squid"
+  default['squid']['version'] = "3.1"
+  default['squid']['config_dir'] = "/etc/squid"
+  default['squid']['service_name'] = "squid"
+  default['squid']['listen_interface'] = "net0"
 end
 
