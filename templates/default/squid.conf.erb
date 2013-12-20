@@ -64,7 +64,7 @@ refresh_pattern     (Release|Package(.gz)*)$	0	20%	2880
 # refresh_pattern	    \.$			1440    20%	10080
 # refresh_pattern	    .				0	20%	4320
 hosts_file /etc/hosts
-cache_dir ufs <%= node['squid']['cache_dir'] %> 100 16 256
+cache_dir ufs <%= node['squid']['cache_dir'] %> <%= node['squid']['cache_size'] %> 16 256
 coredump_dir <%= node['squid']['coredump_dir'] %>
 refresh_pattern deb$ 1577846 100% 1577846
 maximum_object_size 1024 MB
