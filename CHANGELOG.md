@@ -3,6 +3,13 @@ squid Cookbook CHANGELOG
 This file is used to list changes made in each version of the squid cookbook.
 
 
+v0.2.10
+-------
+### Bug
+- **[COOK-3936](https://tickets.opscode.com/browse/COOK-3936)** - configure squid cache size on disk
+- updating style and test harness
+
+
 v0.2.8
 ------
 ### Bug
