@@ -43,25 +43,24 @@ Chef::Log.debug("Squid acls: #{acls}")
 package node['squid']['package']
 
 # rhel_family sysconfig
-if platform_family?("rhel")
-  template "/etc/sysconfig/squid" do
-    source "redhat/sysconfig/squid.erb"
-    notifies :restart, "service[#{node['squid']['service_name']}]", :delayed
-    mode 00644
-  end
+template '/etc/sysconfig/squid' do
+  source 'redhat/sysconfig/squid.erb'
+  notifies :restart, "service[#{node['squid']['service_name']}]", :delayed
+  mode 00644
+  only_if { platform_family? 'rhel' }
 end
 
 # squid config dir
 directory node['squid']['config_dir'] do
   action :create
   recursive true
-  owner "root"
+  owner 'root'
   mode 00755
 end
 
 # squid mime config
 cookbook_file "#{node['squid']['config_dir']}/mime.conf" do
-  source "mime.conf"
+  source 'mime.conf'
   mode 00644
 end
 
@@ -72,7 +71,7 @@ end
 
 # squid config
 template node['squid']['config_file'] do
-  source "squid.conf.erb"
+  source 'squid.conf.erb'
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode 00644
   variables(
@@ -86,5 +85,5 @@ end
 service node['squid']['service_name'] do
   supports :restart => true, :status => true, :reload => true
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
-  action [ :enable, :start ]
+  action [:enable, :start]
 end
