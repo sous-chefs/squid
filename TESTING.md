@@ -184,4 +184,3 @@ before_install:
   - echo -n $EC2_KEY_CHUNK_{0..30} >> ~/.ssh/id_ec2.base64
   - cat ~/.ssh/id_ec2.base64 | tr -d ' ' | base64 --decode > ~/.ssh/id_ec2.pem
 ```
-
