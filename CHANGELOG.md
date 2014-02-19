@@ -3,6 +3,11 @@ squid Cookbook CHANGELOG
 This file is used to list changes made in each version of the squid cookbook.
 
 
+v0.3.0 (2014-02-18)
+-------------------
+[COOK-4066] - squid attributes should be default and not set/normal
+
+
 v0.2.10
 -------
 ### Bug
