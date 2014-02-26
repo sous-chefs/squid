@@ -43,7 +43,6 @@ when 'debian'
   when 'debian'
     if node['platform_version'] == '6.0.3'
       default['squid']['package'] = 'squid3'
-      default['squid']['version'] = '3.1'
       default['squid']['config_dir'] = '/etc/squid3'
       default['squid']['config_file'] = '/etc/squid3/squid.conf'
       default['squid']['service_name'] = 'squid3'
@@ -55,7 +54,6 @@ when 'debian'
 
     elsif node['platform_version'] == '12.04'
       default['squid']['package'] = 'squid3'
-      default['squid']['version'] = '3.1'
       default['squid']['config_dir'] = '/etc/squid3'
       default['squid']['config_file'] = '/etc/squid3/squid.conf'
       default['squid']['log_dir'] = '/var/log/squid3'
@@ -67,10 +65,8 @@ when 'debian'
 
 when 'rhel'
   rhel_version = node['platform_version'].to_f
-  default['squid']['version'] = '3.1' if rhel_version >= 6 && rhel_version < 7
   default['squid']['version'] = '2.6' if rhel_version >= 5 && rhel_version < 6
 
 when 'smartos'
-  default['squid']['version'] = '3.1'
   default['squid']['listen_interface'] = 'net0'
 end
