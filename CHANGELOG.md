@@ -3,6 +3,13 @@ squid Cookbook CHANGELOG
 This file is used to list changes made in each version of the squid cookbook.
 
 
+v0.4.0 (2014-02-27)
+-------------------
+- [COOK-4373] Add conditional output of optional attribute for cache_peer to template
+- [COOK-4376] remove duplicated attributes
+- [COOK-4377] Generate a sysconfig on Fedora
+
+
 v0.3.0 (2014-02-18)
 -------------------
 [COOK-4066] - squid attributes should be default and not set/normal
