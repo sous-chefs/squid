@@ -29,6 +29,7 @@ netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress
 acls = squid_load_acls
 host_acl = squid_load_host_acl
 url_acl = squid_load_url_acl
+auth_params = squid_load_auth_params
 
 # Log variables to Chef::Log::debug()
 Chef::Log.debug("Squid listen_interface: #{listen_interface}")
