@@ -3,6 +3,11 @@ squid Cookbook CHANGELOG
 This file is used to list changes made in each version of the squid cookbook.
 
 
+v0.4.2 (2014-03-27)
+-------------------
+- [COOK-4320] - Add support for ubuntu 13 to the squid cookbook
+
+
 v0.4.0 (2014-02-27)
 -------------------
 - [COOK-4373] Add conditional output of optional attribute for cache_peer to template
