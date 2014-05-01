@@ -82,7 +82,7 @@ template node['squid']['config_file'] do
 end
 
 execute "squid -z" do
-  not_if { File.exist?(node['squid']['cache_dir']) }
+  not_if { File.exist?("#{node['squid']['cache_dir']}") }
 end
 
 # services
