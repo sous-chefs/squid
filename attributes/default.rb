@@ -35,6 +35,9 @@ default['squid']['service_name'] = 'squid'
 
 default['squid']['listen_interface'] = 'eth0'
 default['squid']['cache_mem'] = '2048'
+default['squid']['cache_size'] = '100'
+default['squid']['max_obj_size'] = 1024
+default['squid']['max_obj_size_unit'] = 'MB'
 
 case platform_family
 
