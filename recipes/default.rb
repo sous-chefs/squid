@@ -20,8 +20,8 @@
 #
 
 # variables
-ipaddress = node['ipaddress']
 listen_interface = node['squid']['listen_interface']
+ipaddress = node[:network][:interfaces][:eth1][:addresses].detect { |k,p| p['family'] == 'inet' }.shift
 version = node['squid']['version']
 netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
 
