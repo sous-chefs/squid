@@ -23,6 +23,7 @@ default['squid']['port'] = 3128
 default['squid']['network'] = nil
 default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
+default['squid']['directives'] = []
 
 default['squid']['package'] = 'squid'
 default['squid']['version'] = '3.1'
