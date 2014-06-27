@@ -74,5 +74,5 @@ refresh_pattern deb$ 1577846 100% 1577846
 maximum_object_size 1024 MB
 cache_mem <%= node['squid']['cache_mem'] %> MB
 <% @directives.each do |directive| %>
-<%= directive[:name] %> <%= directive[:value] %>
+<%= directive %> 
 <% end %>
