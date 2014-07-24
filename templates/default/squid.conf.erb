@@ -73,3 +73,6 @@ coredump_dir <%= node['squid']['coredump_dir'] %>
 refresh_pattern deb$ 1577846 100% 1577846
 maximum_object_size <%= node['squid']['max_obj_size'] %> <%= node['squid']['max_obj_size_unit'] %>
 cache_mem <%= node['squid']['cache_mem'] %> MB
+<% @directives.each do |directive| %>
+<%= directive %> 
+<% end %>

@@ -77,7 +77,8 @@ template node['squid']['config_file'] do
   variables(
     :host_acl => host_acl,
     :url_acl => url_acl,
-    :acls => acls
+    :acls => acls,
+    :directives => node['squid']['directives'] 
     )
 end
 
