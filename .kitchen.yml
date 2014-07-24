@@ -7,7 +7,7 @@ provisioner:
 
 platforms:
   - name: centos-5.10
-  - name: centos-6.4
+  - name: centos-6.5
   - name: fedora-19
   - name: ubuntu-10.04
   - name: ubuntu-12.04

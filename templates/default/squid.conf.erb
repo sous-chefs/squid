@@ -71,5 +71,5 @@ hosts_file /etc/hosts
 cache_dir ufs <%= node['squid']['cache_dir'] %> <%= node['squid']['cache_size'] %> 16 256
 coredump_dir <%= node['squid']['coredump_dir'] %>
 refresh_pattern deb$ 1577846 100% 1577846
-maximum_object_size 1024 MB
+maximum_object_size <%= node['squid']['max_obj_size'] %> <%= node['squid']['max_obj_size_unit'] %>
 cache_mem <%= node['squid']['cache_mem'] %> MB

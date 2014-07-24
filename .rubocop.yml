@@ -8,7 +8,18 @@ LineLength:
   Max: 200
 
 HashSyntax:
+  Exclude:
+    - Rakefile
   EnforcedStyle: hash_rockets
 
 MethodLength:
   Enabled: false
+
+Style/SingleSpaceBeforeFirstArg:
+  Exclude:
+    - Rakefile
+    - metadata.rb
+
+Style/PercentLiteralDelimiters:
+  Exclude: 
+    - metadata.rb
