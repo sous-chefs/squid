@@ -139,7 +139,7 @@ and add them to the .travis.yml.
 ```
 gem install travis
 travis encrypt AWS_ACCESS_KEY_ID='your_bits_here' --add
-travis encrypt AWS_SECRET_ACCESS_'your_bits_here' --add
+travis encrypt AWS_SECRET_ACCESS_KEY='your_bits_here' --add
 travis encrypt AWS_KEYPAIR_NAME='your_bits_here' --add
 travis encrypt EC2_SSH_KEY_PATH='~/.ssh/id_ec2.pem' --add
 
