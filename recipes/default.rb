@@ -82,6 +82,10 @@ template node['squid']['config_file'] do
     )
 end
 
+execute "squid -z" do
+  not_if { File.exist?("#{node['squid']['cache_dir']}/00") }
+end
+
 # services
 service node['squid']['service_name'] do
   supports :restart => true, :status => true, :reload => true
