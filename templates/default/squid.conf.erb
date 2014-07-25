@@ -5,13 +5,15 @@
     <%= node['squid']['cache_peer'] %>
 <% end %>
 
-<%= "acl all src" if node['squid']['version'].to_i <3 %>
-acl manager proto cache_object
+<%= "acl all src" if node['squid']['version'].to_i < 3 %>
+<%= "acl manager proto cache_object" if node['squid']['version'].to_f < 3.2 %>
 acl localhost src 127.0.0.1/32
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32
+<%= "acl to_localhost dst 127.0.0.0/8 0.0.0.0/32" if node['squid']['version'].to_f < 3.2 %>
 acl localnet src 10.0.0.0/8	# RFC1918 possible internal network
 acl localnet src 172.16.0.0/12	# RFC1918 possible internal network
 acl localnet src 192.168.0.0/16	# RFC1918 possible internal network
+acl localnet src fc00::/7       # RFC4193 local private network range
+acl localnet src fe80::/10      # RFC4291 link-local (directly-plugged) machine
 acl SSL_ports port 443		# https
 acl SSL_ports port 563		# snews
 acl SSL_ports port 873		# rsync
