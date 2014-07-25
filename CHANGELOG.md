@@ -2,6 +2,15 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v0.5.0 (2014-07-25)
+-------------------
+- Don't assume default interface is 'eth0' (@juliandunn)
+- Fix breakage on Fedora (@juliandunn)
+- Enable a simple way to add arbitrary directives to the bottom of the squid.conf (@dansweeting)
+- Add enable_cache_dir attribute to allow disabling the cache_dir (@phutchins)
+- Permit configuration of cache size (@dschlenk)
+- Fix all test harnesses, Rubocop violations
+
 
 v0.4.2 (2014-03-27)
 -------------------
