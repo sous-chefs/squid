@@ -34,7 +34,7 @@ default['squid']['cache_dir'] = '/var/spool/squid'
 default['squid']['coredump_dir'] = '/var/spool/squid'
 default['squid']['service_name'] = 'squid'
 
-default['squid']['listen_interface'] = 'eth0'
+default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, v| k == 'lo' }.keys.first
 default['squid']['cache_mem'] = '2048'
 default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
@@ -71,6 +71,9 @@ when 'debian'
 when 'rhel'
   rhel_version = node['platform_version'].to_f
   default['squid']['version'] = '2.6' if rhel_version >= 5 && rhel_version < 6
+
+when 'fedora'
+  default['squid']['version'] = '3.2'
 
 when 'smartos'
   default['squid']['listen_interface'] = 'net0'
