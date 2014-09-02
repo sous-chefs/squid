@@ -2,6 +2,10 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v0.5.1 (2014-09-02)
+-------------------
+- Support Ubuntu 14.04. (@maciejmajewski)
+
 v0.5.0 (2014-07-25)
 -------------------
 - Don't assume default interface is 'eth0' (@juliandunn)
