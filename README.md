@@ -16,6 +16,11 @@ Include the squid recipe on the server. Other nodes may search for this node as 
 
 Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
 
+### LDAP Authentication
+
+Two attributes are optional if you want to use anonymous LDAP binds,  ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].  All other attributes are required.  See http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap for further help.
+
+You must also include the two LDAP databags in your cookbook as shown below in the Databags examples.
 
 Example Databags
 ----------------
@@ -57,6 +62,31 @@ Example Databags
 }
 ```
 
+The following two data bags are only needed if you are using LDAP Authentication.
+
+### squid_hosts - ldap_auth item
+```javascript
+{
+  "type": "proxy_auth",
+  "id": "ldap_auth",
+  "net": [
+    "REQUIRED"
+  ]
+}
+```
+
+### squid_acls - ldap_auth item
+```javascript
+{
+  "id": "ldap_auth",
+  "acl": [
+    [
+      "",
+      "allow"
+    ]
+  ]
+}
+```
 
 License & Authors
 -----------------
