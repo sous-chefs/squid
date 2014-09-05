@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-default['squid']['port'] = 3128
+default['squid']['port'] = [3128]
 default['squid']['network'] = nil
 default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
