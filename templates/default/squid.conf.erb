@@ -56,7 +56,13 @@ http_access deny all
 
 icp_access allow localnet
 icp_access deny all
+<% if node['squid']['port'].kind_of?(Array) %>
+  <% node['squid']['port'].each do |port| %>
+http_port <%= port %>
+  <% end %>
+<% else %>
 http_port <%= node['squid']['port'] %>
+<% end %>
 
 hierarchy_stoplist cgi-bin ?
 access_log <%= node['squid']['log_dir'] %>/access.log squid
