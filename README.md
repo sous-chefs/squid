@@ -18,9 +18,12 @@ Databags are able to be used for storing host & url acls and also which hosts/ne
 
 ### LDAP Authentication
 
-Two attributes are optional if you want to use anonymous LDAP binds,  ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].  All other attributes are required.  See http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap for further help.
-
-You must also include the two LDAP databags in your cookbook as shown below in the Databags examples.
+* Set (`node['squid']['enable_ldap']`) to true.
+* Modify the ldap attributes for your environment.
+  * If you use anonymous bindings, two attributes are optional, ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].
+  * All other attributes are required.
+  * See http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap for further help.
+* To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the Example Databags below.
 
 Example Databags
 ----------------
@@ -62,7 +65,10 @@ Example Databags
 }
 ```
 
-The following two data bags are only needed if you are using LDAP Authentication.
+LDAP Databags
+-------------
+
+The following two data bags are only required if you are using LDAP Authentication.
 
 ### squid_hosts - ldap_auth item
 ```javascript
