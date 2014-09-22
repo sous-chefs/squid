@@ -20,7 +20,7 @@ def squid_load_url_acl
     data_bag('squid_urls').each do |bag|
       group = data_bag_item('squid_urls', bag)
       group['urls'].each do |url|
-        url_acl.push [group['id'], url]
+        url_acl.push [group['id'], group.has_key?('element') ? group['element'] : node['squid']['acl_element'], url]
       end
     end
   rescue
