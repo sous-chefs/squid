@@ -2,6 +2,13 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v0.5.2 (2014-10-14)
+-------------------
+- Support LDAP. (@MattMencel)
+- Support multiple listen ports. (@MattMencel)
+- Support use of other ACL types other than url_regex. (@thoutenbos)
+- Fix test harness on Ubuntu. (@juliandunn)
+
 v0.5.1 (2014-09-02)
 -------------------
 - Support Ubuntu 14.04. (@maciejmajewski)
