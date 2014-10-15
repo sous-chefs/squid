@@ -33,6 +33,7 @@ default['squid']['log_dir'] = '/var/log/squid'
 default['squid']['cache_dir'] = '/var/spool/squid'
 default['squid']['coredump_dir'] = '/var/spool/squid'
 default['squid']['service_name'] = 'squid'
+default['squid']['acl_element'] = 'url_regex'
 
 default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, v| k == 'lo' }.keys.first
 default['squid']['cache_mem'] = '2048'
