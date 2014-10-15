@@ -1,7 +1,7 @@
 # This file generated from a Chef template.
 # squid/templates/default.squid.conf.erb
 
-<% unless node['squid']['enable_ldap'] %>
+<% if node['squid']['enable_ldap'] %>
 auth_param basic program <%= node['squid']['ldap_program'] %> -v <%= node['squid']['ldap_version'] %> -b <%= node['squid']['ldap_basedn'] %> <%= "-D #{node['squid']['ldap_binddn']}" unless node['squid']['ldap_binddn'].nil? %> <%= "-w #{node['squid']['ldap_bindpassword']}" unless node['squid']['ldap_bindpassword'].nil? %> -f <%= node['squid']['ldap_searchfilter'] %> <%= node['squid']['ldap_host'] %>
 auth_param basic children <%= node['squid']['ldap_authchildren'] %>
 auth_param basic realm <%= node['squid']['ldap_authrealm'] %>
