@@ -9,3 +9,6 @@ version          '0.5.2'
 %w{debian ubuntu centos fedora redhat scientific suse amazon}.each do |os|
   supports os
 end
+
+recipe 'squid', 'Installs and configures Squid.'
+
