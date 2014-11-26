@@ -14,7 +14,9 @@ Usage
 -----
 Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use the `node.ipaddress` and `node['squid']['port']` to point at it.
 
-Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
+Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url. The default databag names are `squid_urls`,
+`squid_hosts`, and `squid_acls` but can be changed by setting the attributes `node['squid']['urls_data_bag_name']`, `node['squid']['hosts_data_bag_name']`, and/or
+`node['squid']['acls_data_bag_name']`, respectively.
 
 ### LDAP Authentication
 
