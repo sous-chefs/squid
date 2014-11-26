@@ -25,6 +25,10 @@ default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
 default['squid']['directives'] = []
 
+default['squid']['hosts_data_bag_name'] = 'squid_hosts'
+default['squid']['urls_data_bag_name'] = 'squid_urls'
+default['squid']['acls_data_bag_name'] = 'squid_acls'
+
 default['squid']['package'] = 'squid'
 default['squid']['version'] = '3.1'
 default['squid']['config_dir'] = '/etc/squid'
