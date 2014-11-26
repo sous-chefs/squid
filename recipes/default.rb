@@ -78,7 +78,7 @@ template node['squid']['config_file'] do
     :host_acl => host_acl,
     :url_acl => url_acl,
     :acls => acls,
-    :directives => node['squid']['directives'] 
+    :directives => node['squid']['directives']
     )
 end
 
