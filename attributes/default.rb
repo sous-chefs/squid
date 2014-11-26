@@ -1,10 +1,10 @@
 #
-# Author:: Matt Ray <matt@opscode.com>
-# Author:: Sean OMeara <someara@opscode.com>
+# Author:: Matt Ray <matt@getchef.com>
+# Author:: Sean OMeara <someara@getchef.com>
 # Cookbook Name:: squid
 # Attributes:: default
 #
-# Copyright 2012 Opscode, Inc
+# Copyright 2012-2014, Chef Software, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
