@@ -26,9 +26,9 @@ version = node['squid']['version']
 netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
 
 # squid/libraries/default.rb
-acls = squid_load_acls
-host_acl = squid_load_host_acl
-url_acl = squid_load_url_acl
+acls = squid_load_acls(node['squid']['acls_databag_name'])
+host_acl = squid_load_host_acl(node['squid']['hosts_databag_name'])
+url_acl = squid_load_url_acl(node['squid']['urls_databag_name'])
 
 # Log variables to Chef::Log::debug()
 Chef::Log.debug("Squid listen_interface: #{listen_interface}")
