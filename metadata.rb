@@ -1,6 +1,6 @@
 name             'squid'
 maintainer       'Chef Software, Inc.'
-maintainer_email 'cookbooks@getchef.com'
+maintainer_email 'cookbooks@chef.io'
 license          'Apache 2.0'
 description      'Installs/configures squid as a simple caching proxy'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
