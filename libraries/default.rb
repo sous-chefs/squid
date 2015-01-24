@@ -9,7 +9,7 @@ def squid_load_host_acl
       end
     end
   rescue
-     Chef::Log.info "no 'squid_hosts' data bag"
+    Chef::Log.info "no 'squid_hosts' data bag"
   end
   host_acl
 end
@@ -20,7 +20,7 @@ def squid_load_url_acl
     data_bag('squid_urls').each do |bag|
       group = data_bag_item('squid_urls', bag)
       group['urls'].each do |url|
-        url_acl.push [group['id'], group.has_key?('element') ? group['element'] : node['squid']['acl_element'], url]
+        url_acl.push [group['id'], group.key?('element') ? group['element'] : node['squid']['acl_element'], url]
       end
     end
   rescue

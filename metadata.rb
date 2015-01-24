@@ -11,4 +11,3 @@ version          '0.5.2'
 end
 
 recipe 'squid', 'Installs and configures Squid.'
-

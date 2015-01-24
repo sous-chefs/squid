@@ -96,8 +96,8 @@ The following two data bags are only required if you are using LDAP Authenticati
 
 License & Authors
 -----------------
-- Author:: Matt Ray (<matt@opscode.com>)
-- Author:: Sean OMeara (<someara@opscode.com>)
+- Author:: Matt Ray (<matt@getchef.com>)
+- Author:: Sean OMeara (<someara@getchef.com>)
 
 ```text
 Copyright 2012-2014 Chef Software, Inc.

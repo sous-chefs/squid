@@ -1,10 +1,10 @@
 #
-# Author:: Matt Ray <matt@opscode.com>
-# Author:: Sean OMeara <someara@opscode.com>
+# Author:: Matt Ray <matt@getchef.com>
+# Author:: Sean OMeara <someara@getchef.com>
 # Cookbook Name:: squid
 # Attributes:: default
 #
-# Copyright 2012 Opscode, Inc
+# Copyright 2012-2014, Chef Software, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ default['squid']['service_name'] = 'squid'
 default['squid']['acl_element'] = 'url_regex'
 
 default['squid']['ipaddress'] = node['ipaddress']
-default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, v| k == 'lo' }.keys.first
+default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, _v| k == 'lo' }.keys.first
 default['squid']['cache_mem'] = '2048'
 default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
