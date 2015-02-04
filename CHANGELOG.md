@@ -2,6 +2,14 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v0.5.3 (2015-02-04)
+-------------------
+- [#37] Fix errors on RHEL7, Fedora
+- [#36] Fix warning when squid >= 3.2
+- [#33] Miscellaneous cleanup
+- [#31] Remove `node['ipaddress']` as the only way to get the ipaddress.
+- [#30] Add metadata for default recipe
+
 v0.5.2 (2014-10-14)
 -------------------
 - Support LDAP. (@MattMencel)
