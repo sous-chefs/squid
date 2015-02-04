@@ -86,9 +86,11 @@ when 'debian'
 when 'rhel'
   rhel_version = node['platform_version'].to_f
   default['squid']['version'] = '2.6' if rhel_version >= 5 && rhel_version < 6
+  default['squid']['version'] = '3.1' if rhel_version >= 6 && rhel_version < 7
+  default['squid']['version'] = '3.3' if rhel_version >= 7 && rhel_version < 8
 
 when 'fedora'
-  default['squid']['version'] = '3.2'
+  default['squid']['version'] = '3.4'
 
 when 'smartos'
   default['squid']['listen_interface'] = 'net0'
