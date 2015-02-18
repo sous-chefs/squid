@@ -51,14 +51,14 @@ v0.3.0 (2014-02-18)
 v0.2.10
 -------
 ### Bug
-- **[COOK-3936](https://tickets.opscode.com/browse/COOK-3936)** - configure squid cache size on disk
+- **[COOK-3936](https://tickets.chef.io/browse/COOK-3936)** - configure squid cache size on disk
 - updating style and test harness
 
 
 v0.2.8
 ------
 ### Bug
-- **[COOK-3590](https://tickets.opscode.com/browse/COOK-3590)** - Fix hard-coded daemon listen port
+- **[COOK-3590](https://tickets.chef.io/browse/COOK-3590)** - Fix hard-coded daemon listen port
 
 
 v0.2.6

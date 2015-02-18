@@ -1,6 +1,6 @@
 #
-# Author:: Matt Ray <matt@getchef.com>
-# Author:: Sean OMeara <someara@getchef.com>
+# Author:: Matt Ray <matt@chef.io>
+# Author:: Sean OMeara <someara@chef.io>
 # Cookbook Name:: squid
 # Attributes:: default
 #
