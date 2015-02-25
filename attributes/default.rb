@@ -36,7 +36,6 @@ default['squid']['service_name'] = 'squid'
 default['squid']['acl_element'] = 'url_regex'
 
 default['squid']['ipaddress'] = node['ipaddress']
-default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, _v| k == 'lo' }.keys.first
 default['squid']['cache_mem'] = '2048'
 default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
@@ -91,7 +90,4 @@ when 'rhel'
 
 when 'fedora'
   default['squid']['version'] = '3.4'
-
-when 'smartos'
-  default['squid']['listen_interface'] = 'net0'
 end
