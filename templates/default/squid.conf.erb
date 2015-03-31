@@ -93,3 +93,6 @@ cache_mem <%= node['squid']['cache_mem'] %> MB
 <% @directives.each do |directive| %>
 <%= directive %>
 <% end %>
+
+# Include from /etc/squid/conf.d
+include /etc/squid/conf.d/*.conf
