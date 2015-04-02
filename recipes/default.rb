@@ -68,7 +68,7 @@ end
 
 # squid dummy include
 # required, otherwise Squid will not start due to missing .conf files
-file 'dummy.conf' do
+file "#{node['squid']['config_dir']}/dummy.conf" do
   content '# Dummy conf to enable Squid includes in conf.d'
 end
 
