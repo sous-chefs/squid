@@ -19,7 +19,8 @@
 # limitations under the License.
 #
 
-default['squid']['port'] = 3128
+default['squid']['port'] = '3128 options=NO_SSLv2,NO_SSLv3,NO_TLSv1'
+default['squid']['http_port'] = '3128 options=NO_SSLv2,NO_SSLv3,NO_TLSv1'
 default['squid']['network'] = nil
 default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
