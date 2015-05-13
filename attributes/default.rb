@@ -19,6 +19,7 @@
 # limitations under the License.
 #
 
+default['squid']['effective_user'] = "proxy"
 default['squid']['port'] = 3128
 default['squid']['network'] = nil
 default['squid']['timeout'] = '10'
