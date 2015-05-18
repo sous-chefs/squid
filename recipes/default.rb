@@ -20,24 +20,16 @@
 #
 
 # variables
-ipaddress = node['squid']['ipaddress']
-listen_interface = node['squid']['listen_interface']
 version = node['squid']['version']
-netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
 
 # squid/libraries/default.rb
 acls = squid_load_acls(node['squid']['acls_databag_name'])
-host_acl = squid_load_host_acl(node['squid']['hosts_databag_name'])
-url_acl = squid_load_url_acl(node['squid']['urls_databag_name'])
+permissions = squid_load_permissions(node['squid']['permissions_databag_name'])
 
 # Log variables to Chef::Log::debug()
-Chef::Log.debug("Squid listen_interface: #{listen_interface}")
-Chef::Log.debug("Squid ipaddress: #{ipaddress}")
-Chef::Log.debug("Squid netmask: #{netmask}")
 Chef::Log.debug("Squid version: #{version}")
-Chef::Log.debug("Squid host_acls: #{host_acl}")
-Chef::Log.debug("Squid url_acls: #{url_acl}")
 Chef::Log.debug("Squid acls: #{acls}")
+Chef::Log.debug("Squid permissions: #{permissions}")
 
 # packages
 package node['squid']['package']
@@ -75,9 +67,8 @@ template node['squid']['config_file'] do
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode 00644
   variables(
-    :host_acl => host_acl,
-    :url_acl => url_acl,
     :acls => acls,
+    :permissions => permissions,
     :directives => node['squid']['directives']
     )
 end

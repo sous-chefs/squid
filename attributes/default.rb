@@ -20,15 +20,14 @@
 #
 
 default['squid']['effective_user'] = "proxy"
-default['squid']['port'] = 3128
+default['squid']['listen'] = 3128
 default['squid']['network'] = nil
 default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
 default['squid']['directives'] = []
 
 default['squid']['acls_databag_name'] = "squid_acls"
-default['squid']['hosts_databag_name'] = "squid_hosts"
-default['squid']['urls_databag_name'] = "squid_urls"
+default['squid']['permissions_databag_name'] = "squid_permissions"
 
 default['squid']['package'] = 'squid'
 default['squid']['version'] = '3.1'
@@ -38,10 +37,7 @@ default['squid']['log_dir'] = '/var/log/squid'
 default['squid']['cache_dir'] = '/var/spool/squid'
 default['squid']['coredump_dir'] = '/var/spool/squid'
 default['squid']['service_name'] = 'squid'
-default['squid']['acl_element'] = 'url_regex'
 
-default['squid']['ipaddress'] = node['ipaddress']
-default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, _v| k == 'lo' }.keys.first
 default['squid']['cache_mem'] = '2048'
 default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
