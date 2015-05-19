@@ -2,6 +2,11 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v0.5.4 (2015-05-19)
+-------------------
+- [#39] Update versions of squid for RHEL7
+- [#38] Added ability to use variable databags per environment, role, etc.
+
 v0.5.3 (2015-02-04)
 -------------------
 - [#37] Fix errors on RHEL7, Fedora
