@@ -56,7 +56,6 @@ acl localnet src 172.16.0.0/12   # RFC1918 possible internal network
 acl localnet src 192.168.0.0/16  # RFC1918 possible internal network
 acl localnet src fc00::/7        # RFC4193 local private network range
 acl localnet src fe80::/10       # RFC4291 link-local (directly-plugged) machine
-acl to_localhost dst 127.0.0.0/8
 
 
 ###
@@ -127,22 +126,26 @@ http_access deny all
 icp_access deny all
 
 hierarchy_stoplist cgi-bin ?
+
 access_log <%= node['squid']['log_dir'] %>/access.log squid
+cache_log <%= node['squid']['log_dir'] %>/cache.log squid
+cache_store_log <%= node['squid']['log_dir'] %>/store.log squid
+
+<% node['squid']['refresh_patterns'].each do |pattern, options| -%>
+refresh_pattern   <% if options['ignore_case'] -%>-i<% end-%> <%= pattern %>  <%= options['min'] %> <%= options['percent'] %> <%= options['max'] %>
+<% end -%>
+
+# Add any of your own refresh_pattern entries above these.
 refresh_pattern     ^ftp:                    1440 20% 10080
 refresh_pattern     ^gopher:                 1440 0%  1440
 refresh_pattern     -i (/cgi-bin/|\?)        0    0%  0
-refresh_pattern     (Release|Package(.gz)*)$ 0    20% 2880
-# refresh_pattern   \.deb$                   1440 20% 10080
-# refresh_pattern   \.rpm$                   1440 20% 10080
-# refresh_pattern   \.iso$                   1440 20% 10080
-# refresh_pattern   \.$                      1440 20% 10080
-# refresh_pattern   .                        0    20% 4320
+refresh_pattern     .                        0    20% 4320
 
 <% if node['squid']['enable_cache_dir'] -%>
 cache_dir ufs <%= node['squid']['cache_dir'] %> <%= node['squid']['cache_size'] %> 16 256
 <% end -%>
+
 coredump_dir <%= node['squid']['coredump_dir'] %>
-refresh_pattern deb$ 1577846 100% 1577846
 maximum_object_size <%= node['squid']['max_obj_size'] %> <%= node['squid']['max_obj_size_unit'] %>
 cache_mem <%= node['squid']['cache_mem'] %> MB
 
