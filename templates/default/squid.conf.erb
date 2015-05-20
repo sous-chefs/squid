@@ -96,8 +96,8 @@ acl authorized proxy_auth REQUIRED
 <% end -%>
 
 # ACL from data_bags
-<% @acls.each do |acl| -%>
-acl <%= acl[0] %> <%= acl[1] %> <%= acl[2] %>
+<% @acls.each do |acl, options| -%>
+acl <%= acl %><% if options['is_external'] -%> external<% end-%> <%= options['type'] %><% if options['modificators'] -%> <%= options['modificator'] %><% end-%> <%= options['value'] %>
 <% end -%>
 
 
@@ -105,17 +105,18 @@ acl <%= acl[0] %> <%= acl[1] %> <%= acl[2] %>
 ### Rules define
 ###
 
-<% @permissions.each do |perm| -%>
-http_access <%= perm[0] %> <%= perm[1] %>
-<% end -%>
-
 http_access allow manager localhost
 http_access deny manager
+http_access deny !Safe_ports
+http_access allow localhost
 http_access allow purge localhost
 http_access deny purge
-http_access deny !Safe_ports
 http_access deny CONNECT !SSL_ports
-http_access allow localhost
+
+<% @permissions.each do |perm| -%>
+http_access <%= perm %>
+<% end -%>
+
 http_access deny all
 
 
@@ -131,7 +132,7 @@ access_log <%= node['squid']['log_dir'] %>/access.log squid
 cache_log <%= node['squid']['log_dir'] %>/cache.log squid
 cache_store_log <%= node['squid']['log_dir'] %>/store.log squid
 
-<% node['squid']['refresh_patterns'].each do |pattern, options| -%>
+<% @refresh_patterns.each do |pattern, options| -%>
 refresh_pattern   <% if options['ignore_case'] -%>-i<% end-%> <%= pattern %>  <%= options['min'] %> <%= options['percent'] %> <%= options['max'] %>
 <% end -%>
 

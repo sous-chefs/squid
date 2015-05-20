@@ -22,9 +22,12 @@
 # variables
 version = node['squid']['version']
 
-# squid/libraries/default.rb
-acls = squid_load_acls(node['squid']['acls_databag_name'])
-permissions = squid_load_permissions(node['squid']['permissions_databag_name'])
+acls = node['squid']['acls']
+permissions = []
+node['squid']['permissions'].uniq.each do |perm|
+  permissions << "#{perm['action']} #{perm['acls'].uniq.flatten.join(" ")}"
+end
+
 
 # Log variables to Chef::Log::debug()
 Chef::Log.debug("Squid version: #{version}")
@@ -67,8 +70,11 @@ template node['squid']['config_file'] do
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode 00644
   variables(
+    #:acls => acls,
+    #:permissions => permissions,
     :acls => acls,
     :permissions => permissions,
+    :refresh_patterns => node['squid']['refresh_patterns'],
     :directives => node['squid']['directives']
     )
 end

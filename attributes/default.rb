@@ -26,8 +26,8 @@ default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
 default['squid']['directives'] = []
 
-default['squid']['acls_databag_name'] = "squid_acls"
-default['squid']['permissions_databag_name'] = "squid_permissions"
+default['squid']['acls'] = Mash.new
+default['squid']['permissions'] = []
 
 default['squid']['package'] = 'squid'
 default['squid']['version'] = '3.1'
