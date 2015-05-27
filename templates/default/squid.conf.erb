@@ -27,9 +27,6 @@ http_port <%= listen %>
 http_port <%= node['squid']['listen'] %>
 <% end -%>
 
-<% if node['squid']['cache_peer'] -%>
-  <%= node['squid']['cache_peer'] %>
-<% end -%>
 
 ###
 ### Athorization rules define
@@ -113,7 +110,7 @@ http_access allow purge localhost
 http_access deny purge
 http_access deny CONNECT !SSL_ports
 
-<% @permissions.each do |perm| -%>
+<% @http_access.each do |perm| -%>
 http_access <%= perm %>
 <% end -%>
 
@@ -124,9 +121,23 @@ http_access deny all
 ### Secondary global settings define
 ###
 
+icp_port <%= node['squid']['icp_port'] %>
+<% @icp_access.each do |perm| -%>
+icp_access <%= perm %>
+<% end -%>
 icp_access deny all
 
-hierarchy_stoplist cgi-bin ?
+htcp_port <%= node['squid']['htcp_port'] %>
+<% @htcp_access.each do |perm| -%>
+htcp_access <%= perm %>
+<% end -%>
+htcp_access deny all
+
+<% if node['squid']['cache_peers'] -%>
+   <% @cache_peers.each do |peer, peer_conf| -%>
+cache_peer <%= peer %> <%= peer_conf['type'] %> <%= peer_conf['http-port'] %> <%= peer_conf['icp-port'] %><% if peer_conf['options'] -%><% peer_conf['options'].each do |opt| -%> <%= opt %><% end -%><% end -%>
+   <% end -%>
+<% end -%>
 
 access_log <%= node['squid']['log_dir'] %>/access.log squid
 cache_log <%= node['squid']['log_dir'] %>/cache.log squid

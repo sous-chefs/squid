@@ -14,7 +14,7 @@ Usage
 -----
 Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use `node['squid']['listen]` to point at it. But strongly recommended to manualy specify proxy server address on clients nodes.
 
-Attributes can be used for storing ACLs, permissions, refresh_patterns and others config options.
+Attributes can be used for storing ACLs, http\_access, refresh\_patterns, cache\_peers, icp\_access, htcp\_access and others config options.
 
 ### LDAP Authentication
 
@@ -25,7 +25,7 @@ Attributes can be used for storing ACLs, permissions, refresh_patterns and other
   * See http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap for further help.
 * To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
 
-Example Databags
+Example Attributes
 ----------------
 ### acls
 ```ruby
@@ -40,9 +40,9 @@ Example Databags
 }
 ```
 
-### permissions
+### http_access
 ```ruby
-'permissions' => [
+'http_access' => [
   {
     'action' => 'allow',
     'acls' => ['all']
@@ -59,6 +59,43 @@ Example Databags
     'max' => 2880,
     'ignore_case' => true # false by defalut
 }
+```
+
+### cache_peers
+```ruby
+'cache_peers' => {
+  '192.168.240.4' => {
+    'type' => 'parent',
+    'http-port' => 3128,
+    'icp-port' => 4827,
+    'options' => [
+      'htcp',
+      'carp',
+      'weight=10',
+      'proxy-only'
+    ]
+  }
+}
+```
+
+### icp_access
+```ruby
+'icp_access' => [
+  {
+    'action' => 'allow',
+    'acls' => ['localnet]
+  }
+]
+```
+
+### htcp_access
+```ruby
+'htcp_access' => [
+  {
+    'action' => 'allow',
+    'acls' => ['localnet]
+  }
+]
 ```
 
 LDAP Databags

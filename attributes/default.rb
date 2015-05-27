@@ -27,7 +27,7 @@ default['squid']['opts'] = ''
 default['squid']['directives'] = []
 
 default['squid']['acls'] = Mash.new
-default['squid']['permissions'] = []
+default['squid']['http_access'] = []
 
 default['squid']['package'] = 'squid'
 default['squid']['version'] = '3.1'
@@ -44,6 +44,12 @@ default['squid']['max_obj_size'] = 1024
 default['squid']['max_obj_size_unit'] = 'MB'
 default['squid']['enable_cache_dir'] = true
 default['squid']['refresh_patterns'] = Mash.new
+
+default['squid']['cache_peer'] = Mash.new
+default['squid']['icp_port'] = 3130
+default['squid']['htcp_port'] = 4827
+default['squid']['icp_access'] = []
+default['squid']['htcp_access'] = []
 
 default['squid']['enable_ldap']       = false
 default['squid']['ldap_host']         = nil   # 'ldap.here.com'

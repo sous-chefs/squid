@@ -15,7 +15,7 @@
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
+# See the License for the specific language governing http_access and
 # limitations under the License.
 #
 
@@ -23,16 +23,19 @@
 version = node['squid']['version']
 
 acls = node['squid']['acls']
-permissions = []
-node['squid']['permissions'].uniq.each do |perm|
-  permissions << "#{perm['action']} #{perm['acls'].uniq.flatten.join(" ")}"
-end
 
+accesses = Mash.new
+%w(http_access icp_access htcp_access).each do |w|
+  accesses[w] = []
+  node['squid'][w].uniq.each do |perm|
+    accesses[w] << "#{perm['action']} #{perm['acls'].uniq.flatten.join(" ")}"
+  end
+end
 
 # Log variables to Chef::Log::debug()
 Chef::Log.debug("Squid version: #{version}")
 Chef::Log.debug("Squid acls: #{acls}")
-Chef::Log.debug("Squid permissions: #{permissions}")
+Chef::Log.debug("Squid http_access: #{accesses['http_access']}")
 
 # packages
 package node['squid']['package']
@@ -70,11 +73,12 @@ template node['squid']['config_file'] do
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode 00644
   variables(
-    #:acls => acls,
-    #:permissions => permissions,
     :acls => acls,
-    :permissions => permissions,
+    :http_access => accesses['http_access'],
     :refresh_patterns => node['squid']['refresh_patterns'],
+    :cache_peers => node['squid']['cache_peers'],
+    :icp_access => accesses['icp_access'],
+    :htcp_access => accesses['htcp_access'],
     :directives => node['squid']['directives']
     )
 end
