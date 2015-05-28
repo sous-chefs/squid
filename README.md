@@ -23,7 +23,7 @@ Attributes can be used for storing ACLs, http\_access, refresh\_patterns, cache\
   * If you use anonymous bindings, two attributes are optional, ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].
   * All other attributes are required.
   * See http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap for further help.
-* To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
+* To create the ldap acls in squid.conf, you also need the two ldap\_auth databag items as shown in the LDAP Databags below.
 
 Example Attributes
 ----------------
@@ -40,7 +40,7 @@ Example Attributes
 }
 ```
 
-### http_access
+### http\_access
 ```ruby
 'http_access' => [
   {
@@ -50,7 +50,7 @@ Example Attributes
 ]
 ```
 
-### refresh_patterns
+### refresh\_patterns
 ```ruby
 'refresh_patterns' => {
   '(Release|Package(.gz)*)$' => {
@@ -61,7 +61,7 @@ Example Attributes
 }
 ```
 
-### cache_peers
+### cache\_peers
 ```ruby
 'cache_peers' => {
   '192.168.240.4' => {
@@ -78,7 +78,7 @@ Example Attributes
 }
 ```
 
-### icp_access
+### icp\_access
 ```ruby
 'icp_access' => [
   {
@@ -88,7 +88,7 @@ Example Attributes
 ]
 ```
 
-### htcp_access
+### htcp\_access
 ```ruby
 'htcp_access' => [
   {
@@ -103,7 +103,7 @@ LDAP Databags
 
 The following two data bags are only required if you are using LDAP Authentication.
 
-### squid_hosts - ldap_auth item
+### squid\_hosts - ldap\_auth item
 ```javascript
 {
   "type": "proxy_auth",
@@ -114,7 +114,7 @@ The following two data bags are only required if you are using LDAP Authenticati
 }
 ```
 
-### squid_acls - ldap_auth item
+### squid\_acls - ldap\_auth item
 ```javascript
 {
   "id": "ldap_auth",
