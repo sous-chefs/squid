@@ -19,15 +19,15 @@
 # limitations under the License.
 #
 
-default['squid']['port'] = 3128
+default['squid']['effective_user'] = "proxy"
+default['squid']['listen'] = 3128
 default['squid']['network'] = nil
 default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
 default['squid']['directives'] = []
 
-default['squid']['acls_databag_name'] = "squid_acls"
-default['squid']['hosts_databag_name'] = "squid_hosts"
-default['squid']['urls_databag_name'] = "squid_urls"
+default['squid']['acls'] = Mash.new
+default['squid']['http_access'] = []
 
 default['squid']['package'] = 'squid'
 default['squid']['version'] = '3.1'
@@ -37,15 +37,19 @@ default['squid']['log_dir'] = '/var/log/squid'
 default['squid']['cache_dir'] = '/var/spool/squid'
 default['squid']['coredump_dir'] = '/var/spool/squid'
 default['squid']['service_name'] = 'squid'
-default['squid']['acl_element'] = 'url_regex'
 
-default['squid']['ipaddress'] = node['ipaddress']
-default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, _v| k == 'lo' }.keys.first
-default['squid']['cache_mem'] = '2048'
-default['squid']['cache_size'] = '100'
+default['squid']['cache_mem'] = 2048
+default['squid']['cache_size'] = 100
 default['squid']['max_obj_size'] = 1024
 default['squid']['max_obj_size_unit'] = 'MB'
 default['squid']['enable_cache_dir'] = true
+default['squid']['refresh_patterns'] = Mash.new
+
+default['squid']['cache_peer'] = Mash.new
+default['squid']['icp_port'] = 3130
+default['squid']['htcp_port'] = 4827
+default['squid']['icp_access'] = []
+default['squid']['htcp_access'] = []
 
 default['squid']['enable_ldap']       = false
 default['squid']['ldap_host']         = nil   # 'ldap.here.com'

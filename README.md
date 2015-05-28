@@ -6,15 +6,15 @@ Configures squid as a caching proxy.
 Recipes
 -------
 ### default
-The default recipe installs squid and sets up simple proxy caching. As of now, the options you may change are the port (`node['squid']['port']`) and the network the caching proxy is available on the subnet from `node.ipaddress` (ie. "192.168.1.0/24") but may be overridden with `node['squid']['network']`. The size of objects allowed to be stored has been bumped up to allow for caching of installation files.
+The default recipe installs squid and sets up simple proxy caching. As of now, the options you may change are the port and ip address which squid should listen on (`node['squid']['listen]`).
 An optional (`node['squid']['cache_peer']`), if set, will be written verbatim to the template.
 
 
 Usage
 -----
-Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use the `node.ipaddress` and `node['squid']['port']` to point at it.
+Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use `node['squid']['listen]` to point at it. But strongly recommended to manualy specify proxy server address on clients nodes.
 
-Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
+Attributes can be used for storing ACLs, http\_access, refresh\_patterns, cache\_peers, icp\_access, htcp\_access and others config options.
 
 ### LDAP Authentication
 
@@ -23,46 +23,79 @@ Databags are able to be used for storing host & url acls and also which hosts/ne
   * If you use anonymous bindings, two attributes are optional, ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].
   * All other attributes are required.
   * See http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap for further help.
-* To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
+* To create the ldap acls in squid.conf, you also need the two ldap\_auth databag items as shown in the LDAP Databags below.
 
-Example Databags
+Example Attributes
 ----------------
-### squid_urls - yubikey item
-```javascript
-{
-  "urls": [
-    "^https://api.yubico.com/wsapi/2.0/verify"
-  ],
-  "id": "yubikey"
+### acls
+```ruby
+'acls' => {
+  'office_net' => {
+    'is_external' => false, # false by default
+    'modificators' => '', # according to acl type you can specify different
+                          # modificators, like -i, -s or others
+    'type' => 'src',
+    'value' => '192.168.1.0/24'
+  }
 }
 ```
 
-### squid_hosts - bastion item
-```javascript
-{
-  "type": "src",
-  "id": "bastion",
-  "net": [
-    "192.168.0.2/32"
-  ]
+### http\_access
+```ruby
+'http_access' => [
+  {
+    'action' => 'allow',
+    'acls' => ['all']
+  }
+]
+```
+
+### refresh\_patterns
+```ruby
+'refresh_patterns' => {
+  '(Release|Package(.gz)*)$' => {
+    'min'=> 0,
+    'percent' => '20%',
+    'max' => 2880,
+    'ignore_case' => true # false by defalut
 }
 ```
 
-### squid_acls - bastion item
-```javascript
-{
-  "id": "bastion",
-  "acl": [
-    [
-      "yubikey",
-      "allow"
-    ],
-    [
-      "all",
-      "deny"
+### cache\_peers
+```ruby
+'cache_peers' => {
+  '192.168.240.4' => {
+    'type' => 'parent',
+    'http-port' => 3128,
+    'icp-port' => 4827,
+    'options' => [
+      'htcp',
+      'carp',
+      'weight=10',
+      'proxy-only'
     ]
-  ]
+  }
 }
+```
+
+### icp\_access
+```ruby
+'icp_access' => [
+  {
+    'action' => 'allow',
+    'acls' => ['localnet]
+  }
+]
+```
+
+### htcp\_access
+```ruby
+'htcp_access' => [
+  {
+    'action' => 'allow',
+    'acls' => ['localnet]
+  }
+]
 ```
 
 LDAP Databags
@@ -70,7 +103,7 @@ LDAP Databags
 
 The following two data bags are only required if you are using LDAP Authentication.
 
-### squid_hosts - ldap_auth item
+### squid\_hosts - ldap\_auth item
 ```javascript
 {
   "type": "proxy_auth",
@@ -81,7 +114,7 @@ The following two data bags are only required if you are using LDAP Authenticati
 }
 ```
 
-### squid_acls - ldap_auth item
+### squid\_acls - ldap\_auth item
 ```javascript
 {
   "id": "ldap_auth",
@@ -98,6 +131,7 @@ License & Authors
 -----------------
 - Author:: Matt Ray (<matt@chef.io>)
 - Author:: Sean OMeara (<someara@chef.io>)
+- Author:: Alexey Mochkin (<alukardd@alukardd.org>)
 
 ```text
 Copyright 2012-2015 Chef Software, Inc.
