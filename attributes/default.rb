@@ -85,4 +85,11 @@ when 'fedora'
 
 when 'smartos'
   default['squid']['listen_interface'] = 'net0'
+
+when 'freebsd'
+  default['squid']['version'] = '3.5'
+  default['squid']['config_dir'] = '/usr/local/etc/squid'
+  default['squid']['config_file'] = '/usr/local/etc/squid/squid.conf'
+  default['squid']['cache_dir'] = '/var/squid/cache'
+  default['squid']['coredump_dir'] = '/var/squid/cache'
 end
