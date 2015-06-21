@@ -11,3 +11,6 @@ version          '0.5.4'
 end
 
 recipe 'squid', 'Installs and configures Squid.'
+
+source_url 'https://github.com/opscode-cookbooks/squid'
+issues_url 'https://github.com/opscode-cookbooks/squid/issues'
