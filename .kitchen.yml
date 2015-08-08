@@ -6,19 +6,16 @@ provisioner:
 
 platforms:
   - name: centos-5.10
-  - name: centos-6.5
-  - name: centos-7.0
+  - name: centos-6.6
+  - name: centos-7.1
   - name: debian-6.0.10
     run_list:
     - recipe[apt]
-  - name: debian-7.7
+  - name: debian-7.8
     run_list:
     - recipe[apt]
-  - name: fedora-19
   - name: fedora-20
-  - name: ubuntu-10.04
-    run_list:
-      - recipe[apt]
+  - name: fedora-21
   - name: ubuntu-12.04
     run_list:
       - recipe[apt]
@@ -28,4 +25,5 @@ platforms:
 
 suites:
   - name: default
-    run_list: squid
+    run_list:
+      - recipe[squid::default]
