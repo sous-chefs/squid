@@ -1,6 +1,22 @@
 squid Cookbook
 ==============
-Configures squid as a caching proxy.
+
+
+[![Build Status](https://travis-ci.org/opscode-cookbooks/squid.svg?branch=master)](https://travis-ci.org/opscode-cookbooks/squid)
+[![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
+
+Installs and configures Squid as a caching proxy.
+
+
+Requirements
+------------
+### Platforms
+
+- Debian/Ubuntu
+- RHEL/CentOS/Scientific/Amazon
+- Fedora
+- SmartOS
+- Suse
 
 
 Recipes
@@ -100,7 +116,7 @@ License & Authors
 - Author:: Sean OMeara (<someara@chef.io>)
 
 ```text
-Copyright 2012-2015 Chef Software, Inc.
+Copyright 2012-2015, Chef Software, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

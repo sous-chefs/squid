@@ -4,7 +4,7 @@
 # Cookbook Name:: squid
 # Attributes:: default
 #
-# Copyright 2012-2014, Chef Software, Inc
+# Copyright 2012-2015, Chef Software, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,9 +55,9 @@ default['squid']['ldap_bindpassword'] = nil   # 'some_password'
 default['squid']['ldap_searchfilter'] = nil   # 'uid=%s'
 default['squid']['ldap_version']      = 3     # LDAP v. 2 or 3
 default['squid']['ldap_program']      = '/usr/lib/squid3/basic_ldap_auth' # Default set for Ubuntu 14
-default['squid']['ldap_authchildren'] = 5     # Number of LDAP threads to start
-default['squid']['ldap_authrealm']    = 'Web-Proxy'   # Authentication Realm
-default['squid']['ldap_authcredentialsttl'] = '1 minute'  # Credentials TTL
+default['squid']['ldap_authchildren'] = 5 # Number of LDAP threads to start
+default['squid']['ldap_authrealm']    = 'Web-Proxy' # Authentication Realm
+default['squid']['ldap_authcredentialsttl'] = '1 minute' # Credentials TTL
 
 case platform_family
 
