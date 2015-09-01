@@ -72,19 +72,15 @@ when 'debian'
     end
 
   when 'ubuntu'
-    if node['platform_version'] == '10.04'
-      default['squid']['version'] = '2.7'
-    elsif node['platform_version'] == '12.04' || node['platform_version'] =~ /1[34]\./
-      default['squid']['package'] = 'squid3'
-      default['squid']['version'] = '3.1' if node['platform_version'] =~ /13\./
-      default['squid']['version'] = '3.3' if node['platform_version'] =~ /14\./
-      default['squid']['config_dir'] = '/etc/squid3'
-      default['squid']['config_file'] = '/etc/squid3/squid.conf'
-      default['squid']['log_dir'] = '/var/log/squid3'
-      default['squid']['cache_dir'] = '/var/spool/squid3'
-      default['squid']['coredump_dir'] = '/var/spool/squid3'
-      default['squid']['service_name'] = 'squid3'
-    end
+    default['squid']['package'] = 'squid3'
+    default['squid']['version'] = '3.1' if node['platform_version'] =~ /13\./
+    default['squid']['version'] = '3.3' if node['platform_version'] =~ /14\./
+    default['squid']['config_dir'] = '/etc/squid3'
+    default['squid']['config_file'] = '/etc/squid3/squid.conf'
+    default['squid']['log_dir'] = '/var/log/squid3'
+    default['squid']['cache_dir'] = '/var/spool/squid3'
+    default['squid']['coredump_dir'] = '/var/spool/squid3'
+    default['squid']['service_name'] = 'squid3'
   end
 
 when 'rhel'
