@@ -73,7 +73,7 @@ when 'debian'
   default['squid']['version'] = '3.1' if node['platform_version'] =~ /7\./
   default['squid']['version'] = '3.3' if node['platform_version'] =~ /14\./
   default['squid']['version'] = '3.4' if node['platform_version'] =~ /8\./
-    
+
 when 'rhel'
   rhel_version = node['platform_version'].to_f
   default['squid']['version'] = '2.6' if rhel_version >= 5 && rhel_version < 6

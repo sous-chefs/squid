@@ -75,16 +75,16 @@ template node['squid']['config_file'] do
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode 00644
   variables(
-    :host_acl => host_acl,
-    :url_acl => url_acl,
-    :acls => acls,
-    :directives => node['squid']['directives']
+    host_acl: host_acl,
+    url_acl: url_acl,
+    acls: acls,
+    directives: node['squid']['directives']
   )
 end
 
 # services
 service node['squid']['service_name'] do
-  supports :restart => true, :status => true, :reload => true
+  supports restart: true, status: true, reload: true
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
   action [:enable, :start]
 end

@@ -11,11 +11,6 @@ Encoding:
 LineLength:
   Max: 200
 
-HashSyntax:
-  Exclude:
-    - Rakefile
-  EnforcedStyle: hash_rockets
-
 MethodLength:
   Enabled: false
 
