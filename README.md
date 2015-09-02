@@ -6,7 +6,6 @@ squid Cookbook
 
 Installs and configures Squid as a caching proxy.
 
-
 Requirements
 ------------
 ### Platforms
@@ -18,6 +17,12 @@ Requirements
 - Fedora
 - SmartOS
 - Suse
+
+### Chef
+Chef 11+
+
+### Cookbooks
+- none
 
 
 Recipes
