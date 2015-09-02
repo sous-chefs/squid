@@ -26,3 +26,7 @@ suites:
   - name: default
     run_list:
       - recipe[squid::default]
+    attributes:
+      squid:
+        cache_size: 10 
+        cache_mem: 10
