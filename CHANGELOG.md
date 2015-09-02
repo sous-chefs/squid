@@ -2,6 +2,12 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v1.0.1 (2015-09-02)
+-------------------
+- Wrap the new source_issues and issues_url to retain compatibility with Chef 11
+- Update the contributing documentation to the latest version
+- Update Travis config to perform just linting and unit testing
+
 v1.0.0 (2015-09-02)
 -------------------
 - Reorder config to place maximum_object_size before cache_dir so it's not ignored
