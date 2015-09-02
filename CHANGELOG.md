@@ -2,6 +2,23 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v0.6.0 (2015-09-01)
+- Reorder config to place maximum_object_size before cache_dir so it's not ignored
+- Remove attributes for Ubuntu 10.04 which is now EoL
+- Remove attributes for Debian 6 which is now EoL
+- Merge Debian and Ubuntu attributes to properly assign Debian style directories on Debian systems
+- Add squid version attributes for Debian 7.X and 8.X
+- Remove RHEL 5.X support from the readme since the current configuration will not start
+- Update Test Kitchen for the latest platforms
+- Add Ruby 2.0 and 2.2 to Travis
+- Add source_url and issues_url to the metadata.rb
+- Update the development dependencies in the Gemfile to the latest releases
+- Add Travis and cookbook release badges to the readme
+- Add required platforms to the readme
+- Add rvm, rbenv and rubymine files to the gitignore file
+- Add a very basic Serverspec test to Test Kitchen to ensure Squid is up and listening on port 3128
+- Converge Test Kitchen instances with a very small memory and disk cache to avoid failures
+
 v0.5.4 (2015-05-19)
 -------------------
 - [#39] Update versions of squid for RHEL7
