@@ -2,7 +2,8 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
-v0.6.0 (2015-09-01)
+v1.0.0 (2015-09-02)
+-------------------
 - Reorder config to place maximum_object_size before cache_dir so it's not ignored
 - Remove attributes for Ubuntu 10.04 which is now EoL
 - Remove attributes for Debian 6 which is now EoL
@@ -18,6 +19,10 @@ v0.6.0 (2015-09-01)
 - Add rvm, rbenv and rubymine files to the gitignore file
 - Add a very basic Serverspec test to Test Kitchen to ensure Squid is up and listening on port 3128
 - Converge Test Kitchen instances with a very small memory and disk cache to avoid failures
+
+v0.6.0 (2015-09-01)
+------------------
+* 0.6.0 was folded into 1.0.0 when it was realized the breaking changes in the release better warranted a 1.0.0 release.
 
 v0.5.4 (2015-05-19)
 -------------------
