@@ -14,7 +14,7 @@ Requirements
 
 - Debian 7+
 - Ubuntu 12.04+
-- RHEL/CentOS/Scientific 5+
+- RHEL/CentOS/Scientific 6+
 - Amazon Linux
 - Fedora
 - SmartOS
