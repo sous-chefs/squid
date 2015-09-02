@@ -1,7 +1,6 @@
 squid Cookbook
 ==============
 
-
 [![Build Status](https://travis-ci.org/opscode-cookbooks/squid.svg?branch=master)](https://travis-ci.org/opscode-cookbooks/squid)
 [![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
 
