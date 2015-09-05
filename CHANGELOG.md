@@ -2,6 +2,12 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v1.1.0 (2015-09-05)
+- Added FreeBSD support
+- Removed use of Ruby 1.8.7 hash rockets
+- Add Chefspec unit tests
+- Documented Chef requirement of 11+
+
 v1.0.1 (2015-09-02)
 -------------------
 - Wrap the new source_issues and issues_url to retain compatibility with Chef 11
