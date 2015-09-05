@@ -82,6 +82,12 @@ template node['squid']['config_file'] do
   )
 end
 
+# squid swap dirs
+execute 'squid -Nz' do
+  action :run
+  creates ::File.join(node['squid']['cache_dir'], '00')
+end
+
 # services
 service node['squid']['service_name'] do
   supports restart: true, status: true, reload: true
