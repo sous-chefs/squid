@@ -17,6 +17,7 @@ Requirements
 - Fedora
 - SmartOS
 - Suse
+- FreeBSD 10+
 
 ### Chef
 Chef 11+
