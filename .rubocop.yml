@@ -18,7 +18,3 @@ Style/SingleSpaceBeforeFirstArg:
   Exclude:
     - Rakefile
     - metadata.rb
-
-Style/PercentLiteralDelimiters:
-  Exclude: 
-    - metadata.rb
