@@ -10,7 +10,7 @@ version          '1.0.1'
   supports os
 end
 
-recipe 'squid', 'Installs and configures Squid.'
+recipe 'squid::default', 'Installs and configures Squid.'
 
 source_url 'https://github.com/opscode-cookbooks/squid' if respond_to?(:source_url)
 issues_url 'https://github.com/opscode-cookbooks/squid/issues' if respond_to?(:source_url)
