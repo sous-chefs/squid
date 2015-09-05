@@ -12,9 +12,9 @@ describe 'default recipe on Ubuntu 14.04' do
   end
 end
 
-describe 'default recipe on FreeBSD 10' do
+describe 'squid::default' do
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'freebsd', version: '10.0') do |node|
+    ChefSpec::SoloRunner.new(platform: 'freebsd', version: '10.0') do
     end.converge(described_recipe)
   end
 
