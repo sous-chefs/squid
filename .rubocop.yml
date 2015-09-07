@@ -4,16 +4,12 @@ AllCops:
 
 AlignParameters:
   Enabled: false
-
 Encoding:
   Enabled: false
-
 LineLength:
   Max: 200
-
 MethodLength:
   Enabled: false
-
 Style/SingleSpaceBeforeFirstArg:
   Exclude:
     - Rakefile
