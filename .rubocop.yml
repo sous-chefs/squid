@@ -7,7 +7,7 @@ AlignParameters:
 Encoding:
   Enabled: false
 LineLength:
-  Max: 200
+  Enabled: false
 MethodLength:
   Enabled: false
 Style/SingleSpaceBeforeFirstArg:
