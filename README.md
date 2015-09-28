@@ -119,12 +119,11 @@ The following two data bags are only required if you are using LDAP Authenticati
 
 License & Authors
 -----------------
-- Author:: Matt Ray (<matt@chef.io>)
-- Author:: Sean OMeara (<someara@chef.io>)
 
-```text
-Copyright 2012-2015, Chef Software, Inc.
+**Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
 
+**Copyright:** 2012-2015, Chef Software, Inc.
+```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
