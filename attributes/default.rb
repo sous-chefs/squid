@@ -24,6 +24,7 @@ default['squid']['network'] = nil
 default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
 default['squid']['directives'] = []
+default['squid']['max_file_descriptors'] = nil # Only supported for redhat platforms
 
 default['squid']['acls_databag_name'] = 'squid_acls'
 default['squid']['hosts_databag_name'] = 'squid_hosts'
