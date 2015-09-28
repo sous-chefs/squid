@@ -83,7 +83,7 @@ template node['squid']['config_file'] do
 end
 
 # squid swap dirs
-execute 'squid -Nz' do
+execute "#{node['squid']['binary']} -Nz" do
   action :run
   creates ::File.join(node['squid']['cache_dir'], '00')
 end

@@ -31,6 +31,7 @@ default['squid']['urls_databag_name'] = 'squid_urls'
 
 default['squid']['package'] = 'squid'
 default['squid']['version'] = '3.1'
+default['squid']['binary'] = 'squid'
 default['squid']['config_dir'] = '/etc/squid'
 default['squid']['config_file'] = '/etc/squid/squid.conf'
 default['squid']['log_dir'] = '/var/log/squid'
@@ -63,6 +64,7 @@ case platform_family
 
 when 'debian'
   default['squid']['package'] = 'squid3'
+  default['squid']['binary'] = '/usr/sbin/squid3'
   default['squid']['config_dir'] = '/etc/squid3'
   default['squid']['config_file'] = '/etc/squid3/squid.conf'
   default['squid']['service_name'] = 'squid3'
