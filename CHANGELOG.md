@@ -2,6 +2,11 @@ squid Cookbook CHANGELOG
 =======================
 This file is used to list changes made in each version of the squid cookbook.
 
+v1.1.1 (2015-09-28)
+-------------------
+- Fix the cache directory initialization execute resource to correctly fire on all platforms
+- Update contributing and testing docs
+
 v1.1.0 (2015-09-05)
 -------------------
 - Added FreeBSD support
