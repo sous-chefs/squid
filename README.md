@@ -8,8 +8,7 @@ Installs and configures Squid as a caching proxy.
 
 Requirements
 ------------
-### Platforms
-
+#### Platforms
 - Debian 7+
 - Ubuntu 12.04+
 - RHEL/CentOS/Scientific 6+
@@ -19,10 +18,10 @@ Requirements
 - Suse
 - FreeBSD 10+
 
-### Chef
+#### Chef
 - Chef 11+
 
-### Cookbooks
+#### Cookbooks
 - none
 
 
@@ -123,6 +122,7 @@ License & Authors
 **Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
 
 **Copyright:** 2012-2015, Chef Software, Inc.
+
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
