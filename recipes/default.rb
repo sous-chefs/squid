@@ -70,7 +70,7 @@ end
 # squid config
 template node['squid']['config_file'] do
   source 'squid.conf.erb'
-  notifies :reload, "service[#{node['squid']['service_name']}]"
+  notifies :restart, "service[#{node['squid']['service_name']}]", :immediately
   mode 00644
   variables(
     :acls => acls,
