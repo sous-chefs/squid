@@ -9,19 +9,18 @@ platforms:
   - name: centos-6.7
   - name: centos-7.1
   - name: debian-7.8
-    run_list:
-    - recipe[apt]
+    - recipe[apt::default]
+
   - name: debian-8.1
-    run_list:
-    - recipe[apt]
+    - recipe[apt::default]
   - name: fedora-21
+  - name: fedora-22
   - name: freebsd-10.1
   - name: ubuntu-12.04
-    run_list:
-      - recipe[apt]
+    - recipe[apt::default]
+
   - name: ubuntu-14.04
-    run_list:
-      - recipe[apt]
+    - recipe[apt::default]
 
 suites:
   - name: default
