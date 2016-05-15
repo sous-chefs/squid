@@ -28,7 +28,6 @@ default['squid']['hosts_databag_name'] = 'squid_hosts'
 default['squid']['urls_databag_name'] = 'squid_urls'
 
 default['squid']['package'] = 'squid'
-default['squid']['version'] = '3.1'
 default['squid']['config_dir'] = '/etc/squid'
 default['squid']['config_file'] = '/etc/squid/squid.conf'
 default['squid']['log_dir'] = '/var/log/squid'
@@ -67,25 +66,11 @@ when 'debian'
   default['squid']['log_dir'] = '/var/log/squid3'
   default['squid']['cache_dir'] = '/var/spool/squid3'
   default['squid']['coredump_dir'] = '/var/spool/squid3'
-  default['squid']['version'] = '3.1' if node['platform_version'] =~ /13\./
-  default['squid']['version'] = '3.1' if node['platform_version'] =~ /7\./
-  default['squid']['version'] = '3.3' if node['platform_version'] =~ /14\./
-  default['squid']['version'] = '3.4' if node['platform_version'] =~ /8\./
-
-when 'rhel'
-  rhel_version = node['platform_version'].to_f
-  default['squid']['version'] = '2.6' if rhel_version >= 5 && rhel_version < 6
-  default['squid']['version'] = '3.1' if rhel_version >= 6 && rhel_version < 7
-  default['squid']['version'] = '3.3' if rhel_version >= 7 && rhel_version < 8
-
-when 'fedora'
-  default['squid']['version'] = '3.4'
 
 when 'smartos'
   default['squid']['listen_interface'] = 'net0'
 
 when 'freebsd'
-  default['squid']['version'] = '3.5'
   default['squid']['config_dir'] = '/usr/local/etc/squid'
   default['squid']['config_file'] = '/usr/local/etc/squid/squid.conf'
   default['squid']['cache_dir'] = '/var/squid/cache'

@@ -2,7 +2,7 @@
 # Cookbook Name:: squid
 # Recipe:: default
 #
-# Copyright 2013-2015, Chef Software, Inc
+# Copyright 2013-2016, Chef Software, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +17,16 @@
 # limitations under the License.
 #
 
+# include helper meth
+class ::Chef::Recipe
+  include ::Opscode::Squid::Helpers
+end
+
 # variables
 ipaddress = node['squid']['ipaddress']
 listen_interface = node['squid']['listen_interface']
-version = node['squid']['version']
 netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
+package_version = squid_version
 
 # squid/libraries/default.rb
 acls = squid_load_acls(node['squid']['acls_databag_name'])
@@ -32,7 +37,7 @@ url_acl = squid_load_url_acl(node['squid']['urls_databag_name'])
 Chef::Log.debug("Squid listen_interface: #{listen_interface}")
 Chef::Log.debug("Squid ipaddress: #{ipaddress}")
 Chef::Log.debug("Squid netmask: #{netmask}")
-Chef::Log.debug("Squid version: #{version}")
+Chef::Log.debug("Squid version: #{squid_version}")
 Chef::Log.debug("Squid host_acls: #{host_acl}")
 Chef::Log.debug("Squid url_acls: #{url_acl}")
 Chef::Log.debug("Squid acls: #{acls}")
@@ -76,7 +81,8 @@ template node['squid']['config_file'] do
     host_acl: host_acl,
     url_acl: url_acl,
     acls: acls,
-    directives: node['squid']['directives']
+    directives: node['squid']['directives'],
+    version: package_version
   )
 end
 
@@ -90,7 +96,6 @@ end
 # services
 service node['squid']['service_name'] do
   supports restart: true, status: true, reload: true
-  provider Chef::Provider::Service::Upstart if platform?('ubuntu')
   action [:enable, :start]
   retries 5
 end
