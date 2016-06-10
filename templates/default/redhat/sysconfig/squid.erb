@@ -6,3 +6,7 @@ SQUID_SHUTDOWN_TIMEOUT=<%= node['squid']['timeout'] %>
 
 # default squid conf file
 SQUID_CONF="<%= node['squid']['config_file'] %>"
+
+<% if node['squid']['max_file_descriptors'] %>
+ulimit -n <%= node['squid']['max_file_descriptors'] %>
+<% end %>
