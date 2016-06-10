@@ -48,6 +48,8 @@ default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
 default['squid']['max_obj_size_unit'] = 'MB'
 default['squid']['enable_cache_dir'] = true
+default['squid']['logformats'] = {}
+default['squid']['access_log_option'] = 'squid'
 
 default['squid']['enable_ldap']       = false
 default['squid']['ldap_host']         = nil   # 'ldap.here.com'
