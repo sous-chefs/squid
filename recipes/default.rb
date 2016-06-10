@@ -82,6 +82,9 @@ template node['squid']['config_file'] do
     url_acl: url_acl,
     acls: acls,
     directives: node['squid']['directives'],
+    localnets: node['squid']['localnets'],
+    safe_ports: node['squid']['safe_ports'],
+    ssl_ports: node['squid']['ssl_ports'],
     version: package_version
   )
 end
