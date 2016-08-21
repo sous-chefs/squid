@@ -31,7 +31,7 @@ module Opscode
             group['net'].each do |host|
               host_acl.push [group['id'], group['type'], host]
             end
-          end
+          end unless databag_name.nil?
         rescue
           Chef::Log.info "no '#{databag_name}' data bag"
         end
@@ -47,7 +47,7 @@ module Opscode
             group['urls'].each do |url|
               url_acl.push [group['id'], group.key?('element') ? group['element'] : node['squid']['acl_element'], url]
             end
-          end
+          end unless databag_name.nil?
         rescue
           Chef::Log.info "no '#{databag_name}' data bag"
         end
@@ -63,7 +63,7 @@ module Opscode
             group['acl'].each do |acl|
               acls.push [acl[1], group['id'], acl[0]]
             end
-          end
+          end unless databag_name.nil?
         rescue
           Chef::Log.info "no '#{databag_name}' data bag"
         end

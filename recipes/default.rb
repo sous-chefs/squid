@@ -25,7 +25,7 @@ end
 # variables
 ipaddress = node['squid']['ipaddress']
 listen_interface = node['squid']['listen_interface']
-netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
+netmask = node['network'].nil? ? '255.255.255.0' : node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
 package_version = squid_version
 
 # squid/libraries/default.rb
