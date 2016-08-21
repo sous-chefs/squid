@@ -13,16 +13,16 @@ auth_param basic credentialsttl <%= node['squid']['ldap_authcredentialsttl'] %>
 <% end %>
 
 <%= "acl all src" if @version.to_i < 3 %>
-<%= "acl manager proto cache_object" if @version.to_f < 3.2 %>
+<%= "acl manager proto cache_object" if @version.to_f < 3.1 %>
 <%= "acl localhost src 127.0.0.1/32" if @version.to_f < 3.2 %>
 <%= "acl to_localhost dst 127.0.0.0/8 0.0.0.0/32" if @version.to_f < 3.2 %>
 <% @localnets.each do |localnet| %>
 acl localnet src <%= localnet %>
 <% end %>
 
-acl localnet src 10.0.0.0/8	# RFC1918 possible internal network
-acl localnet src 172.16.0.0/12	# RFC1918 possible internal network
-acl localnet src 192.168.0.0/16	# RFC1918 possible internal network
+acl localnet src 10.0.0.0/8  # RFC1918 possible internal network
+acl localnet src 172.16.0.0/12  # RFC1918 possible internal network
+acl localnet src 192.168.0.0/16  # RFC1918 possible internal network
 acl localnet src fc00::/7       # RFC4193 local private network range
 acl localnet src fe80::/10      # RFC4291 link-local (directly-plugged) machine
 
@@ -73,15 +73,15 @@ logformat <%= name %> <%= format %>
 <% end -%>
 
 access_log <%= node['squid']['log_dir'] %>/access.log <%= node['squid']['access_log_option'] %>
-refresh_pattern	    ^ftp:			1440	20%	10080
-refresh_pattern     ^gopher:			1440	0%	1440
-refresh_pattern	    -i (/cgi-bin/|\?)		0	0%	0
-refresh_pattern     (Release|Package(.gz)*)$	0	20%	2880
-# refresh_pattern	    \.deb$			1440    20%	10080
-# refresh_pattern	    \.rpm$			1440    20%	10080
-# refresh_pattern	    \.iso$			1440    20%	10080
-# refresh_pattern	    \.$			1440    20%	10080
-# refresh_pattern	    .				0	20%	4320
+refresh_pattern      ^ftp:      1440  20%  10080
+refresh_pattern     ^gopher:      1440  0%  1440
+refresh_pattern      -i (/cgi-bin/|\?)    0  0%  0
+refresh_pattern     (Release|Package(.gz)*)$  0  20%  2880
+# refresh_pattern      \.deb$      1440    20%  10080
+# refresh_pattern      \.rpm$      1440    20%  10080
+# refresh_pattern      \.iso$      1440    20%  10080
+# refresh_pattern      \.$      1440    20%  10080
+# refresh_pattern      .        0  20%  4320
 hosts_file /etc/hosts
 maximum_object_size <%= node['squid']['max_obj_size'] %> <%= node['squid']['max_obj_size_unit'] %>
 <%- if node['squid']['enable_cache_dir'] %>
