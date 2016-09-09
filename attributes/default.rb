@@ -63,7 +63,7 @@ default['squid']['ldap_authchildren'] = 5 # Number of LDAP threads to start
 default['squid']['ldap_authrealm']    = 'Web-Proxy' # Authentication Realm
 default['squid']['ldap_authcredentialsttl'] = '1 minute' # Credentials TTL
 
-case platform_family
+case node['platform_family']
 
 when 'debian'
   default['squid']['package'] = 'squid3'
