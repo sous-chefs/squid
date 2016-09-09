@@ -20,7 +20,7 @@ platforms:
     pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      - RUN /usr/bin/apt-get install lsb-release procps -y
+      - RUN /usr/bin/apt-get install lsb-release net-tools procps -y
 
 - name: debian-8
   driver:
@@ -28,7 +28,7 @@ platforms:
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      - RUN /usr/bin/apt-get install lsb-release -y
+      - RUN /usr/bin/apt-get install net-tools lsb-release -y
 
 - name: centos-5
   driver:
@@ -67,6 +67,8 @@ platforms:
     pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install lsb-release net-tools procps -y
+
 
 - name: ubuntu-14.04
   driver:
@@ -74,6 +76,7 @@ platforms:
     pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install lsb-release net-tools procps -y
 
 - name: ubuntu-16.04
   driver:
@@ -81,6 +84,7 @@ platforms:
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install lsb-release net-tools procps -y
 
 - name: opensuse-13.2
   driver:
