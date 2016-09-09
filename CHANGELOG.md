@@ -2,6 +2,18 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 2.0.0 (2016-09-09)
+- Fixed crash on empty databag
+- Allow setting Squid's max file descriptors on redhat platforms
+- Allow more customization to localnets, safe ports and ssl ports config
+- Allow changing the logformat for access_log
+- Fixing a bootstrap timing issue
+- Use kitche-docker for integration testing in Travis CI and run foodcritic / cookstyle there as well
+- Move squid version parsing to a helper
+- Fix node attribute warning
+- Expand the specs to test more platforms
+- Require Chef 12.1+
+
 ## v1.1.1 (2015-09-28)
 
 - Fix the cache directory initialization execute resource to correctly fire on all platforms
