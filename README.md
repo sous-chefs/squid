@@ -1,14 +1,13 @@
-squid Cookbook
-==============
+# squid Cookbook
 
-[![Build Status](https://travis-ci.org/chef-cookbooks/squid.svg?branch=master)](https://travis-ci.org/chef-cookbooks/squid)
-[![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
+[![Build Status](https://travis-ci.org/chef-cookbooks/squid.svg?branch=master)](https://travis-ci.org/chef-cookbooks/squid) [![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
 
 Installs and configures Squid as a caching proxy.
 
-Requirements
-------------
-#### Platforms
+## Requirements
+
+### Platforms
+
 - Debian 7+
 - Ubuntu 12.04+
 - RHEL/CentOS/Scientific 6+
@@ -18,39 +17,41 @@ Requirements
 - Suse
 - FreeBSD 10+
 
-#### Chef
-- Chef 11+
+### Chef
 
-#### Cookbooks
+- Chef 12.1+
+
+### Cookbooks
+
 - none
 
+## Recipes
 
-Recipes
--------
 ### default
-The default recipe installs squid and sets up simple proxy caching. As of now, the options you may change are the port (`node['squid']['port']`) and the network the caching proxy is available on the subnet from `node.ipaddress` (ie. "192.168.1.0/24") but may be overridden with `node['squid']['network']`. The size of objects allowed to be stored has been bumped up to allow for caching of installation files.
-An optional (`node['squid']['cache_peer']`), if set, will be written verbatim to the template.
-On redhat based platforms, this cookbook supports customizing the max number of file descriptors that Squid may open (`node['squid']['max_file_descriptors']`). The default value is 1024.
 
+The default recipe installs squid and sets up simple proxy caching. As of now, the options you may change are the port (`node['squid']['port']`) and the network the caching proxy is available on the subnet from `node.ipaddress` (ie. "192.168.1.0/24") but may be overridden with `node['squid']['network']`. The size of objects allowed to be stored has been bumped up to allow for caching of installation files. An optional (`node['squid']['cache_peer']`), if set, will be written verbatim to the template. On redhat based platforms, this cookbook supports customizing the max number of file descriptors that Squid may open (`node['squid']['max_file_descriptors']`). The default value is 1024.
 
-Usage
------
+## Usage
+
 Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use the `node.ipaddress` and `node['squid']['port']` to point at it.
 
 Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
 
 ### LDAP Authentication
 
-* Set (`node['squid']['enable_ldap']`) to true.
-* Modify the ldap attributes for your environment.
-  * If you use anonymous bindings, two attributes are optional, ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].
-  * All other attributes are required.
-  * See http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap for further help.
-* To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
+- Set (`node['squid']['enable_ldap']`) to true.
+- Modify the ldap attributes for your environment.
 
-Example Databags
-----------------
+  - If you use anonymous bindings, two attributes are optional, ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].
+  - All other attributes are required.
+  - See <http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap> for further help.
+
+- To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
+
+## Example Databags
+
 ### squid_urls - yubikey item
+
 ```javascript
 {
   "urls": [
@@ -61,6 +62,7 @@ Example Databags
 ```
 
 ### squid_hosts - bastion item
+
 ```javascript
 {
   "type": "src",
@@ -72,6 +74,7 @@ Example Databags
 ```
 
 ### squid_acls - bastion item
+
 ```javascript
 {
   "id": "bastion",
@@ -88,12 +91,12 @@ Example Databags
 }
 ```
 
-LDAP Databags
--------------
+## LDAP Databags
 
 The following two data bags are only required if you are using LDAP Authentication.
 
 ### squid_hosts - ldap_auth item
+
 ```javascript
 {
   "type": "proxy_auth",
@@ -105,6 +108,7 @@ The following two data bags are only required if you are using LDAP Authenticati
 ```
 
 ### squid_acls - ldap_auth item
+
 ```javascript
 {
   "id": "ldap_auth",
@@ -117,12 +121,11 @@ The following two data bags are only required if you are using LDAP Authenticati
 }
 ```
 
-License & Authors
------------------
+## License & Authors
 
-**Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
+**Author:** Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))
 
-**Copyright:** 2012-2015, Chef Software, Inc.
+**Copyright:** 2012-2016, Chef Software, Inc.
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
