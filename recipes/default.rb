@@ -32,6 +32,7 @@ package_version = squid_version
 acls = squid_load_acls(node['squid']['acls_databag_name'])
 host_acl = squid_load_host_acl(node['squid']['hosts_databag_name'])
 url_acl = squid_load_url_acl(node['squid']['urls_databag_name'])
+ssl = squid_load_ssl(node['squid']['ssl_databag_name'])
 
 # Log variables to Chef::Log::debug()
 Chef::Log.debug("Squid listen_interface: #{listen_interface}")
@@ -44,6 +45,7 @@ Chef::Log.debug("Squid acls: #{acls}")
 
 # packages
 package node['squid']['package']
+package node['squid']['helper_package']
 
 # rhel_family sysconfig
 template '/etc/sysconfig/squid' do
@@ -59,6 +61,27 @@ directory node['squid']['config_dir'] do
   recursive true
   owner 'root'
   mode 00755
+end
+
+directory "#{node['squid']['config_dir']}/ssl_cert" do
+  owner 'root'
+  mode '0755'
+  only_if { node['squid']['enable_ssl_bump'] }
+  action :create
+end
+
+file "#{node['squid']['config_dir']}/ssl_cert/squid.pem" do
+  content ssl['certificate']
+  mode '0644'
+  sensitive true
+  only_if { node['squid']['enable_ssl_bump'] }
+end
+
+file "#{node['squid']['config_dir']}/whitelist.txt" do
+  content ssl['whitelist'].join("\n")
+  mode '0644'
+  sensitive true
+  only_if { node['squid']['enable_ssl_bump'] }
 end
 
 # squid mime config
@@ -94,6 +117,12 @@ execute 'initialize squid cache dir' do
   command "#{node['squid']['package']} -Nz"
   action :run
   creates ::File.join(node['squid']['cache_dir'], '00')
+end
+
+execute 'initialize squid ssl db' do
+  command '/usr/lib64/squid/ssl_crtd  -c -s /var/lib/ssl_db && chown squid:squid -R /var/lib/ssl_db'
+  action :run
+  only_if { node['squid']['enable_ssl_bump'] }
 end
 
 # services

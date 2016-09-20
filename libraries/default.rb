@@ -69,6 +69,18 @@ module Opscode
         end
         acls
       end
+
+      def squid_load_ssl(databag_name)
+        ssl = {}
+        begin
+          data = data_bag_item(databag_name, 'proxy')
+          ssl['certificate'] = data['content']
+          ssl['whitelist'] = data['whitelist']
+        rescue
+          Chef::Log.info "no '#{databag_name}' data bag"
+        end
+        ssl
+      end
     end
   end
 end
