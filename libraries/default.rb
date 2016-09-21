@@ -3,6 +3,8 @@ module Opscode
     # helper methods for use in squid recipe code
     module Helpers
       def squid_version
+        return "#{MixLib::Versioning.parse(node['squid']['version']).major}.#{MixLib::Versioning.parse(node['squid']['version']).minor}" if node['squid']['version']
+
         case node['platform_family']
         when 'debian'
           return '3.1' if node['platform_version'].to_i == 7
