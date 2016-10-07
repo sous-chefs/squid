@@ -37,7 +37,7 @@ Usage
 -----
 Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use the `node.ipaddress` and `node['squid']['port']` to point at it.
 
-Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
+Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url. Due to Chef limitations being incongruent with Squid specifications, you may also specify acls in `node['squid']['acls']`
 
 ### LDAP Authentication
 
