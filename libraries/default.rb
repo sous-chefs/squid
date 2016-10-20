@@ -2,25 +2,6 @@ module Opscode
   module Squid
     # helper methods for use in squid recipe code
     module Helpers
-      def squid_version
-        case node['platform_family']
-        when 'debian'
-          return '3.1' if node['platform_version'].to_i == 7
-          return '3.1' if node['platform_version'].to_i == 12
-          return '3.1' if node['platform_version'].to_i == 14
-          return '3.4' if node['platform_version'].to_i == 8
-          return '3.5' if node['platform_version'].to_i == 16
-        when 'rhel'
-          return '2.6' if node['platform_version'].to_i == 5
-          return '3.1' if node['platform_version'].to_i == 6
-          return '3.3' if node['platform_version'].to_i == 7
-        when 'fedora'
-          return '3.5'
-        when 'freebsd'
-          return '3.5'
-        end
-      end
-
       # load them databags.
       def squid_load_host_acl(databag_name)
         host_acl = []
