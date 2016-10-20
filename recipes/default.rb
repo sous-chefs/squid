@@ -85,7 +85,7 @@ template node['squid']['config_file'] do
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode 00644
   variables(
-    lazy {
+    lazy do
       {
         host_acl: host_acl,
         url_acl: url_acl,
@@ -96,7 +96,7 @@ template node['squid']['config_file'] do
         ssl_ports: node['squid']['ssl_ports'],
         version: node['squid']['squid_version_detected']
       }
-    }
+    end
   )
 end
 
