@@ -49,7 +49,7 @@ package node['squid']['package']
 template '/etc/sysconfig/squid' do
   source 'redhat/sysconfig/squid.erb'
   notifies :restart, "service[#{node['squid']['service_name']}]", :delayed
-  mode 00644
+  mode "644"
   only_if { platform_family? 'rhel', 'fedora' }
 end
 
@@ -58,13 +58,13 @@ directory node['squid']['config_dir'] do
   action :create
   recursive true
   owner 'root'
-  mode 00755
+  mode "755"
 end
 
 # squid mime config
 cookbook_file "#{node['squid']['config_dir']}/mime.conf" do
   source 'mime.conf'
-  mode 00644
+  mode "644"
 end
 
 # TODO:  COOK-3041 (manage this file appropriately)
@@ -76,7 +76,7 @@ end
 template node['squid']['config_file'] do
   source 'squid.conf.erb'
   notifies :reload, "service[#{node['squid']['service_name']}]"
-  mode 00644
+  mode "644"
   variables(
     host_acl: host_acl,
     url_acl: url_acl,
