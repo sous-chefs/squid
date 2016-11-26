@@ -43,7 +43,9 @@ Chef::Log.debug("Squid url_acls: #{url_acl}")
 Chef::Log.debug("Squid acls: #{acls}")
 
 # packages
-package node['squid']['package']
+package node['squid']['package'] do
+  version node['squid']['version']
+end
 
 # rhel_family sysconfig
 template '/etc/sysconfig/squid' do

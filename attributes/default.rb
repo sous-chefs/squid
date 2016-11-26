@@ -29,6 +29,7 @@ default['squid']['hosts_databag_name'] = 'squid_hosts'
 default['squid']['urls_databag_name'] = 'squid_urls'
 
 default['squid']['package'] = 'squid'
+default['squid']['version'] =  nil
 default['squid']['config_dir'] = '/etc/squid'
 default['squid']['config_file'] = '/etc/squid/squid.conf'
 default['squid']['log_dir'] = '/var/log/squid'
