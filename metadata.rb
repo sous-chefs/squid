@@ -16,3 +16,5 @@ source_url 'https://github.com/chef-cookbooks/squid'
 issues_url 'https://github.com/chef-cookbooks/squid/issues'
 
 chef_version '>= 12.1'
+
+depends 'selinux_policy', '1.0.0'

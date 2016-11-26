@@ -104,6 +104,7 @@ suites:
   - name: default
     run_list:
       - recipe[squid::default]
+      - recipe[squid::selinux]
     attributes:
       squid:
         cache_size: 10
