@@ -2,7 +2,15 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 3.0.0 (2016-11-25)
+
+- Expand testing and clarify supported platforms
+- Remove SmartOS from the readme since we don't test it
+- Add selinux compatibility with a new selinux recipe
+- Detect version of squid installed by shelling out instead of a fixed case statement
+
 ## 2.0.0 (2016-09-09)
+
 - Fixed crash on empty databag
 - Allow setting Squid's max file descriptors on redhat platforms
 - Allow more customization to localnets, safe ports and ssl ports config
