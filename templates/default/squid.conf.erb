@@ -20,12 +20,6 @@ auth_param basic credentialsttl <%= node['squid']['ldap_authcredentialsttl'] %>
 acl localnet src <%= localnet %>
 <% end %>
 
-acl localnet src 10.0.0.0/8	# RFC1918 possible internal network
-acl localnet src 172.16.0.0/12	# RFC1918 possible internal network
-acl localnet src 192.168.0.0/16	# RFC1918 possible internal network
-acl localnet src fc00::/7       # RFC4193 local private network range
-acl localnet src fe80::/10      # RFC4291 link-local (directly-plugged) machine
-
 <% @ssl_ports.each do |port| %>
 acl SSL_ports port <%= port %>
 <% end %>
@@ -46,6 +40,30 @@ acl <%= url[0] %> <%= url[1] %> <%= url[2] %>
 http_access <%= acl[0] %> <%= acl[1] %> <%= acl[2] %>
 <% end %>
 
+<% if node['squid']['enable_ssl_bump'] %>
+http_port <%= node['squid']['port'] %> ssl-bump cert=<%= node['squid']['config_dir'] %>/ssl_cert/squid.pem generate-host-certificates=on dynamic_cert_mem_cache_size=4MB
+https_port <%= node['squid']['ssl_port'] %> ssl-bump intercept cert=<%= node['squid']['config_dir'] %>/ssl_cert/squid.pem generate-host-certificates=on dynamic_cert_mem_cache_size=4MB
+
+acl step1 at_step SslBump1
+acl step2 at_step SslBump2
+acl step3 at_step SslBump3
+
+acl allowed_https_sites ssl::server_name "<%= node['squid']['config_dir'] %>/whitelist.txt"
+
+ssl_bump peek step1 all                   # at step 1 we're peeking at client TLS-request in order to find the SNI
+ssl_bump peek step2 allowed_https_sites   # here we're peeking at server certificate
+ssl_bump splice step3 allowed_https_sites # here we're splicing connections which match the whitelist
+ssl_bump terminate all
+<% else %>
+<% if node['squid']['port'].kind_of?(Array) %>
+<% node['squid']['port'].each do |port| %>
+http_port <%= port %>
+<% end %>
+<% else %>
+http_port <%= node['squid']['port'] %>
+<% end %>
+<% end %>
+
 http_access allow manager localhost
 http_access deny manager
 http_access allow purge localhost
@@ -58,15 +76,8 @@ http_access deny all
 
 <%= "icp_access allow localnet" if !@localnets.empty? %>
 icp_access deny all
-<% if node['squid']['port'].kind_of?(Array) %>
-  <% node['squid']['port'].each do |port| %>
-http_port <%= port %>
-  <% end %>
-<% else %>
-http_port <%= node['squid']['port'] %>
-<% end %>
 
-hierarchy_stoplist cgi-bin ?
+<%= "hierarchy_stoplist cgi-bin ?" if @version.to_f < 3.5 %>
 
 <% node['squid']['logformats'].each do |name, format| %>
 logformat <%= name %> <%= format %>
