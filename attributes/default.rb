@@ -42,7 +42,6 @@ default['squid']['ssl_ports'] = [443, 563, 873]
 default['squid']['safe_ports'] = [80, 21, 443, 70, 210, '1025-65535', 280, 488, 591, 777, 631, 873, 901]
 
 default['squid']['ipaddress'] = node['ipaddress']
-default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, _v| k == 'lo' }.keys.first
 default['squid']['cache_mem'] = '2048'
 default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
