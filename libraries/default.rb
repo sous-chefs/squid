@@ -5,11 +5,17 @@ module Opscode
       def squid_version
         case node['platform_family']
         when 'debian'
-          return '3.1' if node['platform_version'].to_i == 7
-          return '3.1' if node['platform_version'].to_i == 12
-          return '3.1' if node['platform_version'].to_i == 14
-          return '3.4' if node['platform_version'].to_i == 8
-          return '3.5' if node['platform_version'].to_i == 16
+          if node['platform'] == 'ubuntu'
+            return '3.1' if node['platform_version'] == '12.04'
+            return '3.3' if node['platform_version'] == '14.04'
+            return '3.5' if node['platform_version'] == '16.04'
+          else
+            return '3.1' if node['platform_version'].to_i == 7
+            return '3.1' if node['platform_version'].to_i == 12
+            return '3.1' if node['platform_version'].to_i == 14
+            return '3.4' if node['platform_version'].to_i == 8
+            return '3.5' if node['platform_version'].to_i == 16
+          end
         when 'rhel'
           return '2.6' if node['platform_version'].to_i == 5
           return '3.1' if node['platform_version'].to_i == 6
