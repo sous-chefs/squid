@@ -26,7 +26,6 @@ end
 ipaddress = node['squid']['ipaddress']
 listen_interface = node['squid']['listen_interface']
 netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress]['netmask']
-package_version = squid_version
 
 # squid/libraries/default.rb
 acls = squid_load_acls(node['squid']['acls_databag_name'])
@@ -37,13 +36,25 @@ url_acl = squid_load_url_acl(node['squid']['urls_databag_name'])
 Chef::Log.debug("Squid listen_interface: #{listen_interface}")
 Chef::Log.debug("Squid ipaddress: #{ipaddress}")
 Chef::Log.debug("Squid netmask: #{netmask}")
-Chef::Log.debug("Squid version: #{squid_version}")
 Chef::Log.debug("Squid host_acls: #{host_acl}")
 Chef::Log.debug("Squid url_acls: #{url_acl}")
 Chef::Log.debug("Squid acls: #{acls}")
 
+ruby_block 'Detect squid version' do
+  block do
+    Chef::Resource::RubyBlock.send(:include, Chef::Mixin::ShellOut)
+    command = %(#{node['squid']['package']} -v | grep Version | sed 's/.*Version \\\(.\\..\\\).*/\\1/g' | tr -d '\n')
+    command_out = shell_out(command)
+    node.normal['squid']['squid_version_detected'] = command_out.stdout.to_f
+  end
+  action:nothing
+end
+
 # packages
-package node['squid']['package']
+package 'Install squid package' do
+  package_name node['squid']['package']
+  notifies :create, 'ruby_block[Detect squid version]', :immediately
+end
 
 # rhel_family sysconfig
 template '/etc/sysconfig/squid' do
@@ -78,14 +89,18 @@ template node['squid']['config_file'] do
   notifies :reload, "service[#{node['squid']['service_name']}]"
   mode "644"
   variables(
-    host_acl: host_acl,
-    url_acl: url_acl,
-    acls: acls,
-    directives: node['squid']['directives'],
-    localnets: node['squid']['localnets'],
-    safe_ports: node['squid']['safe_ports'],
-    ssl_ports: node['squid']['ssl_ports'],
-    version: package_version
+    lazy do
+      {
+        host_acl: host_acl,
+        url_acl: url_acl,
+        acls: acls,
+        directives: node['squid']['directives'],
+        localnets: node['squid']['localnets'],
+        safe_ports: node['squid']['safe_ports'],
+        ssl_ports: node['squid']['ssl_ports'],
+        version: node['squid']['squid_version_detected']
+      }
+    end
   )
 end
 
