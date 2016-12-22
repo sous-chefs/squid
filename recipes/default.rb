@@ -98,7 +98,7 @@ template node['squid']['config_file'] do
         localnets: node['squid']['localnets'],
         safe_ports: node['squid']['safe_ports'],
         ssl_ports: node['squid']['ssl_ports'],
-        version: node['squid']['squid_version_detected']
+        version: node['squid']['squid_version_detected'],
       }
     end
   )
