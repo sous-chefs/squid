@@ -13,6 +13,14 @@ describe 'squid::default on Ubuntu 16.04' do
   it 'templates /etc/squid3/squid.conf' do
     expect(chef_run).to create_template('/etc/squid3/squid.conf')
   end
+
+  it 'file /etc/squid/conf.d/dummy.conf' do
+    expect(chef_run).to_not create_file('/etc/squid/conf.d/dummy.conf')
+  end
+
+  it 'directory /etc/squid/conf.d/' do
+    expect(chef_run).to_not create_directory('/etc/squid/conf.d')
+  end
 end
 
 describe 'squid::default on CentOS 6' do
@@ -31,6 +39,14 @@ describe 'squid::default on CentOS 6' do
 
   it 'templates /etc/squid/squid.conf' do
     expect(chef_run).to create_template('/etc/squid/squid.conf')
+  end
+
+  it 'file /etc/squid/conf.d/dummy.conf' do
+    expect(chef_run).to_not create_file('/etc/squid/conf.d/dummy.conf')
+  end
+
+  it 'directory /etc/squid/conf.d/' do
+    expect(chef_run).to_not create_directory('/etc/squid/conf.d')
   end
 end
 
@@ -56,5 +72,41 @@ describe 'squid::default on FreeBSD 10' do
 
   it 'templates /usr/local/etc/squid/squid.conf' do
     expect(chef_run).to create_template('/usr/local/etc/squid/squid.conf')
+  end
+
+  it 'file /etc/squid/conf.d/dummy.conf' do
+    expect(chef_run).to_not create_file('/etc/squid/conf.d/dummy.conf')
+  end
+
+  it 'directory /etc/squid/conf.d/' do
+    expect(chef_run).to_not create_directory('/etc/squid/conf.d')
+  end
+end
+
+describe 'squid::default with conf.d attribute set on CentOS 6' do
+  let(:chef_run) do
+    runner = ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8')
+    runner.node.set['squid']['config_include_dir'] = '/etc/squid/conf.d'
+    converge('squid::default')
+  end
+
+  it 'installs package squid' do
+    expect(chef_run).to install_package('squid')
+  end
+
+  it 'templates /etc/sysconfig/squid' do
+    expect(chef_run).to create_template('/etc/sysconfig/squid')
+  end
+
+  it 'templates /etc/squid/squid.conf' do
+    expect(chef_run).to create_template('/etc/squid/squid.conf')
+  end
+
+  it 'file /etc/squid/conf.d/dummy.conf' do
+    expect(chef_run).to create_file('/etc/squid/conf.d/dummy.conf')
+  end
+
+  it 'directory /etc/squid/conf.d/' do
+    expect(chef_run).to create_directory('/etc/squid/conf.d')
   end
 end
