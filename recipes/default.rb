@@ -73,6 +73,7 @@ directory node['squid']['config_dir'] do
 end
 
 # squid config include dir
+# will only create directory if config_include_dir attribute is not nil
 directory node['squid']['config_include_dir'] do
   action :create
   recursive true
