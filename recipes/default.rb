@@ -74,7 +74,8 @@ end
 
 # squid config include dir
 # will only create directory if config_include_dir attribute is not nil
-directory node['squid']['config_include_dir'] do
+directory 'squid_config_include_dir' do
+  path node['squid']['config_include_dir']
   action :create
   recursive true
   owner 'root'
