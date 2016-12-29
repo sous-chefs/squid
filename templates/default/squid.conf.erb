@@ -92,3 +92,8 @@ cache_mem <%= node['squid']['cache_mem'] %> MB
 <% @directives.each do |directive| %>
 <%= directive %>
 <% end %>
+
+<% if node['squid']['config_include_dir'] %>
+# Include additional configuration files
+include <%= node['squid']['config_include_dir'] %>/*.conf
+<% end %>
