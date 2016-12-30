@@ -14,7 +14,19 @@ describe 'squid::default on Ubuntu 16.04' do
     expect(chef_run).to create_template('/etc/squid3/squid.conf')
   end
 
-  it 'templates /etc/squid/squid.conf without include directory' do
+  it 'templates /etc/squid3/squid.conf http deny all' do
+    expect(chef_run).to render_file('/etc/squid3/squid.conf').with_content(
+      'http_access deny all'
+    )
+  end
+
+  it 'templates /etc/squid3/squid.conf icp deny all' do
+    expect(chef_run).to render_file('/etc/squid3/squid.conf').with_content(
+      'icp_access deny all'
+    )
+  end
+
+  it 'templates /etc/squid3/squid.conf without include directory' do
     expect(chef_run).to_not render_file('/etc/squid/squid.conf').with_content(
       'Include additional configuration files'
     )
@@ -45,6 +57,18 @@ describe 'squid::default on CentOS 6' do
 
   it 'templates /etc/squid/squid.conf' do
     expect(chef_run).to create_template('/etc/squid/squid.conf')
+  end
+
+  it 'templates /etc/squid/squid.conf http deny all' do
+    expect(chef_run).to render_file('/etc/squid/squid.conf').with_content(
+      'http_access deny all'
+    )
+  end
+
+  it 'templates /etc/squid/squid.conf icp deny all' do
+    expect(chef_run).to render_file('/etc/squid/squid.conf').with_content(
+      'icp_access deny all'
+    )
   end
 
   it 'templates /etc/squid/squid.conf without include directory' do
@@ -86,6 +110,18 @@ describe 'squid::default on FreeBSD 10' do
     expect(chef_run).to create_template('/usr/local/etc/squid/squid.conf')
   end
 
+  it 'templates /usr/local/etc/squid/squid.conf http deny all' do
+    expect(chef_run).to render_file('/usr/local/etc/squid/squid.conf').with_content(
+      'http_access deny all'
+    )
+  end
+
+  it 'templates /usr/local/etc/squid/squid.conf icp deny all' do
+    expect(chef_run).to render_file('/usr/local/etc/squid/squid.conf').with_content(
+      'icp_access deny all'
+    )
+  end
+
   it 'templates /usr/local/etc/squid/squid.conf without include directory' do
     expect(chef_run).to_not render_file('/usr/local/etc/squid/squid.conf').with_content(
       'Include additional configuration files'
@@ -101,10 +137,12 @@ describe 'squid::default on FreeBSD 10' do
   end
 end
 
-describe 'squid::default with conf.d attribute set on CentOS 6' do
+describe 'squid::default with conf.d and denyall attributes set on CentOS 6' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8') do |node|
       node.set['squid']['config_include_dir'] = '/etc/squid/conf.d'
+      node.set['squid']['http_access_deny_all'] = false
+      node.set['squid']['icp_access_deny_all'] = false
     end.converge('squid::default')
   end
 
@@ -124,6 +162,18 @@ describe 'squid::default with conf.d attribute set on CentOS 6' do
 
   it 'templates /etc/squid/squid.conf' do
     expect(chef_run).to create_template('/etc/squid/squid.conf')
+  end
+
+  it 'templates /etc/squid/squid.conf http deny all' do
+    expect(chef_run).to_not render_file('/etc/squid/squid.conf').with_content(
+      'http_access deny all'
+    )
+  end
+
+  it 'templates /etc/squid/squid.conf icp deny all' do
+    expect(chef_run).to_not render_file('/etc/squid/squid.conf').with_content(
+      'icp_access deny all'
+    )
   end
 
   it 'templates /etc/squid/squid.conf with include directory' do
