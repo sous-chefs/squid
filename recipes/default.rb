@@ -72,6 +72,25 @@ directory node['squid']['config_dir'] do
   mode '755'
 end
 
+# squid config include dir
+# will only create directory if config_include_dir attribute is not nil
+directory 'squid_config_include_dir' do
+  path node['squid']['config_include_dir']
+  action :create
+  recursive true
+  owner 'root'
+  mode '755'
+  only_if defined?(node['squid']['config_include_dir']).nil?
+end
+
+# squid dummy include
+# required, otherwise Squid will not start due to missing .conf files
+file 'squid_config_include_dir_dummy.conf' do
+  path "#{node['squid']['config_include_dir']}/dummy.conf"
+  content '# Dummy conf to enable Squid includes in conf.d'
+  only_if defined?(node['squid']['config_include_dir']).nil?
+end
+
 # squid mime config
 cookbook_file "#{node['squid']['config_dir']}/mime.conf" do
   source 'mime.conf'
