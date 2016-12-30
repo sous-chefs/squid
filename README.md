@@ -122,7 +122,7 @@ The following two data bags are only required if you are using LDAP Authenticati
 ### Additional configuration files
 
 - Set (`node['squid']['config_include_dir']`) to the directory of your additional files, ex. /etc/squid/conf.d
-- It is recommended that you set `node['squid']['http_access_deny_all']` and `node['squid']['http_access_deny_all']` to false because the include statement is at the bottom of squid.conf.  Otherwise http_access allow statements may not be evaluated in the additional configuration files.
+- It is recommended that you set `node['squid']['http_access_deny_all']` and `node['squid']['icp_access_deny_all']` to false because the include statement is at the bottom of squid.conf.  Otherwise http_access allow statements may not be evaluated in the additional configuration files.
 
 ## License & Authors
 
