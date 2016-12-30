@@ -80,7 +80,7 @@ directory 'squid_config_include_dir' do
   recursive true
   owner 'root'
   mode '755'
-  only_if (defined?(node['squid']['config_include_dir'])).nil?
+  only_if defined?(node['squid']['config_include_dir']).nil?
 end
 
 # squid dummy include
@@ -88,7 +88,7 @@ end
 file 'squid_config_include_dir_dummy.conf' do
   path "#{node['squid']['config_include_dir']}/dummy.conf"
   content '# Dummy conf to enable Squid includes in conf.d'
-  only_if (defined?(node['squid']['config_include_dir'])).nil?
+  only_if defined?(node['squid']['config_include_dir']).nil?
 end
 
 # squid mime config
