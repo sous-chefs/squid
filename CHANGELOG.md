@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 3.1.0 (2016-12-30)
+
+- Added include for additional .conf files inside squid.conf.erb template
+- Added definition of additional attributes to allow writing of http_access and icp_access deny statement in cookbook
+
 ## 3.0.0 (2016-11-25)
 
 - Expand testing and clarify supported platforms
