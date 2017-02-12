@@ -3,6 +3,7 @@ driver:
 
 provisioner:
   name: chef_zero
+  deprecations_as_errors: true
 
 verifier:
   name: inspec
@@ -29,9 +30,9 @@ suites:
       - recipe[squid::default]
     excludes:
       - fedora-25
-      - centos-7.2
+      - centos-7.3
       - centos-6.8
-      - centos-7.2
+      - centos-7.3
     attributes:
       squid:
         cache_size: 10
@@ -42,9 +43,9 @@ suites:
       - recipe[squid::default]
     includes:
       - fedora-25
-      - centos-7.2
+      - centos-7.3
       - centos-6.8
-      - centos-7.2
+      - centos-7.3
     attributes:
       squid:
         cache_size: 10
