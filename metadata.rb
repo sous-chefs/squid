@@ -12,7 +12,7 @@ recipe 'squid::default', 'Installs and configures Squid.'
   supports os
 end
 
-depends 'selinux_policy', '1.0.0'
+depends 'selinux_policy', '>= 1.0.0'
 
 source_url 'https://github.com/chef-cookbooks/squid'
 issues_url 'https://github.com/chef-cookbooks/squid/issues'
