@@ -17,11 +17,6 @@
 # limitations under the License.
 #
 
-# include helper meth
-class ::Chef::Recipe
-  include ::Opscode::Squid::Helpers
-end
-
 # variables
 ipaddress = node['squid']['ipaddress']
 listen_interface = node['squid']['listen_interface']
@@ -59,7 +54,7 @@ end
 # rhel_family sysconfig
 template '/etc/sysconfig/squid' do
   source 'redhat/sysconfig/squid.erb'
-  notifies :restart, "service[#{node['squid']['service_name']}]", :delayed
+  notifies :restart, 'service[squid_service_name]', :delayed
   mode '644'
   only_if { platform_family? 'rhel', 'fedora' }
 end
@@ -105,7 +100,7 @@ end
 # squid config
 template node['squid']['config_file'] do
   source 'squid.conf.erb'
-  notifies :reload, "service[#{node['squid']['service_name']}]"
+  notifies :reload, 'service[squid_service_name]'
   mode '644'
   variables(
     lazy do
@@ -131,7 +126,7 @@ execute 'initialize squid cache dir' do
 end
 
 # services
-service node['squid']['service_name'] do
+service squid_service_name do
   supports restart: true, status: true, reload: true
   action [:enable, :start]
   retries 5

@@ -35,7 +35,6 @@ default['squid']['config_file'] = '/etc/squid/squid.conf'
 default['squid']['log_dir'] = '/var/log/squid'
 default['squid']['cache_dir'] = '/var/spool/squid'
 default['squid']['coredump_dir'] = '/var/spool/squid'
-default['squid']['service_name'] = 'squid'
 default['squid']['acl_element'] = 'url_regex'
 
 default['squid']['localnets'] = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', 'fc00::/7', 'fe80::/10']
@@ -72,8 +71,6 @@ when 'debian'
   default['squid']['package'] = 'squid3'
   default['squid']['config_dir'] = '/etc/squid3'
   default['squid']['config_file'] = '/etc/squid3/squid.conf'
-  default['squid']['service_name'] = 'squid3' if node['platform_version'].to_i <  16
-  default['squid']['service_name'] = 'squid'  if node['platform_version'].to_i >= 16
   default['squid']['log_dir'] = '/var/log/squid3'
   default['squid']['cache_dir'] = '/var/spool/squid3'
   default['squid']['coredump_dir'] = '/var/spool/squid3'
