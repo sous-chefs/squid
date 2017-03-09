@@ -54,7 +54,7 @@ end
 # rhel_family sysconfig
 template '/etc/sysconfig/squid' do
   source 'redhat/sysconfig/squid.erb'
-  notifies :restart, 'service[squid_service_name]', :delayed
+  notifies :restart, "service[#{squid_service_name}]", :delayed
   mode '644'
   only_if { platform_family? 'rhel', 'fedora' }
 end
@@ -100,7 +100,7 @@ end
 # squid config
 template node['squid']['config_file'] do
   source 'squid.conf.erb'
-  notifies :reload, 'service[squid_service_name]'
+  notifies :reload, "service[#{squid_service_name}]"
   mode '644'
   variables(
     lazy do

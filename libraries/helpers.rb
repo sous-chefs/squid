@@ -58,4 +58,5 @@
   end
 end
 
+Chef::Resource.send(:include, ChefSquidHelpers)
 Chef::Recipe.send(:include, ChefSquidHelpers)
