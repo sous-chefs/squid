@@ -1,4 +1,4 @@
-  module ChefSquidHelpers
+module ChefSquidHelpers
   # load them databags.
   def squid_load_host_acl(databag_name)
     host_acl = []
