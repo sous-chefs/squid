@@ -49,9 +49,8 @@ module ChefSquidHelpers
   end
 
   def squid_service_name
-    case node['platform_family']
-    when 'debian'
-      'squid3' if node['platform_version'].to_i < 16
+    if node['platform_family'] == 'debian' && node['platform_version'].to_i < 16
+      'squid3'
     else
       'squid'
     end
