@@ -35,6 +35,9 @@ Chef::Log.debug("Squid host_acls: #{host_acl}")
 Chef::Log.debug("Squid url_acls: #{url_acl}")
 Chef::Log.debug("Squid acls: #{acls}")
 
+# packages
+package node['squid']['package']
+
 ruby_block 'Detect squid version' do
   block do
     Chef::Resource::RubyBlock.send(:include, Chef::Mixin::ShellOut)
@@ -42,13 +45,6 @@ ruby_block 'Detect squid version' do
     command_out = shell_out(command)
     node.normal['squid']['squid_version_detected'] = command_out.stdout.to_f
   end
-  action:nothing
-end
-
-# packages
-package 'Install squid package' do
-  package_name node['squid']['package']
-  notifies :create, 'ruby_block[Detect squid version]', :immediately
 end
 
 # rhel_family sysconfig
