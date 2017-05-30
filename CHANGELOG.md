@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 3.1.1 (2017-05-30)
+
+- Revert "Remove repetition of version detection" which causes 2nd run issues
+
 ## 3.1.0 (2016-12-30)
 
 - Added include for additional .conf files inside squid.conf.erb template
