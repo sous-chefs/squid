@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 3.1.2 (2017-06-27)
+
+- Only configure directive hierarchy_stoplist if squid version is less than 3.5
+
 ## 3.1.1 (2017-05-30)
 
 - Revert "Remove repetition of version detection" which causes 2nd run issues
