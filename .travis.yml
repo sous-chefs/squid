@@ -21,6 +21,8 @@ env:
   matrix:
   - INSTANCE=selinux-centos-6
   - INSTANCE=selinux-centos-7
+  - INSTANCE=default-amazon-201609
+  - INSTANCE=default-amazon-201703
   - INSTANCE=default-debian-7
   - INSTANCE=default-debian-8
   - INSTANCE=selinux-fedora-latest
