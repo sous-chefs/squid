@@ -52,7 +52,7 @@ template '/etc/sysconfig/squid' do
   source 'redhat/sysconfig/squid.erb'
   notifies :restart, "service[#{squid_service_name}]", :delayed
   mode '644'
-  only_if { platform_family? 'rhel', 'fedora' }
+  only_if { platform_family? 'rhel', 'fedora', 'amazon' }
 end
 
 # squid config dir
