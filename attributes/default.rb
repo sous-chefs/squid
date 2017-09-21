@@ -33,6 +33,7 @@ default['squid']['config_dir'] = '/etc/squid'
 default['squid']['config_include_dir'] = nil   # '/etc/squid/conf.d'
 default['squid']['config_file'] = '/etc/squid/squid.conf'
 default['squid']['log_dir'] = '/var/log/squid'
+default['squid']['log_module'] = nil # e.g. syslog, stdio, or none (nil != none)
 default['squid']['cache_dir'] = '/var/spool/squid'
 default['squid']['coredump_dir'] = '/var/spool/squid'
 default['squid']['acl_element'] = 'url_regex'

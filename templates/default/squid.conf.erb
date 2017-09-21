@@ -72,7 +72,7 @@ http_port <%= node['squid']['port'] %>
 logformat <%= name %> <%= format %>
 <% end -%>
 
-access_log <%= node['squid']['log_dir'] %>/access.log <%= node['squid']['access_log_option'] %>
+access_log <%= !@log_module.nil? ? @log_module + ':' : '' %><%= node['squid']['log_dir'] %>/access.log <%= node['squid']['access_log_option'] %>
 refresh_pattern	    ^ftp:			1440	20%	10080
 refresh_pattern     ^gopher:			1440	0%	1440
 refresh_pattern	    -i (/cgi-bin/|\?)		0	0%	0
