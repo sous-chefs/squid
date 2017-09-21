@@ -106,6 +106,7 @@ template node['squid']['config_file'] do
         acls: acls,
         directives: node['squid']['directives'],
         localnets: node['squid']['localnets'],
+        log_module: node['squid']['log_module'],
         safe_ports: node['squid']['safe_ports'],
         ssl_ports: node['squid']['ssl_ports'],
         version: node['squid']['squid_version_detected'],
