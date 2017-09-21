@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 3.2.0 (2017-09-21)
+
+- Add support for Amazon Linux.
+- Allow log_module to be configured for logging to syslog for example
+
 ## 3.1.2 (2017-06-27)
 
 - Only configure directive hierarchy_stoplist if squid version is less than 3.5
