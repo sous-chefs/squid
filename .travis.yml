@@ -19,15 +19,19 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=selinux-centos-6
-  - INSTANCE=selinux-centos-7
-  - INSTANCE=default-amazon-201609
-  - INSTANCE=default-amazon-201703
-  - INSTANCE=default-debian-7
-  - INSTANCE=default-debian-8
-  - INSTANCE=selinux-fedora-latest
-  - INSTANCE=default-ubuntu-1404
-  - INSTANCE=default-ubuntu-1604
+  - CHEF_VERSION=12 INSTANCE=default-amazon-201609
+  - CHEF_VERSION=12 INSTANCE=default-amazon-201703
+  - CHEF_VERSION=12 INSTANCE=default-debian-7
+  - CHEF_VERSION=12 INSTANCE=default-debian-8
+  - CHEF_VERSION=12 INSTANCE=default-ubuntu-1404
+  - CHEF_VERSION=12 INSTANCE=default-ubuntu-1604
+  - CHEF_VERSION=13 INSTANCE=default-amazon-201609
+  - CHEF_VERSION=13 INSTANCE=default-amazon-201703
+  - CHEF_VERSION=13 INSTANCE=default-debian-7
+  - CHEF_VERSION=13 INSTANCE=default-debian-8
+  - CHEF_VERSION=13 INSTANCE=default-ubuntu-1404
+  - CHEF_VERSION=13 INSTANCE=default-ubuntu-1604
+
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
@@ -36,7 +40,7 @@ before_script:
   - cookstyle --version
   - foodcritic --version
 
-script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml CHEF_VERSION=${CHEF_VERSION} kitchen verify ${INSTANCE}
 
 matrix:
   include:
