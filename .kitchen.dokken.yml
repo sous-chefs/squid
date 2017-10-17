@@ -87,22 +87,6 @@ suites:
   - name: default
     run_list:
       - recipe[squid::default]
-    excludes:
-      - fedora-latest
-      - centos-6
-      - centos-7
-    attributes:
-      squid:
-        cache_size: 10
-        cache_mem: 10
-  - name: selinux
-    run_list:
-      - recipe[squid::selinux]
-      - recipe[squid::default]
-    includes:
-      - fedora-latest
-      - centos-7
-      - centos-6
     attributes:
       squid:
         cache_size: 10

@@ -40,8 +40,11 @@ suites:
         cache_mem: 10
   - name: selinux
     run_list:
-      - recipe[squid::selinux]
+      - recipe[test::enforce_selinux]
       - recipe[squid::default]
+    verifier:
+      inspec_tests:
+        - path: ./test/integration/default/
     includes:
       - fedora-26
       - centos-7

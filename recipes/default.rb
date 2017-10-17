@@ -120,6 +120,7 @@ execute 'initialize squid cache dir' do
   command "#{node['squid']['package']} -Nz"
   action :run
   creates ::File.join(node['squid']['cache_dir'], '00')
+  not_if { node['platform_family'] =~ /(rhel|fedora)/ }
 end
 
 # services
