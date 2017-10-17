@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 4.0.0 (2017-10-17)
+
+- Removed the selinux recipe and the selinux cookbook dependency. Let Chef / Squid handle the context instead
+
 ## 3.2.0 (2017-09-21)
 
 - Add support for Amazon Linux.
