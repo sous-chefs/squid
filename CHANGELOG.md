@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 4.0.1 (2017-11-28)
+
+- Use correct application directories for debian-based distros
+
 ## 4.0.0 (2017-10-17)
 
 - Removed the selinux recipe and the selinux cookbook dependency. Let Chef / Squid handle the context instead
