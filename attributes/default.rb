@@ -69,12 +69,21 @@ default['squid']['ldap_authcredentialsttl'] = '1 minute' # Credentials TTL
 case node['platform_family']
 
 when 'debian'
-  default['squid']['package'] = 'squid3'
-  default['squid']['config_dir'] = '/etc/squid3'
-  default['squid']['config_file'] = '/etc/squid3/squid.conf'
-  default['squid']['log_dir'] = '/var/log/squid3'
-  default['squid']['cache_dir'] = '/var/spool/squid3'
-  default['squid']['coredump_dir'] = '/var/spool/squid3'
+  if node['platform_version'] =~ /^8|^14/
+    default['squid']['package'] = 'squid3'
+    default['squid']['config_dir'] = '/etc/squid3'
+    default['squid']['config_file'] = '/etc/squid3/squid.conf'
+    default['squid']['log_dir'] = '/var/log/squid3'
+    default['squid']['cache_dir'] = '/var/spool/squid3'
+    default['squid']['coredump_dir'] = '/var/spool/squid3'
+  else
+    default['squid']['package'] = 'squid'
+    default['squid']['config_dir'] = '/etc/squid'
+    default['squid']['config_file'] = '/etc/squid/squid.conf'
+    default['squid']['log_dir'] = '/var/log/squid'
+    default['squid']['cache_dir'] = '/var/spool/squid'
+    default['squid']['coredump_dir'] = '/var/spool/squid'
+  end
 
 when 'smartos'
   default['squid']['listen_interface'] = 'net0'
