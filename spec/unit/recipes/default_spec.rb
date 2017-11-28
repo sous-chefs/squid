@@ -6,27 +6,27 @@ describe 'squid::default on Ubuntu 16.04' do
     end.converge('squid::default')
   end
 
-  it 'installs package squid3' do
-    expect(chef_run).to install_package('squid3')
+  it 'installs package squid' do
+    expect(chef_run).to install_package('squid')
   end
 
-  it 'templates /etc/squid3/squid.conf' do
-    expect(chef_run).to create_template('/etc/squid3/squid.conf')
+  it 'templates /etc/squid/squid.conf' do
+    expect(chef_run).to create_template('/etc/squid/squid.conf')
   end
 
-  it 'templates /etc/squid3/squid.conf http deny all' do
-    expect(chef_run).to render_file('/etc/squid3/squid.conf').with_content(
+  it 'templates /etc/squid/squid.conf http deny all' do
+    expect(chef_run).to render_file('/etc/squid/squid.conf').with_content(
       'http_access deny all'
     )
   end
 
-  it 'templates /etc/squid3/squid.conf icp deny all' do
-    expect(chef_run).to render_file('/etc/squid3/squid.conf').with_content(
+  it 'templates /etc/squid/squid.conf icp deny all' do
+    expect(chef_run).to render_file('/etc/squid/squid.conf').with_content(
       'icp_access deny all'
     )
   end
 
-  it 'templates /etc/squid3/squid.conf without include directory' do
+  it 'templates /etc/squid/squid.conf without include directory' do
     expect(chef_run).to_not render_file('/etc/squid/squid.conf').with_content(
       'Include additional configuration files'
     )
