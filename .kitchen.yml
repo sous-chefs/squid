@@ -20,6 +20,7 @@ platforms:
     run_list: apt::default
   - name: fedora-26
   - name: freebsd-10
+  - name: freebsd-11
   - name: opensuse-leap-42
   - name: ubuntu-14.04
     run_list: apt::default
