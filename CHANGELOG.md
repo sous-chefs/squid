@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 4.0.2 (2017-12-19)
+
+- Avoid overlapping network definition on startup
+
 ## 4.0.1 (2017-11-28)
 
 - Use correct application directories for debian-based distros
