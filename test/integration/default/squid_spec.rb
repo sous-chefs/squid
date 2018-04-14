@@ -1,5 +1,3 @@
-describe 'Squid server' do
-  it 'is listening on port 3128' do
-    expect(port(3128)).to be_listening
-  end
+describe port(3128) do
+  it { should be_listening }
 end
