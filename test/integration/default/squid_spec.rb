@@ -6,9 +6,7 @@ describe port(3128) do
 end
 
 squid_syntax_check = 'sudo squid -k parse'
-if os[:family] == 'debian'
-  squid_syntax_check = 'sudo squid3 -k parse'
-end
+squid_syntax_check = 'sudo squid3 -k parse' if os[:family] == 'debian'
 
 describe command(squid_syntax_check) do
   its('exit_status') { should eq 0 }
