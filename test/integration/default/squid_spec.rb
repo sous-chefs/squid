@@ -1,3 +1,6 @@
+# wait for squid to be started
+sleep 15
+
 describe port(3128) do
   it { should be_listening }
 end
