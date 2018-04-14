@@ -21,14 +21,12 @@ env:
   matrix:
   - CHEF_VERSION=12 INSTANCE=default-amazon-201609
   - CHEF_VERSION=12 INSTANCE=default-amazon-201703
-  - CHEF_VERSION=12 INSTANCE=default-debian-7
   - CHEF_VERSION=12 INSTANCE=default-debian-8
   - CHEF_VERSION=12 INSTANCE=default-debian-9
   - CHEF_VERSION=12 INSTANCE=default-ubuntu-1404
   - CHEF_VERSION=12 INSTANCE=default-ubuntu-1604
   - CHEF_VERSION=13 INSTANCE=default-amazon-201609
   - CHEF_VERSION=13 INSTANCE=default-amazon-201703
-  - CHEF_VERSION=13 INSTANCE=default-debian-7
   - CHEF_VERSION=13 INSTANCE=default-debian-8
   - CHEF_VERSION=13 INSTANCE=default-debian-9
   - CHEF_VERSION=13 INSTANCE=default-ubuntu-1404
