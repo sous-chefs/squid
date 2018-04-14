@@ -16,7 +16,9 @@ platforms:
   - name: centos-7
   - name: debian-8
     run_list: apt::default
-  - name: fedora-26
+  - name: debian-9
+    run_list: apt::default
+  - name: fedora-27
   - name: freebsd-10
   - name: freebsd-11
   - name: opensuse-leap-42
@@ -24,13 +26,15 @@ platforms:
     run_list: apt::default
   - name: ubuntu-16.04
     run_list: apt::default
+  - name: ubuntu-18.04
+    run_list: apt::default
 
 suites:
   - name: default
     run_list:
       - recipe[squid::default]
     excludes:
-      - fedora-26
+      - fedora-27
       - centos-7
       - centos-6
     attributes:
@@ -45,7 +49,7 @@ suites:
       inspec_tests:
         - path: ./test/integration/default/
     includes:
-      - fedora-26
+      - fedora-27
       - centos-7
       - centos-6
     attributes:
