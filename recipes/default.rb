@@ -24,6 +24,7 @@ netmask = node['network']['interfaces'][listen_interface]['addresses'][ipaddress
 
 # squid/libraries/default.rb
 acls = squid_load_acls(node['squid']['acls_databag_name'])
+acls += (node['squid']['acls'] || [])
 host_acl = squid_load_host_acl(node['squid']['hosts_databag_name'])
 url_acl = squid_load_url_acl(node['squid']['urls_databag_name'])
 
