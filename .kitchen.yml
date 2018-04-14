@@ -15,44 +15,16 @@ platforms:
   - name: centos-6
   - name: centos-7
   - name: debian-8
-    run_list: apt::default
   - name: debian-9
-    run_list: apt::default
   - name: fedora-27
   - name: freebsd-10
   - name: freebsd-11
   - name: opensuse-leap-42
   - name: ubuntu-14.04
-    run_list: apt::default
   - name: ubuntu-16.04
-    run_list: apt::default
   - name: ubuntu-18.04
-    run_list: apt::default
 
 suites:
   - name: default
     run_list:
-      - recipe[squid::default]
-    excludes:
-      - fedora-27
-      - centos-7
-      - centos-6
-    attributes:
-      squid:
-        cache_size: 10
-        cache_mem: 10
-  - name: selinux
-    run_list:
-      - recipe[test::enforce_selinux]
-      - recipe[squid::default]
-    verifier:
-      inspec_tests:
-        - path: ./test/integration/default/
-    includes:
-      - fedora-27
-      - centos-7
-      - centos-6
-    attributes:
-      squid:
-        cache_size: 10
-        cache_mem: 10
+      - recipe[test::default]
