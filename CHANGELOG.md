@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 4.0.3 (2018-04-13)
+
+- Fix only_if test around config_include_dir.
+- Remove debian 7 testing
+- Remove fqdn from the Berksfile
+- Test on Chef 13 and 14 in Travis
+- Add Testing for Ubuntu 18.04 / Debian 9 and remove Debian 7
+- Rework the testing to look more like a wrapper cookbook
+
 ## 4.0.2 (2017-12-19)
 
 - Avoid overlapping network definition on startup
