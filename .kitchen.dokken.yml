@@ -38,14 +38,14 @@ platforms:
     image: amazonlinux:2016.09
     pid_one_command: /sbin/init
     intermediate_instructions:
-      - RUN yum -y install lsof which initscripts net-tools wget net-tools
+      - RUN yum -y install lsof which initscripts net-tools wget net-tools libselinux-utils
 
 - name: amazon-201703
   driver:
     image: amazonlinux:2017.03
     pid_one_command: /sbin/init
     intermediate_instructions:
-      - RUN yum -y install lsof which initscripts net-tools wget net-tools
+      - RUN yum -y install lsof which initscripts net-tools wget net-tools libselinux-utils
 
 - name: centos-6
   driver:
