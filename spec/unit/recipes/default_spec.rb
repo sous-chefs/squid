@@ -43,7 +43,7 @@ end
 
 describe 'squid::default on CentOS 6' do
   cached(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8') do
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9') do
     end.converge('squid::default')
   end
 
@@ -139,7 +139,7 @@ end
 
 describe 'squid::default with conf.d and denyall attributes set on CentOS 6' do
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8') do |node|
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9') do |node|
       node.set['squid']['config_include_dir'] = '/etc/squid/conf.d'
       node.set['squid']['http_access_deny_all'] = false
       node.set['squid']['icp_access_deny_all'] = false
