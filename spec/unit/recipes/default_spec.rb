@@ -202,11 +202,10 @@ describe 'squid::default with squid_acl databag entries set on CentOS 6' do
     # https://github.com/sethvargo/chefspec/issues/260
     stub_command('/etc/squid/conf.d').and_return(false)
     stub_data_bag('squid_acls').and_return(['my-acl'])
-    stub_data_bag_item('squid_acls', 'my-acl').and_return({
-      "id": "my-acl",
-       "acl": [["","allow"],["","deny","!"]]
-       }
-     )
+    stub_data_bag_item('squid_acls', 'my-acl').and_return(
+      "id": 'my-acl',
+      "acl": [['', 'allow'], ['', 'deny', '!']]
+    )
   end
 
   it 'templates /etc/squid/squid.conf with content http_access allow my-acl' do
