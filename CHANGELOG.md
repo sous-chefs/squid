@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## 4.1.0 (2018-05-23)
+
+Allow us to optionally invert the ACL name by including an exclamation mark in an additional array element in the databag
+
 ## 4.0.3 (2018-04-13)
 
 - Fix only_if test around config_include_dir.
