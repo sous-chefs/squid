@@ -190,3 +190,34 @@ describe 'squid::default with conf.d and denyall attributes set on CentOS 6' do
     expect(chef_run).to create_directory('/etc/squid/conf.d')
   end
 end
+
+describe 'squid::default with squid_acl databag entries set on CentOS 6' do
+  let(:chef_run) do
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8') do
+    end.converge('squid::default')
+  end
+
+  before do
+    # Required to make spec pass
+    # https://github.com/sethvargo/chefspec/issues/260
+    stub_command('/etc/squid/conf.d').and_return(false)
+    stub_data_bag('squid_acls').and_return(['my-acl'])
+    stub_data_bag_item('squid_acls', 'my-acl').and_return({
+      "id": "my-acl",
+       "acl": [["","allow"],["","deny","!"]]
+       }
+     )
+  end
+
+  it 'templates /etc/squid/squid.conf with content http_access allow my-acl' do
+    expect(chef_run).to render_file('/etc/squid/squid.conf').with_content(
+      'http_access allow my-acl'
+    )
+  end
+
+  it 'templates /etc/squid/squid.conf with content http_access deny !my-acl' do
+    expect(chef_run).to render_file('/etc/squid/squid.conf').with_content(
+      'http_access deny !my-acl'
+    )
+  end
+end
