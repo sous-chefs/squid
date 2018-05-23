@@ -82,6 +82,11 @@ Databags are able to be used for storing host & url acls and also which hosts/ne
       "allow"
     ],
     [
+      "yubikey",
+      "deny",
+      "!"
+    ],
+    [
       "all",
       "deny"
     ]
