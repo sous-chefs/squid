@@ -46,8 +46,6 @@ default['squid']['enable_connect_restriction'] = true
 default['squid']['http_access_deny_all'] = true
 default['squid']['icp_access_deny_all'] = true
 
-default['squid']['ipaddress'] = node['ipaddress']
-default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, v| k == 'lo' || v[:state] == 'down' }.keys.first
 default['squid']['cache_mem'] = '2048'
 default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
@@ -86,9 +84,6 @@ when 'debian'
     default['squid']['cache_dir'] = '/var/spool/squid'
     default['squid']['coredump_dir'] = '/var/spool/squid'
   end
-
-when 'smartos'
-  default['squid']['listen_interface'] = 'net0'
 
 when 'freebsd'
   default['squid']['config_dir'] = '/usr/local/etc/squid'
