@@ -15,18 +15,3 @@ workflows:
           name: default-suite
           suite: default
           requires: [ lint, danger ]
-      - kitchen/dokken-single:
-          name: default-freebsd-10
-          suite: default
-          platform: freebsd-10
-          requires: [ danger, lint ]
-      - kitchen/dokken-single:
-          name: default-freebsd-11
-          suite: default
-          platform: freebsd-11
-          requires: [ danger, lint ]
-      - kitchen/dokken-single:
-          name: default-opensuse-leap-42
-          suite: default
-          platform: opensuse-leap-42
-          requires: [ danger, lint ]

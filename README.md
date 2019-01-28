@@ -12,7 +12,7 @@ Installs and configures Squid as a caching proxy.
 - Ubuntu 12.04+
 - RHEL/CentOS/Amazon/Scientific 6+
 - openSUSE / openSUSE Leap
-- FreeBSD 10+
+- FreeBSD 11+
 
 ### Chef
 
