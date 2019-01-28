@@ -8,6 +8,7 @@ This file is used to list changes made in each version of the squid cookbook.
 - Change chef to minimum of 13
 - Removed Fedora Support
 - Removed support for smartos
+- Removed Travis testing, added circleci testing
 
 ## 4.1.0 (2018-05-23)
 
