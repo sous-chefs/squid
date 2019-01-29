@@ -1,6 +1,7 @@
 # squid Cookbook
 
-[![Build Status](https://travis-ci.org/chef-cookbooks/squid.svg?branch=master)](https://travis-ci.org/chef-cookbooks/squid) [![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
+[![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
+[![Build Status](https://img.shields.io/circleci/project/github/sous-chefs/squid/master.svg)](https://circleci.com/gh/sous-chefs/squid)
 
 Installs and configures Squid as a caching proxy.
 
