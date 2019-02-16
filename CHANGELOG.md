@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## Unreleased
+
+- Changed ownership to sous-chefs
+- Change chef to minimum of 13
+- Removed Fedora Support
+- Removed support for smartos
+- Removed Travis testing, added circleci testing
+
 ## 4.1.0 (2018-05-23)
 
 Allow us to optionally invert the ACL name by including an exclamation mark in an additional array element in the databag
