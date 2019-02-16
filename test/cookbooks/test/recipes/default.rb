@@ -6,7 +6,7 @@ apt_update
 # Enforce SELinux
 if platform_family?('rhel', 'amazon', 'fedora')
   execute 'setenforce 1' do
-    not_if '[[ $(getenforce) == "Enforcing" ]]'
+    only_if '[[ $(getenforce) == "Enforcing" ]]'
   end
 end
 
