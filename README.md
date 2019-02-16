@@ -1,6 +1,7 @@
 # squid Cookbook
 
-[![Build Status](https://travis-ci.org/chef-cookbooks/squid.svg?branch=master)](https://travis-ci.org/chef-cookbooks/squid) [![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
+[![Cookbook Version](https://img.shields.io/cookbook/v/squid.svg)](https://supermarket.chef.io/cookbooks/squid)
+[![Build Status](https://img.shields.io/circleci/project/github/sous-chefs/squid/master.svg)](https://circleci.com/gh/sous-chefs/squid)
 
 Installs and configures Squid as a caching proxy.
 
@@ -11,13 +12,12 @@ Installs and configures Squid as a caching proxy.
 - Debian 7+
 - Ubuntu 12.04+
 - RHEL/CentOS/Amazon/Scientific 6+
-- Fedora
 - openSUSE / openSUSE Leap
-- FreeBSD 10+
+- FreeBSD 11+
 
 ### Chef
 
-- Chef 12.1+
+- Chef 13+
 
 ### Cookbooks
 
