@@ -1,7 +1,8 @@
+---
 version: 2.1
 
 orbs:
-  kitchen: sous-chefs/kitchen@1.0.0
+  kitchen: sous-chefs/kitchen@1.0.2
 
 workflows:
   kitchen:
@@ -9,9 +10,9 @@ workflows:
       - kitchen/danger:
           name: danger
           context: Danger
-      - kitchen/lint:
-          name: lint
+      - kitchen/delivery:
+          name: delivery
       - kitchen/dokken:
           name: default-suite
           suite: default
-          requires: [ lint, danger ]
+          requires: [delivery, danger]
