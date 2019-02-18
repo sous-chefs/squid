@@ -44,8 +44,12 @@ http_access allow manager localhost
 http_access deny manager
 http_access allow purge localhost
 http_access deny purge
+<% if node['squid']['enable_safe_ports_restriction'] -%>
 http_access deny !Safe_ports
+<% end -%>
+<% if node['squid']['enable_connect_restriction'] -%>
 http_access deny CONNECT !SSL_ports
+<% end -%>
 http_access allow localhost
 <%= "http_access allow localnet" if !@localnets.empty? %>
 <%= "http_access deny all" if node['squid']['http_access_deny_all'] %>

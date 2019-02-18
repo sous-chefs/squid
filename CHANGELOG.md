@@ -9,6 +9,7 @@ This file is used to list changes made in each version of the squid cookbook.
 - Removed Fedora Support
 - Removed support for smartos
 - Removed Travis testing, added circleci testing
+- Add attribute to set CONNECT and safe_ports restriction optionnal
 
 ## 4.1.0 (2018-05-23)
 
