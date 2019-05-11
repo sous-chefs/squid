@@ -40,11 +40,11 @@ default['squid']['acl_element'] = 'url_regex'
 default['squid']['localnets'] = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', 'fc00::/7', 'fe80::/10']
 default['squid']['ssl_ports'] = [443, 563, 873]
 default['squid']['safe_ports'] = [80, 21, 443, 70, 210, '1025-65535', 280, 488, 591, 777, 631, 873, 901]
+default['squid']['enable_safe_ports_restriction'] = true
+default['squid']['enable_connect_restriction'] = true
 default['squid']['http_access_deny_all'] = true
 default['squid']['icp_access_deny_all'] = true
 
-default['squid']['ipaddress'] = node['ipaddress']
-default['squid']['listen_interface'] = node['network']['interfaces'].dup.reject { |k, v| k == 'lo' || v[:state] == 'down' }.keys.first
 default['squid']['cache_mem'] = '2048'
 default['squid']['cache_size'] = '100'
 default['squid']['max_obj_size'] = 1024
@@ -83,9 +83,6 @@ when 'debian'
     default['squid']['cache_dir'] = '/var/spool/squid'
     default['squid']['coredump_dir'] = '/var/spool/squid'
   end
-
-when 'smartos'
-  default['squid']['listen_interface'] = 'net0'
 
 when 'freebsd'
   default['squid']['config_dir'] = '/usr/local/etc/squid'
