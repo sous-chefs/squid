@@ -86,7 +86,6 @@ describe 'squid::default on CentOS 6' do
   end
 end
 
-
 describe 'squid::default with squid_acl databag entries set on CentOS 6' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'centos', version: '6.8') do
