@@ -35,7 +35,7 @@ ruby_block 'Detect squid version' do
     Chef::Resource::RubyBlock.send(:include, Chef::Mixin::ShellOut)
     command = %(#{node['squid']['package']} -v | grep Version | sed 's/.*Version \\\(.\\..\\\).*/\\1/g' | tr -d '\n')
     command_out = shell_out(command)
-    node.normal['squid']['squid_version_detected'] = command_out.stdout.to_f
+    node.default['squid']['squid_version_detected'] = command_out.stdout.to_f
   end
 end
 
