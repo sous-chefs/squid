@@ -56,6 +56,12 @@ module ChefSquidHelpers
       'squid'
     end
   end
+
+  def squid_version_detected
+    command = %(#{node['squid']['package']} -v | grep Version | sed 's/.*Version \\\(.\\..\\\).*/\\1/g' | tr -d '\n')
+    command_out = shell_out(command)
+    command_out.stdout.to_f
+  end
 end
 
 Chef::Resource.send(:include, ChefSquidHelpers)
