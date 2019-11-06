@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'squid::default' do
   before do
-    stubs_for_resource("template[/etc/squid/squid.conf]") do |resource|
+    stubs_for_resource('template[/etc/squid/squid.conf]') do |resource|
       allow(resource).to receive_shell_out("squid -v | grep Version | sed 's/.*Version \\(.\\..\\).*/\\1/g' | tr -d '\n'")
     end
   end
@@ -10,7 +10,7 @@ describe 'squid::default' do
   context 'When all attributes are default, on an Ubuntu 16.04' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04')
-        .converge(described_recipe)
+                          .converge(described_recipe)
     end
 
     it 'installs package squid' do
@@ -51,7 +51,7 @@ describe 'squid::default' do
   context 'When all attributes are default, on an Centos 6' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'centos', version: '6')
-        .converge(described_recipe)
+                          .converge(described_recipe)
     end
 
     it 'installs package squid' do
