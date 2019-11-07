@@ -2,10 +2,11 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
-## Unreleased
+## 4.2.0 (2019-11-07)
 
 - Changed ownership to sous-chefs
 - Change chef to minimum of 13
+- Changed `['squid']['squid_version_detected']` in `default` recipe to be a `default` level attribute
 - Removed Fedora Support
 - Removed support for smartos
 - Removed Travis testing, added circleci testing
