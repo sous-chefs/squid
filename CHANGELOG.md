@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## Unreleased
+
+- Migrate to github actions
+
 ## 4.2.0 (2019-11-07)
 
 - Changed ownership to sous-chefs
