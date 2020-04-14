@@ -64,5 +64,5 @@ module ChefSquidHelpers
   end
 end
 
-Chef::Resource.send(:include, ChefSquidHelpers)
-Chef::Recipe.send(:include, ChefSquidHelpers)
+Chef::Resource.include ChefSquidHelpers
+Chef::Recipe.include ChefSquidHelpers
