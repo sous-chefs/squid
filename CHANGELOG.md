@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the squid cookbook.
 
 ## Unreleased
 
+- resolved cookstyle error: libraries/helpers.rb:67:16 warning: `Lint/SendWithMixinArgument`
+- resolved cookstyle error: libraries/helpers.rb:68:14 warning: `Lint/SendWithMixinArgument`
 - Migrate to github actions
 
 ## 4.2.0 (2019-11-07)
