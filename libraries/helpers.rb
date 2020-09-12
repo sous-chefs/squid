@@ -50,7 +50,7 @@ module ChefSquidHelpers
   end
 
   def squid_service_name
-    if node['platform_family'] == 'debian' && node['platform_version'] =~ /^8|^14/
+    if platform_family?('debian') && node['platform_version'] =~ /^8|^14/
       'squid3'
     else
       'squid'
