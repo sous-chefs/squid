@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## Unreleased
+
+- resolved cookstyle error: libraries/helpers.rb:68:1 refactor: `ChefCorrectness/IncorrectLibraryInjection`
+
 ## 4.3.0 (2020-05-05)
 
 - resolved cookstyle error: libraries/helpers.rb:67:16 warning: `Lint/SendWithMixinArgument`
