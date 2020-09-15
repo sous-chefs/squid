@@ -65,4 +65,4 @@ module ChefSquidHelpers
 end
 
 Chef::Resource.include ChefSquidHelpers
-Chef::Recipe.include ChefSquidHelpers
+Chef::DSL::Recipe.include ChefSquidHelpers
