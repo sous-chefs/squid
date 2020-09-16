@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
-## Unreleased
+## 4.3.1 (2020-09-16)
 
 - resolved cookstyle error: libraries/helpers.rb:68:1 refactor: `ChefCorrectness/IncorrectLibraryInjection`
 - Cookstyle Bot Auto Corrections with Cookstyle 6.17.6

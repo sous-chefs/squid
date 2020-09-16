@@ -6,7 +6,7 @@ description       'Installs/configures squid as a simple caching proxy'
 chef_version      '>= 13'
 source_url        'https://github.com/sous-chefs/squid'
 issues_url        'https://github.com/sous-chefs/squid/issues'
-version           '4.3.0'
+version           '4.3.1'
 
 %w(debian ubuntu centos redhat scientific suse amazon freebsd).each do |os|
   supports os
