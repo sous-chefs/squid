@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## Unreleased
+
+- Add Debian 10 / Ubuntu 20.04 support
+- Add testing on Centos 8
+- Remove testing on Debian 8 and Centos 6
+
 ## 4.3.1 (2020-09-16)
 
 - resolved cookstyle error: libraries/helpers.rb:68:1 refactor: `ChefCorrectness/IncorrectLibraryInjection`

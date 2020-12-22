@@ -41,11 +41,13 @@ jobs:
       matrix:
         os:
           - 'amazonlinux-2'
-          - 'debian-8'
           - 'debian-9'
+          - 'debian-10'
           - 'centos-7'
+          - 'centos-8'
           - 'ubuntu-1604'
           - 'ubuntu-1804'
+          - 'ubuntu-2004'
         suite:
           - 'default'
       fail-fast: false
