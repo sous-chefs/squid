@@ -16,9 +16,9 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Platforms
 
-- Debian 7+
-- Ubuntu 12.04+
-- RHEL/CentOS/Amazon/Scientific 6+
+- Debian 9+
+- Ubuntu 16.04+
+- RHEL/CentOS/Amazon/Scientific 7+
 - openSUSE / openSUSE Leap
 - FreeBSD 11+
 

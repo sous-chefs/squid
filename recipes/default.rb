@@ -104,6 +104,8 @@ execute 'initialize squid cache dir' do
   command "#{node['squid']['package']} -Nz"
   action :run
   creates ::File.join(node['squid']['cache_dir'], '00')
+  notifies :stop, "service[#{squid_service_name}]", :before
+  notifies :start, "service[#{squid_service_name}]"
   not_if { FileTest.directory?("#{node['squid']['cache_dir']}/00") }
 end
 
