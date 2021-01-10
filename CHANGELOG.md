@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## Unreleased
+
 ## 4.4.0 - *2021-01-10*
 
 - Add Debian 10 / Ubuntu 20.04 support
