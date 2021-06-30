@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
-## Unreleased
+## 4.4.2 - *2021-06-30*
 
 - Fix squid stopping and starting on every run if caching is disabled
 
