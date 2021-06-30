@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the squid cookbook.
 
 ## Unreleased
 
+- Fix squid stopping and starting on every run if caching is disabled
+
 ## 4.4.1 - *2021-06-01*
 
 ## 4.4.0 - *2021-01-10*

@@ -107,6 +107,7 @@ execute 'initialize squid cache dir' do
   notifies :stop, "service[#{squid_service_name}]", :before
   notifies :start, "service[#{squid_service_name}]"
   not_if { FileTest.directory?("#{node['squid']['cache_dir']}/00") }
+  only_if { node['squid']['enable_cache_dir'] }
 end
 
 # services
