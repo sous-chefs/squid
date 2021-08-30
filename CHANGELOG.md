@@ -4,11 +4,15 @@ This file is used to list changes made in each version of the squid cookbook.
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 4.4.2 - *2021-06-30*
 
 - Fix squid stopping and starting on every run if caching is disabled
 
 ## 4.4.1 - *2021-06-01*
+
+- Standardise files with files in sous-chefs/repo-management
 
 ## 4.4.0 - *2021-01-10*
 
