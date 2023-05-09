@@ -49,14 +49,6 @@ module ChefSquidHelpers
     acls
   end
 
-  def squid_service_name
-    if platform_family?('debian') && node['platform_version'] =~ /^8|^14/
-      'squid3'
-    else
-      'squid'
-    end
-  end
-
   def squid_version_detected
     command = %(#{node['squid']['package']} -v | grep Version | sed 's/.*Version \\\(.\\..\\\).*/\\1/g' | tr -d '\n')
     command_out = shell_out(command)

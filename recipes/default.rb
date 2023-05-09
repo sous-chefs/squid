@@ -33,7 +33,7 @@ package node['squid']['package']
 # rhel_family sysconfig
 template '/etc/sysconfig/squid' do
   source 'redhat/sysconfig/squid.erb'
-  notifies :restart, "service[#{squid_service_name}]", :delayed
+  notifies :restart, 'service[squid]', :delayed
   mode '644'
   only_if { platform_family? 'rhel', 'fedora', 'amazon' }
 end
@@ -72,7 +72,6 @@ cookbook_file "#{node['squid']['config_dir']}/mime.conf" do
   mode '644'
 end
 
-# TODO:  COOK-3041 (manage this file appropriately)
 file "#{node['squid']['config_dir']}/msntauth.conf" do
   action :delete
 end
@@ -80,7 +79,7 @@ end
 # squid config
 template node['squid']['config_file'] do
   source 'squid.conf.erb'
-  notifies :reload, "service[#{squid_service_name}]"
+  notifies :reload, 'service[squid]'
   mode '644'
   variables(
     lazy do
@@ -104,14 +103,14 @@ execute 'initialize squid cache dir' do
   command "#{node['squid']['package']} -Nz"
   action :run
   creates ::File.join(node['squid']['cache_dir'], '00')
-  notifies :stop, "service[#{squid_service_name}]", :before
-  notifies :start, "service[#{squid_service_name}]"
+  notifies :stop, 'service[squid]', :before
+  notifies :start, 'service[squid]'
   not_if { FileTest.directory?("#{node['squid']['cache_dir']}/00") }
   only_if { node['squid']['enable_cache_dir'] }
 end
 
 # services
-service squid_service_name do
+service 'squid' do
   supports restart: true, status: true, reload: true
   action [:enable, :start]
   retries 5

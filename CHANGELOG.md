@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the squid cookbook.
 
 ## Unreleased
 
+- Remove support for EOL Ubuntu 14.04 and Debian 8 distributions
+
 ## 4.4.5 - *2023-02-14*
 
 ## 4.4.4 - *2022-02-08*

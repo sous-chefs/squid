@@ -47,7 +47,7 @@ Databags are able to be used for storing host & url acls and also which hosts/ne
 - Set (`node['squid']['enable_ldap']`) to true.
 - Modify the ldap attributes for your environment.
 
-  - If you use anonymous bindings, two attributes are optional, ['squid']['ldap_binddn'] and ['squid']['ldap_bindpassword'].
+  - If you use anonymous bindings, two attributes are optional, `['squid']['ldap_binddn']` and `['squid']['ldap_bindpassword']`.
   - All other attributes are required.
   - See <http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap> for further help.
 
