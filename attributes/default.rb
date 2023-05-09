@@ -66,26 +66,7 @@ default['squid']['ldap_authchildren'] = 5 # Number of LDAP threads to start
 default['squid']['ldap_authrealm']    = 'Web-Proxy' # Authentication Realm
 default['squid']['ldap_authcredentialsttl'] = '1 minute' # Credentials TTL
 
-case node['platform_family']
-
-when 'debian'
-  if node['platform_version'] =~ /^8|^14/
-    default['squid']['package'] = 'squid3'
-    default['squid']['config_dir'] = '/etc/squid3'
-    default['squid']['config_file'] = '/etc/squid3/squid.conf'
-    default['squid']['log_dir'] = '/var/log/squid3'
-    default['squid']['cache_dir'] = '/var/spool/squid3'
-    default['squid']['coredump_dir'] = '/var/spool/squid3'
-  else
-    default['squid']['package'] = 'squid'
-    default['squid']['config_dir'] = '/etc/squid'
-    default['squid']['config_file'] = '/etc/squid/squid.conf'
-    default['squid']['log_dir'] = '/var/log/squid'
-    default['squid']['cache_dir'] = '/var/spool/squid'
-    default['squid']['coredump_dir'] = '/var/spool/squid'
-  end
-
-when 'freebsd'
+if platform_family?('freebsd')
   default['squid']['config_dir'] = '/usr/local/etc/squid'
   default['squid']['config_file'] = '/usr/local/etc/squid/squid.conf'
   default['squid']['cache_dir'] = '/var/squid/cache'
