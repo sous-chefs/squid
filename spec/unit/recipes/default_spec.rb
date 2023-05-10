@@ -7,9 +7,9 @@ describe 'squid::default' do
     end
   end
 
-  context 'When all attributes are default, on an Ubuntu 16.04' do
+  context 'When all attributes are default, on an Ubuntu 20.04' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04')
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '20.04')
                           .converge(described_recipe)
     end
 
@@ -48,9 +48,9 @@ describe 'squid::default' do
     end
   end
 
-  context 'When all attributes are default, on an Centos 6' do
+  context 'When all attributes are default, on an CentOS 8' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'centos', version: '6')
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '8')
                           .converge(described_recipe)
     end
 
