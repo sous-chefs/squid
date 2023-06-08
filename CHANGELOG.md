@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the squid cookbook.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 5.1.0 - *2023-05-10*
 
 - Remove support for EOL Debian 9 distribution.
