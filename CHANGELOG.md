@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## Unreleased
+
 ## 5.1.6 - *2023-10-31*
 
 ## 5.1.5 - *2023-09-28*
