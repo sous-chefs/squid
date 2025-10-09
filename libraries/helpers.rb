@@ -40,7 +40,7 @@ module ChefSquidHelpers
         next unless group['acl'].respond_to?(:each)
         group['acl'].each do |acl|
           # An exclamation mark can be optionally included in the additional array element to invert the ACL
-          acls.push [acl[1], "#{acl[2] || ''}#{group['id']}", acl[0]]
+          acls.push [acl[1], "#{acl[2] || ''}#{group['id']}", acl.first]
         end
       end
     rescue
