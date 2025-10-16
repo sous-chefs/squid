@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## [5.1.11](https://github.com/sous-chefs/squid/compare/5.1.10...v5.1.11) (2025-10-16)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#166](https://github.com/sous-chefs/squid/issues/166)) ([16b04a4](https://github.com/sous-chefs/squid/commit/16b04a4c95d8a94f0b4ccc95a905186404f389d1))
+
 ## 5.1.1 - *2023-06-08*
 
 Standardise files with files in sous-chefs/repo-management
