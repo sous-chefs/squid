@@ -2,6 +2,24 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## [6.0.0](https://github.com/sous-chefs/squid/compare/v5.1.11...v6.0.0) (2026-05-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate squid to custom resources ([#171](https://github.com/sous-chefs/squid/issues/171))
+
+### Features
+
+* migrate squid to custom resources ([#171](https://github.com/sous-chefs/squid/issues/171)) ([c487dee](https://github.com/sous-chefs/squid/commit/c487dee48bc67c8e21851a0b65d6912a46028765))
+
+
+### Bug Fixes
+
+* 1. Remove unused network detection which break some setups ([#91](https://github.com/sous-chefs/squid/issues/91)) ([26a703f](https://github.com/sous-chefs/squid/commit/26a703f57efa2a99c4e2ddcb666289b89f5fa10f))
+* 9 - accidental overwrite of default by set ([eb8fcd4](https://github.com/sous-chefs/squid/commit/eb8fcd4586358a4ff748f9607b49eb3b669d17f5))
+* **ci:** Update workflows to use release pipeline ([#166](https://github.com/sous-chefs/squid/issues/166)) ([16b04a4](https://github.com/sous-chefs/squid/commit/16b04a4c95d8a94f0b4ccc95a905186404f389d1))
+
 ## [5.1.11](https://github.com/sous-chefs/squid/compare/5.1.10...v5.1.11) (2025-10-16)
 
 

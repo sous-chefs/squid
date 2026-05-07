@@ -16,24 +16,24 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Platforms
 
-- Debian 12+
-- Ubuntu 22.04+
-- RHEL-compatible platforms 8+
-- Amazon Linux 2023+
-- openSUSE Leap 16+
-- FreeBSD 13+
+* Debian 12+
+* Ubuntu 22.04+
+* RHEL-compatible platforms 8+
+* Amazon Linux 2023+
+* openSUSE Leap 16+
+* FreeBSD 13+
 
 ### Chef
 
-- Chef 15.3+
+* Chef 15.3+
 
 ### Cookbooks
 
-- none
+* none
 
 ## Resources
 
-- [squid](documentation/squid_squid.md)
+* [squid](documentation/squid_squid.md)
 
 ## Migration
 
@@ -55,14 +55,14 @@ Databags are able to be used for storing host & url acls and also which hosts/ne
 
 ### LDAP Authentication
 
-- Set `enable_ldap true`.
-- Set the LDAP properties for your environment.
+* Set `enable_ldap true`.
+* Set the LDAP properties for your environment.
 
-  - If you use anonymous bindings, `ldap_binddn` and `ldap_bindpassword` are optional.
-  - All other LDAP properties are required.
-  - See <http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap> for further help.
+  * If you use anonymous bindings, `ldap_binddn` and `ldap_bindpassword` are optional.
+  * All other LDAP properties are required.
+  * See <http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap> for further help.
 
-- To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
+* To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
 
 ## Example Databags
 
@@ -144,8 +144,8 @@ The following two data bags are only required if you are using LDAP Authenticati
 
 ### Additional configuration files
 
-- Set `config_include_dir` to the directory of your additional files, such as `/etc/squid/conf.d`.
-- It is recommended that you set `http_access_deny_all false` and `icp_access_deny_all false`
+* Set `config_include_dir` to the directory of your additional files, such as `/etc/squid/conf.d`.
+* It is recommended that you set `http_access_deny_all false` and `icp_access_deny_all false`
   because the include statement is at the bottom of `squid.conf`. Otherwise `http_access allow`
   statements may not be evaluated in the additional configuration files.
 
