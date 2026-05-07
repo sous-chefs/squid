@@ -1,5 +1,4 @@
-node.default['squid']['cache_size'] = 10
-node.default['squid']['cache_mem'] = 10
+# frozen_string_literal: true
 
 apt_update
 
@@ -10,4 +9,7 @@ if platform_family?('rhel', 'amazon', 'fedora')
   end
 end
 
-include_recipe 'squid::default'
+squid 'default' do
+  cache_size 10
+  cache_mem 10
+end
