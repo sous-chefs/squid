@@ -16,7 +16,7 @@ This file is used to list changes made in each version of the squid cookbook.
 
 ### Bug Fixes
 
-* 86. Remove unused network detection which break some setups ([#91](https://github.com/sous-chefs/squid/issues/91)) ([26a703f](https://github.com/sous-chefs/squid/commit/26a703f57efa2a99c4e2ddcb666289b89f5fa10f))
+* 1. Remove unused network detection which break some setups ([#91](https://github.com/sous-chefs/squid/issues/91)) ([26a703f](https://github.com/sous-chefs/squid/commit/26a703f57efa2a99c4e2ddcb666289b89f5fa10f))
 * 9 - accidental overwrite of default by set ([eb8fcd4](https://github.com/sous-chefs/squid/commit/eb8fcd4586358a4ff748f9607b49eb3b669d17f5))
 * **ci:** Update workflows to use release pipeline ([#166](https://github.com/sous-chefs/squid/issues/166)) ([16b04a4](https://github.com/sous-chefs/squid/commit/16b04a4c95d8a94f0b4ccc95a905186404f389d1))
 
