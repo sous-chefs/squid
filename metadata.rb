@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 name              'squid'
 maintainer        'Sous Chefs'
 maintainer_email  'help@sous-chefs.org'
 license           'Apache-2.0'
-description       'Installs/configures squid as a simple caching proxy'
-chef_version      '>= 13'
+description       'Provides a squid custom resource for installing and configuring Squid as a caching proxy'
+chef_version      '>= 15.3'
 source_url        'https://github.com/sous-chefs/squid'
 issues_url        'https://github.com/sous-chefs/squid/issues'
 version           '5.1.11'
 
-%w(debian ubuntu centos redhat scientific suse amazon freebsd).each do |os|
-  supports os
-end
+supports 'almalinux', '>= 8.0'
+supports 'amazon', '>= 2023.0'
+supports 'debian', '>= 12.0'
+supports 'fedora'
+supports 'freebsd', '>= 13.0'
+supports 'oracle', '>= 8.0'
+supports 'redhat', '>= 8.0'
+supports 'rocky', '>= 8.0'
+supports 'ubuntu', '>= 22.04'

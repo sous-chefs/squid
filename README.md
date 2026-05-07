@@ -6,7 +6,7 @@
 [![OpenCollective](https://opencollective.com/sous-chefs/sponsors/badge.svg)](#sponsors)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Installs and configures Squid as a caching proxy.
+Installs and configures Squid as a caching proxy with the `squid` custom resource.
 
 ## Maintainers
 
@@ -16,39 +16,50 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Platforms
 
-- Debian 10+
-- Ubuntu 16.04+
-- RHEL/CentOS/Scientific 7+
-- openSUSE / openSUSE Leap
-- FreeBSD 11+
+- Debian 12+
+- Ubuntu 22.04+
+- RHEL-compatible platforms 8+
+- Amazon Linux 2023+
+- openSUSE Leap 16+
+- FreeBSD 13+
 
 ### Chef
 
-- Chef 13+
+- Chef 15.3+
 
 ### Cookbooks
 
 - none
 
-## Recipes
+## Resources
 
-### default
+- [squid](documentation/squid_squid.md)
 
-The default recipe installs squid and sets up simple proxy caching. As of now, the options you may change are the port (`node['squid']['port']`) and the network the caching proxy is available on the subnet from `node.ipaddress` (ie. "192.168.1.0/24") but may be overridden with `node['squid']['network']`. The size of objects allowed to be stored has been bumped up to allow for caching of installation files. An optional (`node['squid']['cache_peer']`), if set, will be written verbatim to the template. On redhat based platforms, this cookbook supports customizing the max number of file descriptors that Squid may open (`node['squid']['max_file_descriptors']`). The default value is 1024.
+## Migration
+
+This release removes recipes and attributes in favor of the `squid` custom resource. See
+[migration.md](migration.md) for the breaking-change guide.
 
 ## Usage
 
-Include the squid recipe on the server. Other nodes may search for this node as their caching proxy and use the `node.ipaddress` and `node['squid']['port']` to point at it.
+Declare the `squid` resource on the server.
+
+```ruby
+squid 'default' do
+  cache_size 10
+  cache_mem 10
+end
+```
 
 Databags are able to be used for storing host & url acls and also which hosts/nets are able to access which hosts/url
 
 ### LDAP Authentication
 
-- Set (`node['squid']['enable_ldap']`) to true.
-- Modify the ldap attributes for your environment.
+- Set `enable_ldap true`.
+- Set the LDAP properties for your environment.
 
-  - If you use anonymous bindings, two attributes are optional, `['squid']['ldap_binddn']` and `['squid']['ldap_bindpassword']`.
-  - All other attributes are required.
+  - If you use anonymous bindings, `ldap_binddn` and `ldap_bindpassword` are optional.
+  - All other LDAP properties are required.
   - See <http://wiki.squid-cache.org/ConfigExamples/Authenticate/Ldap> for further help.
 
 - To create the ldap acls in squid.conf, you also need the two ldap_auth databag items as shown in the LDAP Databags below.
@@ -133,8 +144,10 @@ The following two data bags are only required if you are using LDAP Authenticati
 
 ### Additional configuration files
 
-- Set (`node['squid']['config_include_dir']`) to the directory of your additional files, ex. /etc/squid/conf.d
-- It is recommended that you set `node['squid']['http_access_deny_all']` and `node['squid']['icp_access_deny_all']` to false because the include statement is at the bottom of squid.conf.  Otherwise http_access allow statements may not be evaluated in the additional configuration files.
+- Set `config_include_dir` to the directory of your additional files, such as `/etc/squid/conf.d`.
+- It is recommended that you set `http_access_deny_all false` and `icp_access_deny_all false`
+  because the include statement is at the bottom of `squid.conf`. Otherwise `http_access allow`
+  statements may not be evaluated in the additional configuration files.
 
 ## Contributors
 
