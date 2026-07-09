@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the squid cookbook.
 
+## [6.0.1](https://github.com/sous-chefs/squid/compare/v6.0.0...v6.0.1) (2026-07-09)
+
+
+### Bug Fixes
+
+* migrate to Policyfile ([#180](https://github.com/sous-chefs/squid/issues/180)) ([e073ee7](https://github.com/sous-chefs/squid/commit/e073ee7a7dcb61ed207652acba8ca3135d84d787))
+
 ## [6.0.0](https://github.com/sous-chefs/squid/compare/v5.1.11...v6.0.0) (2026-05-07)
 
 

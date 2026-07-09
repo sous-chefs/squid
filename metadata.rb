@@ -8,7 +8,7 @@ description       'Provides a squid custom resource for installing and configuri
 chef_version      '>= 15.3'
 source_url        'https://github.com/sous-chefs/squid'
 issues_url        'https://github.com/sous-chefs/squid/issues'
-version           '6.0.0'
+version           '6.0.1'
 
 supports 'almalinux', '>= 8.0'
 supports 'amazon', '>= 2023.0'
