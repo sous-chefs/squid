@@ -5,7 +5,9 @@ driver:
   chef_version: current
 
 transport: { name: dokken }
-provisioner: { name: dokken }
+provisioner:
+  name: dokken
+  chef_license: accept
 
 platforms:
   - name: almalinux-8
